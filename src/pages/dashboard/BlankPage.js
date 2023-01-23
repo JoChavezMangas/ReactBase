@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm } from "react-hook-form";
 // @mui
 import {
     Container,
@@ -25,11 +25,11 @@ import Box from '@mui/material/Box';
 
 // components
 import { useSettingsContext } from '../../components/settings';
-import UserNewEditForm from '../../sections/@dashboard/user/UserNewEditForm';
+// import UserNewEditForm from '../../sections/@dashboard/user/UserNewEditForm';
 // ----------------------------------------------------------------------
 export default function BlankPage() {
   const { themeStretch } = useSettingsContext();
-    const { register, handleSubmit } = useForm();
+    const { handleSubmit } = useForm();
     const onSubmit = data => console.log(data);
   return (
     <>

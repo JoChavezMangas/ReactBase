@@ -6,7 +6,7 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import AuthGuard from '../auth/AuthGuard';
 import GuestGuard from '../auth/GuestGuard';
 // layouts
-import MainLayout from '../layouts/main';
+// import MainLayout from '../layouts/main';
 import SimpleLayout from '../layouts/simple';
 import CompactLayout from '../layouts/compact';
 import DashboardLayout from '../layouts/dashboard';
@@ -64,16 +64,16 @@ import {
   Page500,
   Page403,
   Page404,
-  HomePage,
-  FaqsPage,
-  AboutPage,
-  Contact,
+//  HomePage,
+//  FaqsPage,
+//  AboutPage,
+//  Contact,
   PricingPage,
   PaymentPage,
   ComingSoonPage,
   MaintenancePage,
   //
-  ComponentsOverviewPage,
+/*  ComponentsOverviewPage,
   FoundationColorsPage,
   FoundationTypographyPage,
   FoundationShadowsPage,
@@ -128,7 +128,7 @@ import {
   DemoSnackbarPage,
   DemoTextMaxLinePage,
   DemoUploadPage,
-  DemoMarkdownPage,
+  DemoMarkdownPage, */
 } from './elements';
 
 // ----------------------------------------------------------------------
