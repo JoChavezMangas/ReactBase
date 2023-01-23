@@ -1,10 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Deploy",
-    "\\Deploy\\build",
-    "\\src\\locales\\langs"
+    "\\src",
+    "\\src\\layouts",
+    "\\src\\routes"
   ],
-  "SelectedNode": "\\Deploy",
+  "SelectedNode": "\\src\\routes\\index.js",
   "PreviewInSolutionExplorer": false
 }
