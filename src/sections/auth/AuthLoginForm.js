@@ -14,6 +14,7 @@ import { useAuthContext } from '../../auth/useAuthContext';
 // components
 import Iconify from '../../components/iconify';
 import FormProvider, { RHFTextField } from '../../components/hook-form';
+// import { functions } from 'lodash';
 
 // ----------------------------------------------------------------------
 
@@ -46,7 +47,7 @@ export default function AuthLoginForm() {
 
   const onSubmit = async (data) => {
     try {
-      await login(data.email, data.password);
+        await loginResult(data)
     } catch (error) {
       console.error(error);
       reset();
@@ -56,6 +57,13 @@ export default function AuthLoginForm() {
       });
     }
   };
+
+function loginResult(data) {
+    console.log(data);
+    login(data.email, data.password);
+}
+
+
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>

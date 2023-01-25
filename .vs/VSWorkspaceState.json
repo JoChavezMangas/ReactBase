@@ -1,12 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\src",
-    "\\src\\layouts\\dashboard\\header",
-    "\\src\\layouts\\dashboard\\nav",
-    "\\src\\locales",
-    "\\src\\locales\\langs"
+    ""
   ],
-  "SelectedNode": "\\src\\locales\\langs\\es.js",
+  "SelectedNode": "\\.env",
   "PreviewInSolutionExplorer": false
 }

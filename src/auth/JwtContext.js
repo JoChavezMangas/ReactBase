@@ -117,6 +117,9 @@ export function AuthProvider({ children }) {
       email,
       password,
     });
+
+    
+
     const { accessToken, user } = response.data;
 
     setSession(accessToken);
