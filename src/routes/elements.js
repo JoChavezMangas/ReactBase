@@ -73,6 +73,9 @@ export const UserListPage = Loadable(lazy(() => import('../pages/dashboard/UserL
 export const UserAccountPage = Loadable(lazy(() => import('../pages/dashboard/UserAccountPage')));
 export const UserCreatePage = Loadable(lazy(() => import('../pages/dashboard/UserCreatePage')));
 export const UserEditPage = Loadable(lazy(() => import('../pages/dashboard/UserEditPage')));
+// DASHBOARD: Empresa
+export const EmpresaListPage = Loadable(lazy(() => import('../pages/Empresa/BandejaEmpresa')));
+export const EmpresaCreatePage = Loadable(lazy(() => import('../pages/Empresa/CreateEmpresa')));
 
 // DASHBOARD: BLOG
 export const BlogPostsPage = Loadable(lazy(() => import('../pages/dashboard/BlogPostsPage')));
