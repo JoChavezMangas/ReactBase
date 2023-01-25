@@ -1,7 +1,16 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\node_modules",
+    "\\node_modules\\@leichtgewicht",
+    "\\node_modules\\@leichtgewicht\\ip-codec",
+    "\\node_modules\\@leichtgewicht\\ip-codec\\types",
+    "\\src\\sections",
+    "\\src\\sections\\@dashboard",
+    "\\src\\sections\\@dashboard\\user",
+    "\\src\\sections\\@dashboard\\user\\list",
+    "\\src\\_mock"
   ],
-  "SelectedNode": "\\.env",
+  "SelectedNode": "\\node_modules\\@leichtgewicht\\ip-codec\\types\\index.d.ts",
   "PreviewInSolutionExplorer": false
 }
