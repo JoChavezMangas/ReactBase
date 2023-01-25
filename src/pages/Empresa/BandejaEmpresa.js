@@ -19,7 +19,7 @@ import {
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // _mock_
-import { _userList } from '../../_mock/arrays';
+import { _userList, _companyList } from '../../_mock/arrays';
 // components
 import Iconify from '../../components/iconify';
 import Scrollbar from '../../components/scrollbar';
@@ -61,9 +61,9 @@ const ROLE_OPTIONS = [
 const TABLE_HEAD = [
     { id: 'CompanyName', label: 'Razon social', align: 'left' },
     { id: 'ContactPhone', label: 'Telefono de contacto', align: 'left' },
-    // { id: 'role', label: 'Role', align: 'left' },
-    // { id: 'isVerified', label: 'Verified', align: 'center' },
-    // { id: 'status', label: 'Status', align: 'left' },
+    { id: 'role', label: 'Role', align: 'left' },
+    { id: 'isVerified', label: 'Verified', align: 'center' },
+    { id: 'status', label: 'Status', align: 'left' },
     { id: '', label: 'Acciones', align: 'center' },
 ];
 
@@ -92,8 +92,8 @@ export default function UserListPage() {
     const { themeStretch } = useSettingsContext();
 
     const navigate = useNavigate();
-
-    const [tableData, setTableData] = useState(_userList);
+    // Crea la constante de la informacion a la tabla
+    const [tableData, setTableData] = useState(_companyList);
 
     const [openConfirm, setOpenConfirm] = useState(false);
 
@@ -193,6 +193,11 @@ export default function UserListPage() {
             </Helmet>
 
             <Container maxWidth={themeStretch ? false : 'lg'}>
+
+
+
+
+
                 <CustomBreadcrumbs
                     heading={Company}
                     links={[
@@ -215,7 +220,7 @@ export default function UserListPage() {
 
 
                     <Divider />
-                    {/* Este metodo  */}
+                    {/* Barra superior de Filtros  */}
                     <UserTableToolbar
                         isFiltered={isFiltered}
                         filterName={filterName}
@@ -226,8 +231,15 @@ export default function UserListPage() {
                         onResetFilter={handleResetFilter}
                     />
 
+
+
+                    {/* Box generica para filtro  */}
                     <genericFilter
                     />
+
+
+
+
 
                     <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
                         <TableSelectedAction
@@ -270,6 +282,9 @@ export default function UserListPage() {
                                     {dataFiltered
                                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                         .map((row) => (
+
+
+                                            // Genera contenido de la tabla, toma el row y coloca el valor (ver el metodo que usa)
                                             <UserTableRow
                                                 key={row.id}
                                                 row={row}
@@ -278,6 +293,10 @@ export default function UserListPage() {
                                                 onDeleteRow={() => handleDeleteRow(row.id)}
                                                 onEditRow={() => handleEditRow(row.name)}
                                             />
+
+
+
+
                                         ))}
 
                                     <TableEmptyRows
