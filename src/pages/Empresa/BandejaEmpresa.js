@@ -196,7 +196,7 @@ export default function UserListPage() {
                 <CustomBreadcrumbs
                     heading={Company}
                     links={[
-                        { name: ''  },
+                        { name: '' },
                     ]}
                     action={
                         <Button

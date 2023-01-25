@@ -16,7 +16,7 @@ genericFilter.propTypes = {
     optionsRole: PropTypes.arrayOf(PropTypes.string),
 };
 
-export default function genericFilter({
+function genericFilter({
     isFiltered,
     filterName,
     filterRole,
