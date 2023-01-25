@@ -99,6 +99,3 @@ export default function genericFilter({
     );
 }
 
-
-
-export { genericFilter }

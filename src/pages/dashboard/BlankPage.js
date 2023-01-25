@@ -38,6 +38,7 @@ import {
 } from '../../components/table';
 // sections
 import { UserTableToolbar, UserTableRow } from '../../sections/@dashboard/user/list';
+import genericFilter from '../../sections/@dashboard/user/list/genericFilter';
 
 
 // ----------------------------------------------------------------------
