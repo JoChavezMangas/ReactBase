@@ -38,6 +38,7 @@ import {
 } from '../../components/table';
 // sections
 import { UserTableToolbar, UserTableRow } from '../../sections/@dashboard/user/list';
+import { genericFilter } from '../../sections/@dashboard/user/list/genericFilter';
 
 
 // ----------------------------------------------------------------------
@@ -58,11 +59,11 @@ const ROLE_OPTIONS = [
 ];
 
 const TABLE_HEAD = [
-    { id: 'name', label: 'Name', align: 'left' },
-    { id: 'company', label: 'Company', align: 'left' },
-    { id: 'role', label: 'Role', align: 'left' },
-    { id: 'isVerified', label: 'Verified', align: 'center' },
-    { id: 'status', label: 'Status', align: 'left' },
+    { id: 'CompanyName', label: 'Razon social', align: 'left' },
+    { id: 'ContactPhone', label: 'Telefono de contacto', align: 'left' },
+    // { id: 'role', label: 'Role', align: 'left' },
+    // { id: 'isVerified', label: 'Verified', align: 'center' },
+    // { id: 'status', label: 'Status', align: 'left' },
     { id: '', label: 'Acciones', align: 'center' },
 ];
 
@@ -223,6 +224,9 @@ export default function UserListPage() {
                         onFilterName={handleFilterName}
                         onFilterRole={handleFilterRole}
                         onResetFilter={handleResetFilter}
+                    />
+
+                    <genericFilter
                     />
 
                     <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
