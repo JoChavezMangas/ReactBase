@@ -69,7 +69,7 @@ const navConfig = [
       },
       // Empresa
       {
-        title: 'Empresa',
+        title: 'empresa',
         path: PATH_DASHBOARD.empresa.root,
         icon: ICONS.cart,
         children: [
