@@ -1,245 +1,357 @@
 import { Helmet } from 'react-helmet-async';
-
-import { useForm } from "react-hook-form";
+import { paramCase } from 'change-case';
+import { useState } from 'react';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
 import {
-    Container,
-    Typography,
-    TextField,
-    FormLabel,
-    RadioGroup,
-    FormControlLabel,
-    Radio,
-    Grid,
-    Checkbox,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
+    Tab,
+    Tabs,
+    Card,
+    Table,
     Button,
+    Tooltip,
     Divider,
-    Stack,
-    Card
+    TableBody,
+    Container,
+    IconButton,
+    TableContainer,
 } from '@mui/material';
-import Box from '@mui/material/Box';
-
+// routes
+import { PATH_DASHBOARD } from '../../routes/paths';
+// _mock_
+import { _userList } from '../../_mock/arrays';
 // components
+import Iconify from '../../components/iconify';
+import Scrollbar from '../../components/scrollbar';
+import ConfirmDialog from '../../components/confirm-dialog';
+import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 import { useSettingsContext } from '../../components/settings';
-// import UserNewEditForm from '../../sections/@dashboard/user/UserNewEditForm';
+import {
+    useTable,
+    getComparator,
+    emptyRows,
+    TableNoData,
+    TableEmptyRows,
+    TableHeadCustom,
+    TableSelectedAction,
+    TablePaginationCustom,
+} from '../../components/table';
+// sections
+import { UserTableToolbar, UserTableRow } from '../../sections/@dashboard/user/list';
+
+
 // ----------------------------------------------------------------------
-export default function BlankPage() {
-  const { themeStretch } = useSettingsContext();
-    const { handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
-  return (
-    <>
-      <Helmet>
-        <title> Creacion de Broker </title>
-      </Helmet>
 
-      <Container maxWidth={themeStretch ? false : 'xl'}>
-              {/* <Typography variant="h6"> Hoja de Prueba </Typography> */}
-        {/* <UserNewEditForm /> */}
-      </Container>
+const STATUS_OPTIONS = ['all', 'active', 'banned'];
 
+const ROLE_OPTIONS = [
+    'all',
+    'ux designer',
+    'full stack designer',
+    'backend developer',
+    'project manager',
+    'leader',
+    'ui designer',
+    'ui/ux designer',
+    'front end developer',
+    'full stack developer',
+];
 
+const TABLE_HEAD = [
+    { id: 'name', label: 'Name', align: 'left' },
+    { id: 'company', label: 'Company', align: 'left' },
+    { id: 'role', label: 'Role', align: 'left' },
+    { id: 'isVerified', label: 'Verified', align: 'center' },
+    { id: 'status', label: 'Status', align: 'left' },
+    { id: '', label: 'Acciones', align: 'center' },
+];
 
+// ----------------------------------------------------------------------
 
-          <Container maxWidth={themeStretch ? false : 'xl'}>
-              <Typography variant="h3" component="h1" paragraph>
-                  Registrar Broker
-              </Typography>
+export default function UserListPage() {
+    const {
+        dense,
+        page,
+        order,
+        orderBy,
+        rowsPerPage,
+        setPage,
+        //
+        selected,
+        setSelected,
+        onSelectRow,
+        onSelectAllRows,
+        //
+        onSort,
+        onChangeDense,
+        onChangePage,
+        onChangeRowsPerPage,
+    } = useTable();
 
-              <Box
-                  component="form"
-                  sx={{
-                      '& .MuiTextField-root': { m: 3, width: '40%' },
-                  }}
-                  noValidate
-                  autoComplete="off"
-                  onSubmit={handleSubmit(onSubmit)}
-              >
+    const { themeStretch } = useSettingsContext();
 
-                  <h3>Datos del Broker</h3>
-                  <Card>
-                      <TextField
-                          id="outlined-number"
-                          label="Razon Social"
-                          InputLabelProps={{
-                              shrink: true,
-                          }}
-                          variant="standard"
-                      />
-                      <TextField
-                          id="outlined-helperText"
-                          label="Razon comercial"
-                          defaultValue=""
-                          helperText="Si es persona fisica solo primer nombre y apellido"
-                      />
-                      <TextField
-                          id="outlined-number"
-                          label="RFC"
-                      />
-                      <TextField
-                          id="outlined-number"
-                          label="Fecha de alta de la franquicia"
-                          InputLabelProps={{
-                              shrink: true,
-                          }}
-                      />
-                      <Grid container margin="24px">
-                          <Grid>
-                              <FormControlLabel control={<Checkbox defaultChecked />} label="Elegir usuario" />
-                          </Grid>
-                      </Grid>
-                      <TextField
-                          id="outlined-number"
-                          label="Usuario Asignado"
-                          InputLabelProps={{
-                              shrink: true,
-                          }}
-                      />
+    const navigate = useNavigate();
 
+    const [tableData, setTableData] = useState(_userList);
 
-                      <Grid container margin="24px">
+    const [openConfirm, setOpenConfirm] = useState(false);
 
-                          <FormLabel id="BrokerType">Tipo de Broker</FormLabel>
-                          <Grid container >
-                              <RadioGroup
-                                  aria-labelledby="demo-radio-buttons-group-label"
-                                  defaultValue="female"
-                                  name="radio-buttons-group"
+    const [filterName, setFilterName] = useState('');
 
-                              >
-                                  <FormControlLabel value="female" control={<Radio />} label="Persona Fisica" />
-                                  <FormControlLabel value="male" control={<Radio />} label="Perosona Moral" />
-                              </RadioGroup>
-                          </Grid>
-                      </Grid>
+    const [filterRole, setFilterRole] = useState('all');
 
+    const [filterStatus, setFilterStatus] = useState('all');
 
-                      <TextField
-                          id="outlined-helperText"
-                          label="RFC"
-                          defaultValue=""
-                      />
+    const dataFiltered = applyFilter({
+        inputData: tableData,
+        comparator: getComparator(order, orderBy),
+        filterName,
+        filterRole,
+        filterStatus,
+    });
 
+    const dataInPage = dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
-                      <FormControl variant="filled" sx={{ m: 3, width: '40%' }}>
-                          <InputLabel id="demo-simple-select-filled-label">Tipo de Broker</InputLabel>
-                          <Select
-                              labelId="demo-simple-select-filled-label"
-                              id="demo-simple-select-filled"
-                              value={10}
-                          >
-                              <MenuItem value="">
-                                  <em>None</em>
-                              </MenuItem>
-                              <MenuItem value={10}>Completa</MenuItem>
-                              <MenuItem value={20}>Parcial</MenuItem>
-                          </Select>
-                      </FormControl>
+    const denseHeight = dense ? 52 : 72;
 
-                      <Divider variant="middle" />
-                  </Card>
-                  <h3>Datos del Representate legal</h3>
+    const isFiltered = filterName !== '' || filterRole !== 'all' || filterStatus !== 'all';
 
-                  <Card>
-                      <TextField
-                          id="outlined-number"
-                          label="Nombre"
-                          InputLabelProps={{
-                              shrink: true,
-                          }}
-                          variant="standard"
-                      />
-                      <TextField
-                          id="outlined-number"
-                          label="Segundo nombre"
-                          InputLabelProps={{
-                              shrink: true,
-                          }}
-                          variant="standard"
-                      />
-                      <TextField
-                          id="outlined-number"
-                          label="Apellido"
-                          InputLabelProps={{
-                              shrink: true,
-                          }}
-                          variant="standard"
-                      />
-                      <TextField
-                          id="outlined-number"
-                          label="Segundo apellido"
-                          InputLabelProps={{
-                              shrink: true,
-                          }}
-                          variant="standard"
-                      />
+    const isNotFound =
+        (!dataFiltered.length && !!filterName) ||
+        (!dataFiltered.length && !!filterRole) ||
+        (!dataFiltered.length && !!filterStatus);
 
-                      <TextField
-                          id="outlined-helperText"
-                          label="CURP"
-                          defaultValue=""
-                      />
-                      <TextField
-                          id="outlined-helperText"
-                          label="Telefono"
-                          defaultValue=""
-                      />
-                      <TextField
-                          id="outlined-helperText"
-                          label="Correo"
-                          defaultValue=""
-                      />
-                      <FormControlLabel variant="filled" sx={{ m: 3, width: '40%' }} control={<Checkbox />} label="Requiere notificacion" />
-                  </Card>
-                  <Divider variant="middle" />
-                  <h3>Datos Bancarios</h3>
-                  <Card>
-                      <TextField
-                          id="outlined-helperText"
-                          label="Cuenta de banco"
-                          defaultValue=""
-                      />
-                      <TextField
-                          id="outlined-helperText"
-                          label="Clave"
-                          defaultValue=""
-                      />
+    const handleOpenConfirm = () => {
+        setOpenConfirm(true);
+    };
 
-                      <Stack variant="filled" sx={{ m: 3, width: '40%' }}>
-                          <InputLabel id="demo-simple-select-filled-label">Banco</InputLabel>
-                          <Select
-                              labelId="demo-simple-select-filled-label"
-                              id="demo-simple-select-filled"
-                              value={10}
-                          >
-                              <MenuItem value="">
-                                  <em>None</em>
-                              </MenuItem>
-                              <MenuItem value={10}>Banorte</MenuItem>
-                              <MenuItem value={20}>HSBC</MenuItem>
-                              <MenuItem value={30}>City Babamex</MenuItem>
-                              <MenuItem value={40}>Afirme</MenuItem>
-                          </Select>
-                      </Stack>
+    const handleCloseConfirm = () => {
+        setOpenConfirm(false);
+    };
 
+    const handleFilterStatus = (event, newValue) => {
+        setPage(0);
+        setFilterStatus(newValue);
+    };
 
-                      <Stack direction="row" sx={{
-                          m: 3, width: '40%'
-                      }}>
-                          <Button type="submit" variant="contained">Guardar</Button>
-                      </Stack>
-                  </Card>
-              </Box>
+    const handleFilterName = (event) => {
+        setPage(0);
+        setFilterName(event.target.value);
+    };
 
-          </Container>
+    const handleFilterRole = (event) => {
+        setPage(0);
+        setFilterRole(event.target.value);
+    };
+
+    const handleDeleteRow = (id) => {
+        const deleteRow = tableData.filter((row) => row.id !== id);
+        setSelected([]);
+        setTableData(deleteRow);
+
+        if (page > 0) {
+            if (dataInPage.length < 2) {
+                setPage(page - 1);
+            }
+        }
+    };
+
+    const handleDeleteRows = (selectedRows) => {
+        const deleteRows = tableData.filter((row) => !selectedRows.includes(row.id));
+        setSelected([]);
+        setTableData(deleteRows);
+
+        if (page > 0) {
+            if (selectedRows.length === dataInPage.length) {
+                setPage(page - 1);
+            } else if (selectedRows.length === dataFiltered.length) {
+                setPage(0);
+            } else if (selectedRows.length > dataInPage.length) {
+                const newPage = Math.ceil((tableData.length - selectedRows.length) / rowsPerPage) - 1;
+                setPage(newPage);
+            }
+        }
+    };
+
+    const handleEditRow = (id) => {
+        navigate(PATH_DASHBOARD.user.edit(paramCase(id)));
+    };
+
+    const handleResetFilter = () => {
+        setFilterName('');
+        setFilterRole('all');
+        setFilterStatus('all');
+    };
+
+    const Company = "Company"
+
+    return (
+        <>
+            <Helmet>
+                <title> {Company} </title>
+            </Helmet>
+
+            <Container maxWidth={themeStretch ? false : 'lg'}>
+                <CustomBreadcrumbs
+                    heading={Company}
+                    links={[
+                        { name: ''  },
+                    ]}
+                    action={
+                        <Button
+                            component={RouterLink}
+                            to={PATH_DASHBOARD.user.new}
+                            variant="contained"
+                            startIcon={<Iconify icon="eva:plus-fill" />}
+                        >
+                            Crear nueva {Company}
+                        </Button>
+                    }
+                />
+
+                <Card>
 
 
 
+                    <Divider />
+                    {/* Este metodo  */}
+                    <UserTableToolbar
+                        isFiltered={isFiltered}
+                        filterName={filterName}
+                        filterRole={filterRole}
+                        optionsRole={ROLE_OPTIONS}
+                        onFilterName={handleFilterName}
+                        onFilterRole={handleFilterRole}
+                        onResetFilter={handleResetFilter}
+                    />
 
-    </>
-  );
+                    <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
+                        <TableSelectedAction
+                            dense={dense}
+                            numSelected={selected.length}
+                            rowCount={tableData.length}
+                            onSelectAllRows={(checked) =>
+                                onSelectAllRows(
+                                    checked,
+                                    tableData.map((row) => row.id)
+                                )
+                            }
+                            action={
+                                <Tooltip title="Delete">
+                                    <IconButton color="primary" onClick={handleOpenConfirm}>
+                                        <Iconify icon="eva:trash-2-outline" />
+                                    </IconButton>
+                                </Tooltip>
+                            }
+                        />
+
+                        <Scrollbar>
+                            <Table size={dense ? 'small' : 'medium'} sx={{ minWidth: 800 }}>
+                                <TableHeadCustom
+                                    order={order}
+                                    orderBy={orderBy}
+                                    headLabel={TABLE_HEAD}
+                                    rowCount={tableData.length}
+                                    numSelected={selected.length}
+                                    onSort={onSort}
+                                    onSelectAllRows={(checked) =>
+                                        onSelectAllRows(
+                                            checked,
+                                            tableData.map((row) => row.id)
+                                        )
+                                    }
+                                />
+
+                                <TableBody>
+                                    {dataFiltered
+                                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                        .map((row) => (
+                                            <UserTableRow
+                                                key={row.id}
+                                                row={row}
+                                                selected={selected.includes(row.id)}
+                                                onSelectRow={() => onSelectRow(row.id)}
+                                                onDeleteRow={() => handleDeleteRow(row.id)}
+                                                onEditRow={() => handleEditRow(row.name)}
+                                            />
+                                        ))}
+
+                                    <TableEmptyRows
+                                        height={denseHeight}
+                                        emptyRows={emptyRows(page, rowsPerPage, tableData.length)}
+                                    />
+
+                                    <TableNoData isNotFound={isNotFound} />
+                                </TableBody>
+                            </Table>
+                        </Scrollbar>
+                    </TableContainer>
+
+                    <TablePaginationCustom
+                        count={dataFiltered.length}
+                        page={page}
+                        rowsPerPage={rowsPerPage}
+                        onPageChange={onChangePage}
+                        onRowsPerPageChange={onChangeRowsPerPage}
+                        //
+                        dense={dense}
+                        onChangeDense={onChangeDense}
+                    />
+                </Card>
+            </Container>
+
+            <ConfirmDialog
+                open={openConfirm}
+                onClose={handleCloseConfirm}
+                title="Delete"
+                content={
+                    <>
+                        Are you sure want to delete <strong> {selected.length} </strong> items?
+                    </>
+                }
+                action={
+                    <Button
+                        variant="contained"
+                        color="error"
+                        onClick={() => {
+                            handleDeleteRows(selected);
+                            handleCloseConfirm();
+                        }}
+                    >
+                        Delete
+                    </Button>
+                }
+            />
+        </>
+    );
+}
+
+// ----------------------------------------------------------------------
+
+function applyFilter({ inputData, comparator, filterName, filterStatus, filterRole }) {
+    const stabilizedThis = inputData.map((el, index) => [el, index]);
+
+    stabilizedThis.sort((a, b) => {
+        const order = comparator(a[0], b[0]);
+        if (order !== 0) return order;
+        return a[1] - b[1];
+    });
+
+    inputData = stabilizedThis.map((el) => el[0]);
+
+    if (filterName) {
+        inputData = inputData.filter(
+            (user) => user.name.toLowerCase().indexOf(filterName.toLowerCase()) !== -1
+        );
+    }
+
+    if (filterStatus !== 'all') {
+        inputData = inputData.filter((user) => user.status === filterStatus);
+    }
+
+    if (filterRole !== 'all') {
+        inputData = inputData.filter((user) => user.role === filterRole);
+    }
+
+    return inputData;
 }
