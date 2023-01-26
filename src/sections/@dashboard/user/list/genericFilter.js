@@ -9,20 +9,14 @@ import Iconify from '../../../../components/iconify';
 genericFilter.propTypes = {
     isFiltered: PropTypes.bool,
     filterName: PropTypes.string,
-    filterRole: PropTypes.string,
     onFilterName: PropTypes.func,
-    onFilterRole: PropTypes.func,
     onResetFilter: PropTypes.func,
-    optionsRole: PropTypes.arrayOf(PropTypes.string),
 };
 
 function genericFilter({
     isFiltered,
     filterName,
-    filterRole,
-    optionsRole,
     onFilterName,
-    onFilterRole,
     onResetFilter,
 }) {
     return (
@@ -35,42 +29,7 @@ function genericFilter({
             }}
             sx={{ px: 2.5, py: 3 }}
         >
-            <TextField
-                fullWidth
-                select
-                label="Role"
-                value={filterRole}
-                onChange={onFilterRole}
-                SelectProps={{
-                    MenuProps: {
-                        PaperProps: {
-                            sx: {
-                                maxHeight: 260,
-                            },
-                        },
-                    },
-                }}
-                sx={{
-                    maxWidth: { sm: 240 },
-                    textTransform: 'capitalize',
-                }}
-            >
-                {optionsRole.map((option) => (
-                    <MenuItem
-                        key={option}
-                        value={option}
-                        sx={{
-                            mx: 1,
-                            borderRadius: 0.75,
-                            typography: 'body2',
-                            textTransform: 'capitalize',
-                        }}
-                    >
-                        {option}
-                    </MenuItem>
-                ))}
-            </TextField>
-
+            
             <TextField
                 fullWidth
                 value={filterName}

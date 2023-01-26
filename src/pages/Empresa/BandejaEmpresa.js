@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { paramCase } from 'change-case';
 import { useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 // @mui
 import {
     Tab,
@@ -15,6 +16,13 @@ import {
     Container,
     IconButton,
     TableContainer,
+    InputAdornment,
+    TextField,
+    Stack,
+    TableRow,
+    TableCell,
+    Checkbox,
+    Typography
 } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
@@ -37,34 +45,16 @@ import {
     TablePaginationCustom,
 } from '../../components/table';
 // sections
-import { UserTableToolbar, UserTableRow } from '../../sections/@dashboard/user/list';
-import { genericFilter } from '../../sections/@dashboard/user/list/genericFilter';
+import { UserTableRow } from '../../sections/@dashboard/user/list';
 
 
 // ----------------------------------------------------------------------
 
-const STATUS_OPTIONS = ['all', 'active', 'banned'];
-
-const ROLE_OPTIONS = [
-    'all',
-    'ux designer',
-    'full stack designer',
-    'backend developer',
-    'project manager',
-    'leader',
-    'ui designer',
-    'ui/ux designer',
-    'front end developer',
-    'full stack developer',
-];
-
 const TABLE_HEAD = [
     { id: 'CompanyName', label: 'Razon social', align: 'left' },
     { id: 'ContactPhone', label: 'Telefono de contacto', align: 'left' },
-    { id: 'role', label: 'Role', align: 'left' },
-    { id: 'isVerified', label: 'Verified', align: 'center' },
-    { id: 'status', label: 'Status', align: 'left' },
-    { id: '', label: 'Acciones', align: 'center' },
+    { id: 'CompanyMail', label: 'Correo Electronico', align: 'left' },
+    { id: '', label: 'Acciones', align: 'center' },    
 ];
 
 // ----------------------------------------------------------------------
@@ -184,7 +174,16 @@ export default function UserListPage() {
         setFilterStatus('all');
     };
 
-    const Company = "Company"
+    const Company = "Empresa"
+    const [openPopover, setOpenPopover] = useState(null);
+    const handleOpenPopover = (event) => {
+        setOpenPopover(event.currentTarget);
+    };
+
+    const handleClosePopover = () => {
+        setOpenPopover(null);
+    };
+
 
     return (
         <>
@@ -217,30 +216,52 @@ export default function UserListPage() {
 
                 <Card>
 
-
-
-                    <Divider />
-                    {/* Barra superior de Filtros  */}
-                    <UserTableToolbar
-                        isFiltered={isFiltered}
-                        filterName={filterName}
-                        filterRole={filterRole}
-                        optionsRole={ROLE_OPTIONS}
-                        onFilterName={handleFilterName}
-                        onFilterRole={handleFilterRole}
-                        onResetFilter={handleResetFilter}
-                    />
-
-
-
-                    {/* Box generica para filtro  */}
-                    <genericFilter
-                    />
+                    {/* Seccion de filtro, debe moverse a un componente aparte  */}
+                   
+                    <Stack
+                        spacing={2}
+                        alignItems="center"
+                        direction={{
+                            xs: 'column',
+                            sm: 'row',
+                        }}
+                        sx={{ px: 2.5, py: 3 }}
+                    >
 
 
 
+                        <TextField
+                            fullWidth
+                            value={filterName}
+                            onChange={handleFilterName}
+                            placeholder="Buscar..."
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled' }} />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+
+                        {isFiltered && (
+                            <Button
+                                color="error"
+                                sx={{ flexShrink: 0 }}
+                                onClick={handleResetFilter}
+                                startIcon={<Iconify icon="eva:trash-2-outline" />}
+                            >
+                                Clear
+                            </Button>
+                        )}
+
+                    </Stack>
+
+                    {/* Fin Filtro  */}
 
 
+
+                    {/* Seccion de Herramientas para seleccion de densidad,cantidad de registros y pagina, debe moverse a un componente aparte  */}
                     <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
                         <TableSelectedAction
                             dense={dense}
@@ -260,6 +281,9 @@ export default function UserListPage() {
                                 </Tooltip>
                             }
                         />
+                    {/* Fin seccion herramientas  */}
+
+
 
                         <Scrollbar>
                             <Table size={dense ? 'small' : 'medium'} sx={{ minWidth: 800 }}>
@@ -285,14 +309,47 @@ export default function UserListPage() {
 
 
                                             // Genera contenido de la tabla, toma el row y coloca el valor (ver el metodo que usa)
-                                            <UserTableRow
-                                                key={row.id}
-                                                row={row}
-                                                selected={selected.includes(row.id)}
-                                                onSelectRow={() => onSelectRow(row.id)}
-                                                onDeleteRow={() => handleDeleteRow(row.id)}
-                                                onEditRow={() => handleEditRow(row.name)}
-                                            />
+                                            // <UserTableRow
+                                            //    key={row.id}
+                                            //    row={row}
+                                            //    selected={selected.includes(row.id)}
+                                            //    onSelectRow={() => onSelectRow(row.id)}
+                                            //    onDeleteRow={() => handleDeleteRow(row.id)}
+                                            //    onEditRow={() => handleEditRow(row.name)}
+                                            // />
+
+
+                                            <TableRow hover selected={selected.includes(row.id)}>
+                                                <TableCell padding="checkbox">
+                                                    <Checkbox checked={selected.includes(row.id)} onClick={() => onSelectRow(row.id)} />
+                                                </TableCell>
+
+                                                <TableCell>
+                                                    <Stack direction="row" alignItems="center" spacing={1}>
+
+                                                        <Typography variant="subtitle2" noWrap>
+                                                            {row.name}
+                                                        </Typography>
+                                                    </Stack>
+                                                </TableCell>
+
+                                                <TableCell align="left">{row.phoneNumber}</TableCell>
+                                                <TableCell align="left">{row.email}</TableCell>
+                                                <TableCell align="center">
+                                                    <IconButton color={openPopover ? 'inherit' : 'default'} onClick={handleOpenPopover}>
+                                                        <Iconify icon="eva:more-vertical-fill" />
+                                                    </IconButton>
+                                                </TableCell>
+
+                                            </TableRow>
+
+
+
+
+
+
+
+
 
 
 
