@@ -1,16 +1,15 @@
 {
   "ExpandedNodes": [
     "",
-    "\\node_modules",
-    "\\node_modules\\@leichtgewicht",
-    "\\node_modules\\@leichtgewicht\\ip-codec",
-    "\\node_modules\\@leichtgewicht\\ip-codec\\types",
-    "\\src\\sections",
-    "\\src\\sections\\@dashboard",
+    "\\public",
+    "\\src",
+    "\\src\\pages",
+    "\\src\\pages\\Empresa",
+    "\\src\\routes",
     "\\src\\sections\\@dashboard\\user",
     "\\src\\sections\\@dashboard\\user\\list",
-    "\\src\\_mock"
+    "\\src\\_mock\\arrays"
   ],
-  "SelectedNode": "\\node_modules\\@leichtgewicht\\ip-codec\\types\\index.d.ts",
+  "SelectedNode": "\\src\\pages\\Empresa\\CreateEmpresa.js",
   "PreviewInSolutionExplorer": false
 }
