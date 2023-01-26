@@ -101,7 +101,7 @@ export default function EmpresaNewEditForm({ isEdit = false, currentEmpresa }) {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
-      enqueueSnackbar(!isEdit ? 'Create success!' : 'Update success!');
+      enqueueSnackbar(!isEdit ? '¡Su empresa fue creada!' : '¡Sus cambios fueron actualizados!');
       navigate(PATH_DASHBOARD.empresa.list);
       console.log('DATA', data);
     } catch (error) {

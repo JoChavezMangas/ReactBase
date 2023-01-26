@@ -37,7 +37,7 @@ export default function EmpresaEditPage() {
               href: PATH_DASHBOARD.root,
             },
             {
-              name: 'empresa',
+              name: 'Empresa',
               href: PATH_DASHBOARD.empresa.list,
             },
             { name: currentEmpresa?.name },

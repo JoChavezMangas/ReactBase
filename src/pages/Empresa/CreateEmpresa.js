@@ -29,7 +29,7 @@ export default function EmpresaCreatePage() {
               href: PATH_DASHBOARD.root,
             },
             {
-              name: 'empresa',
+              name: 'Empresa',
               href: PATH_DASHBOARD.empresa.list,
             },
             { name: 'Nueva Empresa' },
