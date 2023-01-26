@@ -78,6 +78,17 @@ const navConfig = [
           { title: 'editar', path: PATH_DASHBOARD.empresa.demoEdit },
         ],
       },
+      // Empleado
+      {
+        title: 'empleado',
+        path: PATH_DASHBOARD.empleado.root,
+        icon: ICONS.user,
+        children: [
+          { title: 'lista', path: PATH_DASHBOARD.empleado.list },
+          { title: 'crear', path: PATH_DASHBOARD.empleado.new },
+          { title: 'editar', path: PATH_DASHBOARD.empleado.demoEdit },
+        ],
+      },
 
       // E-COMMERCE
       /* {
