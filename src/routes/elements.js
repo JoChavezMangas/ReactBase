@@ -74,7 +74,7 @@ export const UserAccountPage = Loadable(lazy(() => import('../pages/dashboard/Us
 export const UserCreatePage = Loadable(lazy(() => import('../pages/dashboard/UserCreatePage')));
 export const UserEditPage = Loadable(lazy(() => import('../pages/dashboard/UserEditPage')));
 
-// DASHBOARD: Empresa
+// DASHBOARD: Empresa hice cambios tontoss
 export const EmpresaListPage = Loadable(lazy(() => import('../pages/Empresa/BandejaEmpresa')));
 export const EmpresaCreatePage = Loadable(lazy(() => import('../pages/Empresa/CreateEmpresa')));
 
