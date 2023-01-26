@@ -19,7 +19,6 @@ import Label from '../../../components/label';
 import { useSnackbar } from '../../../components/snackbar';
 import FormProvider, {
   RHFSelect,
-  RHFSwitch,
   RHFTextField,
   RHFUploadAvatar,
 } from '../../../components/hook-form';
@@ -28,49 +27,53 @@ import FormProvider, {
 
 EmpresaNewEditForm.propTypes = {
   isEdit: PropTypes.bool,
-  currentUser: PropTypes.object,
+  currentEmpresa: PropTypes.object,
 };
 
-export default function EmpresaNewEditForm({ isEdit = false, currentUser }) {
+export default function EmpresaNewEditForm({ isEdit = false, currentEmpresa }) {
   const navigate = useNavigate();
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const NewUserSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
-    phoneNumber: Yup.string().required('Phone number is required'),
-    address: Yup.string().required('Address is required'),
-    country: Yup.string().required('Country is required'),
-    company: Yup.string().required('Company is required'),
-    state: Yup.string().required('State is required'),
-    city: Yup.string().required('City is required'),
-    role: Yup.string().required('Role is required'),
-    avatarUrl: Yup.string().required('Avatar is required').nullable(true),
+  const NewEmpresaSchema = Yup.object().shape({
+    businessName: Yup.string().required('Ingrese la Razón social'),
+    businessReason: Yup.string().required('Ingrese la Razón comercial'),
+    RFC: Yup.string().required('Ingrese RFC'),
+    email: Yup.string().required('Ingrese correo electrónico').email('De ser una dirección valida'),
+    phoneNumber: Yup.string().required('Ingresé número de teléfono'),
+    address: Yup.string().required('Ingrese dirección'),
+    colony: Yup.string().required('Seleccione una colonia'),
+    // company: Yup.string().required('Company is required'),
+    state: Yup.string().required('Ingrese un estado'),
+    city: Yup.string().required('Ingrese una ciudad'),
+    // role: Yup.string().required('Role is required'),
+    avatarUrl: Yup.string().required('Cargar imagen').nullable(true),
   });
 
   const defaultValues = useMemo(
     () => ({
-      name: currentUser?.name || '',
-      email: currentUser?.email || '',
-      phoneNumber: currentUser?.phoneNumber || '',
-      address: currentUser?.address || '',
-      country: currentUser?.country || '',
-      state: currentUser?.state || '',
-      city: currentUser?.city || '',
-      zipCode: currentUser?.zipCode || '',
-      avatarUrl: currentUser?.avatarUrl || null,
-      isVerified: currentUser?.isVerified || true,
-      status: currentUser?.status,
-      company: currentUser?.company || '',
-      role: currentUser?.role || '',
+      businessName: currentEmpresa?.businessName || '',
+      businessReason: currentEmpresa?.businessReason || '',
+      RFC: currentEmpresa?. RFC || '',
+      email: currentEmpresa?.email || '',
+      phoneNumber: currentEmpresa?.phoneNumber || '',
+      address: currentEmpresa?.address || '',
+      zipCode: currentEmpresa?.zipCode || '',
+      colony: currentEmpresa?.colony || '',
+      state: currentEmpresa?.state || '',
+      city: currentEmpresa?.city || '',
+      avatarUrl: currentEmpresa?.avatarUrl || null,
+      isVerified: currentEmpresa?.isVerified || true,
+      // status: currentEmpresa?.status,
+      // company: currentEmpresa?.company || '',
+      // role: currentEmpresa?.role || '',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [currentUser]
+    [currentEmpresa]
   );
 
   const methods = useForm({
-    resolver: yupResolver(NewUserSchema),
+    resolver: yupResolver(NewEmpresaSchema),
     defaultValues,
   });
 
@@ -86,14 +89,14 @@ export default function EmpresaNewEditForm({ isEdit = false, currentUser }) {
   const values = watch();
 
   useEffect(() => {
-    if (isEdit && currentUser) {
+    if (isEdit && currentEmpresa) {
       reset(defaultValues);
     }
     if (!isEdit) {
       reset(defaultValues);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isEdit, currentUser]);
+  }, [isEdit, currentEmpresa]);
 
   const onSubmit = async (data) => {
     try {
@@ -125,7 +128,7 @@ export default function EmpresaNewEditForm({ isEdit = false, currentUser }) {
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={3}>
           <Card sx={{ pt: 10, pb: 5, px: 3 }}>
             {isEdit && (
               <Label
@@ -152,8 +155,8 @@ export default function EmpresaNewEditForm({ isEdit = false, currentUser }) {
                       color: 'text.secondary',
                     }}
                   >
-                    Allowed *.jpeg, *.jpg, *.png, *.gif
-                    <br /> max size of {fData(3145728)}
+                    Formatos *.jpeg, *.jpg, *.png, *.gif
+                    <br /> Tamaño máximo {fData(3145728)}
                   </Typography>
                 }
               />
@@ -191,40 +194,38 @@ export default function EmpresaNewEditForm({ isEdit = false, currentUser }) {
               />
             )}
 
-            <RHFSwitch
-              name="isVerified"
-              labelPlacement="start"
-              label={
-                <>
-                  <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-                    Email Verified
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    Disabling this will automatically send the user a verification email
-                  </Typography>
-                </>
-              }
-              sx={{ mx: 0, width: 1, justifyContent: 'space-between' }}
-            />
+
           </Card>
         </Grid>
 
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={9}>
           <Card sx={{ p: 3 }}>
             <Box
               rowGap={3}
-              columnGap={2}
+              columnGap={3}
               display="grid"
               gridTemplateColumns={{
                 xs: 'repeat(1, 1fr)',
-                sm: 'repeat(2, 1fr)',
+                sm: 'repeat(3, 1fr)',
               }}
             >
-              <RHFTextField name="name" label="Full Name" />
-              <RHFTextField name="email" label="Email Address" />
-              <RHFTextField name="phoneNumber" label="Phone Number" />
+              <RHFTextField name="businessName" label="Razón social" />
+              <RHFTextField name="businessReason" label="Razón comercial" />
+              <RHFTextField name="RFC" label="RFC" />
+              <RHFTextField name="email" label="Correo electrónico" />
+              <RHFTextField name="phoneNumber" label="Teléfono" />
+              <RHFTextField name="address" label="Dirección" />
+              <RHFTextField name="zipCode" label="Código postal" />
 
-              <RHFSelect native name="country" label="Country" placeholder="Country">
+              {/* <RHFSelect native name="country" label="Country" placeholder="Country">
+                <option value="" />
+                {countries.map((country) => (
+                  <option key={country.code} value={country.label}>
+                    {country.label}
+                  </option>
+                ))}
+              </RHFSelect> */}
+              <RHFSelect native name="colony" label="Colonia" placeholder="Colonia">
                 <option value="" />
                 {countries.map((country) => (
                   <option key={country.code} value={country.label}>
@@ -232,18 +233,14 @@ export default function EmpresaNewEditForm({ isEdit = false, currentUser }) {
                   </option>
                 ))}
               </RHFSelect>
+              <RHFTextField name="state" label="Estado" />
+              <RHFTextField name="city" label="Delegación" />
 
-              <RHFTextField name="state" label="State/Region" />
-              <RHFTextField name="city" label="City" />
-              <RHFTextField name="address" label="Address" />
-              <RHFTextField name="zipCode" label="Zip/Code" />
-              <RHFTextField name="company" label="Company" />
-              <RHFTextField name="role" label="Role" />
             </Box>
 
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                {!isEdit ? 'Create User' : 'Save Changes'}
+                {!isEdit ? 'Crear Empresa' : 'Guardar Cambios'}
               </LoadingButton>
             </Stack>
           </Card>

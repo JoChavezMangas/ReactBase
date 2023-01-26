@@ -72,6 +72,8 @@ export const PATH_DASHBOARD = {
     root: path(ROOTS_DASHBOARD, '/empresa'),
     list: path(ROOTS_DASHBOARD, '/empresa/list'),
     new: path(ROOTS_DASHBOARD, '/empresa/new'),
+    edit: (name) => path(ROOTS_DASHBOARD, `/empresa/${name}/edit`),
+    demoEdit: path(ROOTS_DASHBOARD, `/empresa/reece-chung/edit`),
   },
   eCommerce: {
     root: path(ROOTS_DASHBOARD, '/e-commerce'),

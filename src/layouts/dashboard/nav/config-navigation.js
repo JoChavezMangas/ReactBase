@@ -75,6 +75,7 @@ const navConfig = [
         children: [
           { title: 'list', path: PATH_DASHBOARD.empresa.list },
           { title: 'create', path: PATH_DASHBOARD.empresa.new },
+          { title: 'edit', path: PATH_DASHBOARD.empresa.demoEdit },
         ],
       },
 
