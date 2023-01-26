@@ -36,8 +36,8 @@ import {
   UserAccountPage,
   // Dashboard: Empresa
   EmpresaListPage,
-  EmpresaCreatePage,
   EmpresaEditPage,
+  EmpresaCreatePage,
 
   // Dashboard: Ecommerce
   EcommerceShopPage,
@@ -219,7 +219,7 @@ export default function Router() {
             { element: <Navigate to="/dashboard/empresa/list" replace />, index: true },
             { path: 'list', element: <EmpresaListPage /> },
             { path: 'new', element: <EmpresaCreatePage /> },
-            { path: 'name/edit', element: <EmpresaEditPage /> },
+            { path: ':name/edit', element: <EmpresaEditPage /> },
           ],
         },
         {

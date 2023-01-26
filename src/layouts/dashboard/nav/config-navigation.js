@@ -73,9 +73,9 @@ const navConfig = [
         path: PATH_DASHBOARD.empresa.root,
         icon: ICONS.cart,
         children: [
-          { title: 'list', path: PATH_DASHBOARD.empresa.list },
-          { title: 'create', path: PATH_DASHBOARD.empresa.new },
-          { title: 'edit', path: PATH_DASHBOARD.empresa.demoEdit },
+          { title: 'lista', path: PATH_DASHBOARD.empresa.list },
+          { title: 'crear', path: PATH_DASHBOARD.empresa.new },
+          { title: 'editar', path: PATH_DASHBOARD.empresa.demoEdit },
         ],
       },
 
