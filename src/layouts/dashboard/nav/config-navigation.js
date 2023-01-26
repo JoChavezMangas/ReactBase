@@ -67,6 +67,16 @@ const navConfig = [
           { title: 'account', path: PATH_DASHBOARD.user.account },
         ],
       },
+      // Empresa
+      {
+        title: 'empresa',
+        path: PATH_DASHBOARD.empresa.root,
+        icon: ICONS.cart,
+        children: [
+          { title: 'list', path: PATH_DASHBOARD.empresa.list },
+          { title: 'create', path: PATH_DASHBOARD.empresa.new },
+        ],
+      },
 
       // E-COMMERCE
       /* {
