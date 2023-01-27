@@ -74,14 +74,27 @@ export default function MUIDataGridPage() {
           <Card>
             <CardHeader title="Basic" sx={{ mb: 2 }} />
             <Box sx={{ height: 390 }}>
-              <DataGridBasic data={_dataGrid} />
+
+
+                          <DataGridBasic data={_dataGrid} />
+
+
+
             </Box>
           </Card>
 
           <Card>
             <CardHeader title="Custom" sx={{ mb: 2 }} />
-            <Box sx={{ height: 720 }}>
-              <DataGridCustom data={_dataGrid} />
+                <Box sx={{ height: 720 }}>
+
+
+
+                          <DataGridCustom data={_dataGrid} />
+
+
+
+
+
             </Box>
           </Card>
         </Stack>

@@ -19,14 +19,16 @@ import {
     TableRow,
     TableCell,
     Checkbox,
-    Typography
+    Typography,
+    CardHeader,
+    Box
 } from '@mui/material';
 // routes
 import { paramCase } from 'change-case';
 import { PATH_DASHBOARD } from '../../routes/paths';
 // _mock_
 // import { _userList, _companyList } from '../../_mock/arrays';
-import {_companyList } from '../../_mock/arrays';
+import { _companyList, _dataList } from '../../_mock/arrays';
 // components
 import Iconify from '../../components/iconify';
 import Scrollbar from '../../components/scrollbar';
@@ -46,6 +48,7 @@ import {
 // sections
 import { UserTableRow } from '../../sections/@dashboard/user/list';
 import { FiltroBandeja, RowEmpresaBandeja } from '../../sections/@dashboard/empresa/EmpresaBandeja';
+import DataGridCustom from '../../sections/_examples/mui/data-grid/DataGridCustom';
 
 // ----------------------------------------------------------------------
 
@@ -57,6 +60,9 @@ const TABLE_HEAD = [
 ];
 
 // ----------------------------------------------------------------------
+
+
+
 
 export default function BandejaEmpresa() {
     const {
@@ -160,156 +166,22 @@ export default function BandejaEmpresa() {
         setOpenPopover(event.currentTarget);
     };
 
-    // const handleClosePopover = () => {
-    //     setOpenPopover(null);
-    // };
-
-
     return (
         <>
             <Helmet>
                 <title> {Company} </title>
             </Helmet>
 
-            <Container maxWidth={themeStretch ? false : 'lg'}>
-
-
-                <CustomBreadcrumbs
-                    heading={Company}
-                    links={[
-                        { name: '' },
-                    ]}
-                    action={
-                        <Button
-                            component={RouterLink}
-                            to={PATH_DASHBOARD.user.new}
-                            variant="contained"
-                            startIcon={<Iconify icon="eva:plus-fill" />}
-                        >
-                            Crear nueva {Company}
-                        </Button>
-                    }
-                />
-
-                
+            <Container>
                 <Card>
-
-                    {/* Seccion de filtro, debe moverse a un componente aparte  */}
-                    <FiltroBandeja
-                        isFiltered={isFiltered}
-                        filterName={filterName}
-                        onFilterName={handleFilterName}
-                        onResetFilter={handleResetFilter}
-                    />
-                    {/* Fin Filtro  */}
-
-
-
                     <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
-
-
-
-                    {/* Seccion de Herramientas para seleccion de densidad,cantidad de registros y pagina, debe moverse a un componente aparte  */}
-                        <TableSelectedAction
-                            dense={false}
-                            numSelected={selected.length}
-                            rowCount={tableData.length}
-                            onSelectAllRows={(checked) =>
-                                onSelectAllRows(
-                                    checked,
-                                    tableData.map((row) => row.id)
-                                )
-                            }
-                            action={
-                                <Tooltip title="Borrar">
-                                    <IconButton color="primary" onClick={handleOpenConfirm}>
-                                        <Iconify icon="eva:trash-2-outline" />
-                                    </IconButton>
-                                </Tooltip>
-                            }
-                        />
-                    {/* Fin seccion herramientas  */}
-
-
-
-                        <Scrollbar>
-                            <Table size={dense ? 'small' : 'medium'} sx={{ minWidth: 800 }}>
-                                <TableHeadCustom
-                                    order={order}
-                                    orderBy={orderBy}
-                                    headLabel={TABLE_HEAD}
-                                    rowCount={tableData.length}
-                                    numSelected={selected.length}
-                                    onSort={onSort}
-                                    onSelectAllRows={(checked) =>
-                                        onSelectAllRows(
-                                            checked,
-                                            tableData.map((row) => row.id)
-                                        )
-                                    }
-                                />
-
-                                <TableBody>
-                                    {dataFiltered
-                                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                        .map((row) => (
-                                            <RowEmpresaBandeja
-                                                key={row.id}
-                                                row={row}
-                                                selected={selected.includes(row.id)}
-                                                onSelectRow={() => onSelectRow(row.id)}
-                                                onDeleteRow={() => handleDeleteRows(row.id)}
-                                                onEditRow={() => handleEditRow(row.name)}
-                                            />
-                                        ))}
-
-
-                                    <TableEmptyRows
-                                        height={denseHeight}
-                                        emptyRows={emptyRows(page, rowsPerPage, tableData.length)}
-                                    />
-
-                                    <TableNoData isNotFound={isNotFound} />
-                                </TableBody>
-                            </Table>
-                        </Scrollbar>
+                    <Box sx={{ height: 800 }}>
+                        <DataGridCustom data={_dataList} />
+                    </Box>
                     </TableContainer>
-
-                    <TablePaginationCustom
-                        count={dataFiltered.length}
-                        page={page}
-                        rowsPerPage={rowsPerPage}
-                        onPageChange={onChangePage}
-                        onRowsPerPageChange={onChangeRowsPerPage}
-                        //
-                        dense={dense}
-                        onChangeDense={onChangeDense}
-                    />
                 </Card>
             </Container>
 
-            <ConfirmDialog
-                open={openConfirm}
-                onClose={handleCloseConfirm}
-                title="Borrar"
-                content={
-                    <>
-                        Seguro que deseas borrar <strong> {selected.length} </strong> Empresas?
-                    </>
-                }
-                action={
-                    <Button
-                        variant="contained"
-                        color="error"
-                        onClick={() => {
-                            handleDeleteRows(selected);
-                            handleCloseConfirm();
-                        }}
-                    >
-                        Borrar
-                    </Button>
-                }
-            />
         </>
     );
 }

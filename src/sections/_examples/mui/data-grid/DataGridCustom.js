@@ -37,7 +37,7 @@ const columns = [
   },
   {
     field: 'avatar',
-    headerName: 'Avatar',
+    headerName: '',
     align: 'center',
     headerAlign: 'center',
     width: 64,
@@ -48,10 +48,21 @@ const columns = [
   },
   {
     field: 'name',
-    headerName: 'Name',
+    headerName: 'Razon Social',
     flex: 1,
     editable: true,
   },
+    {
+        field: 'Phone',
+        headerName: 'Telefono',
+        flex: 1,
+        editable: false,
+        renderCell: (params) => (
+            <Typography variant="body2" sx={{ textDecoration: 'underline' }} noWrap>
+                {params.row.phone}
+            </Typography>
+        ),
+    },
   {
     field: 'email',
     headerName: 'Email',
@@ -63,83 +74,83 @@ const columns = [
       </Typography>
     ),
   },
-  {
-    field: 'lastLogin',
-    type: 'dateTime',
-    headerName: 'Last login',
-    align: 'right',
-    headerAlign: 'right',
-    width: 200,
-  },
-  {
-    field: 'rating',
-    type: 'number',
-    headerName: 'Rating',
-    width: 160,
-    disableColumnMenu: true,
-    renderCell: (params) => (
-      <Rating size="small" value={params.row.rating} precision={0.5} readOnly />
-    ),
-  },
+  // {
+  //  field: 'lastLogin',
+  //  type: 'dateTime',
+  //  headerName: 'Last login',
+  //  align: 'right',
+  //  headerAlign: 'right',
+  //  width: 200,
+  // },
+  // {
+  //  field: 'rating',
+  //  type: 'number',
+  //  headerName: 'Rating',
+  //  width: 160,
+  //  disableColumnMenu: true,
+  //  renderCell: (params) => (
+  //    <Rating size="small" value={params.row.rating} precision={0.5} readOnly />
+  //  ),
+  // },
   {
     field: 'status',
     type: 'singleSelect',
     headerName: 'Status',
-    valueOptions: ['online', 'away', 'busy'],
+    valueOptions: ['Activo', 'Inactivo', 'Bloqueado'],
     align: 'center',
     headerAlign: 'center',
     width: 120,
     renderCell: (params) => RenderStatus(params.row.status),
   },
-  {
-    field: 'isAdmin',
-    type: 'boolean',
-    align: 'center',
-    headerAlign: 'center',
-    width: 120,
+  // {
+  //  field: 'isAdmin',
+  //  type: 'boolean',
+  //  align: 'center',
+  //  headerAlign: 'center',
+  //  width: 120,
 
-    renderCell: (params) =>
-      params.row.isAdmin ? (
-        <Iconify icon="eva:checkmark-circle-2-fill" sx={{ color: 'primary.main' }} />
-      ) : (
-        '-'
-      ),
-  },
-  {
-    field: 'performance',
-    type: 'number',
-    headerName: 'Performance',
-    align: 'center',
-    headerAlign: 'center',
-    width: 160,
-    renderCell: (params) => (
-      <Stack spacing={1} direction="row" alignItems="center" sx={{ px: 1, width: 1, height: 1 }}>
-        <LinearProgress
-          value={params.row.performance}
-          variant="determinate"
-          color={
-            (params.row.performance < 30 && 'error') ||
-            (params.row.performance > 30 && params.row.performance < 70 && 'warning') ||
-            'primary'
-          }
-          sx={{ width: 1, height: 6 }}
-        />
-        <Typography variant="caption" sx={{ width: 80 }}>
-          {fPercent(params.row.performance)}
-        </Typography>
-      </Stack>
-    ),
-  },
+  //  renderCell: (params) =>
+  //    params.row.isAdmin ? (
+  //      <Iconify icon="eva:checkmark-circle-2-fill" sx={{ color: 'primary.main' }} />
+  //    ) : (
+  //      '-'
+  //    ),
+  // },
+  // {
+  //  field: 'performance',
+  //  type: 'number',
+  //  headerName: 'Performance',
+  //  align: 'center',
+  //  headerAlign: 'center',
+  //  width: 160,
+  //  renderCell: (params) => (
+  //    <Stack spacing={1} direction="row" alignItems="center" sx={{ px: 1, width: 1, height: 1 }}>
+  //      <LinearProgress
+  //        value={params.row.performance}
+  //        variant="determinate"
+  //        color={
+  //          (params.row.performance < 30 && 'error') ||
+  //          (params.row.performance > 30 && params.row.performance < 70 && 'warning') ||
+  //          'primary'
+  //        }
+  //        sx={{ width: 1, height: 6 }}
+  //      />
+  //      <Typography variant="caption" sx={{ width: 80 }}>
+  //        {fPercent(params.row.performance)}
+  //      </Typography>
+  //    </Stack>
+  //  ),
+  // },
   {
     field: 'action',
-    headerName: ' ',
-    align: 'right',
-    width: 80,
+    headerName: 'Acciones',
+    align: 'center',
+    width: 90,
     sortable: false,
     filterable: false,
     disableColumnMenu: true,
     renderCell: (params) => (
-      <IconButton onClick={() => console.log('ID', params.row.id)}>
+        <IconButton onClick={handleOpenPopover}>
         <Iconify icon="eva:more-vertical-fill" />
       </IconButton>
     ),
@@ -163,15 +174,22 @@ export default function DataGridCustom({ data }) {
       ...operator,
       InputComponent: RatingInputValue,
     }));
+
     columns[ratingColIndex] = {
       ...ratingColumn,
       filterOperators: ratingFilterOperators,
     };
+
   }
 
   const selected = data.filter((row) => selectionModel.includes(row.id));
 
   console.log('SELECTED', selected);
+
+    const handleOpenPopover = (event) => {
+        setOpenPopover(event.currentTarget);
+    };
+
 
   return (
     <DataGrid
@@ -197,8 +215,8 @@ function RenderStatus(getStatus) {
   const isLight = theme.palette.mode === 'light';
   return (
     <Label
-      variant={isLight ? 'soft' : 'filled'}
-      color={(getStatus === 'busy' && 'error') || (getStatus === 'away' && 'warning') || 'success'}
+      variant={isLight ? 'soft' : 'filled'} 
+          color={(getStatus === 'Bloqueado' && 'error') || (getStatus === 'Inactivo' && 'warning') || 'success'}
       sx={{ mx: 'auto' }}
     >
       {getStatus}
@@ -219,7 +237,7 @@ function RatingInputValue({ item, applyValue }) {
       <Rating
         size="small"
         precision={0.5}
-        placeholder="Filter value"
+        placeholder="Buscar"
         value={Number(item.value)}
         onChange={(event, newValue) => {
           applyValue({ ...item, value: newValue });

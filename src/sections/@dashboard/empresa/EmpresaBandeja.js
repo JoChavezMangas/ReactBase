@@ -10,7 +10,7 @@ import {
     Button,
     MenuItem
 } from "@mui/material";
-import { func, string, number, bool, object } from "prop-types";
+import { func, string, number, bool, object, array } from "prop-types";
 import { useState } from "react";
 import ConfirmDialog from "../../../components/confirm-dialog";
 import Iconify from "../../../components/iconify";
@@ -175,8 +175,6 @@ function FiltroBandeja({
         </>
     )
 }
-
-
 
 export { FiltroBandeja, RowEmpresaBandeja }
 
