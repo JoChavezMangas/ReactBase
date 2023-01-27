@@ -7,7 +7,7 @@ import { PATH_DASHBOARD } from '../../routes/paths';
 import { useSettingsContext } from '../../components/settings';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 // sections
-import EmpresaNewEditForm from '../../sections/@dashboard/empresa/EmpresaNewEditForm';
+import EmpleadoNewEditForm from '../../sections/@dashboard/empleado/EmpleadoNewEditForm';
 
 // ----------------------------------------------------------------------
 
@@ -17,25 +17,25 @@ export default function EmpleadoCreatePage() {
   return (
     <>
       <Helmet>
-        <title> Empresa</title>
+        <title> Empleado</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Crear nueva empresa"
+          heading="Crear nuevo empleado"
           links={[
             {
               name: 'Dashboard',
               href: PATH_DASHBOARD.root,
             },
             {
-              name: 'Empresa',
-              href: PATH_DASHBOARD.empresa.list,
+              name: 'Empleado',
+              href: PATH_DASHBOARD.empleado.list,
             },
-            { name: 'Nueva Empresa' },
+            { name: 'Nuevo Empleado' },
           ]}
         />
-        <EmpresaNewEditForm />
+        <EmpleadoNewEditForm />
       </Container>
     </>
   );

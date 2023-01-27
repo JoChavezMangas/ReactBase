@@ -11,16 +11,16 @@ import { _userList } from '../../_mock/arrays';
 import { useSettingsContext } from '../../components/settings';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 // sections
-import EmpresaNewEditForm from '../../sections/@dashboard/empresa/EmpresaNewEditForm';
+import EmpleadoNewEditForm from '../../sections/@dashboard/empleado/EmpleadoNewEditForm';
 
 // ----------------------------------------------------------------------
 
-export default function EmpresaEditPage() {
+export default function EmpleadoEditPage() {
   const { themeStretch } = useSettingsContext();
 
   const { name } = useParams();
 
-  const currentEmpresa = _userList.find((empresa) => paramCase(empresa.name) === name);
+  const currentEmpleado = _userList.find((empleado) => paramCase(empleado.name) === name);
 
   return (
     <>
@@ -30,21 +30,21 @@ export default function EmpresaEditPage() {
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Editar empresa"
+          heading="Editar empleado"
           links={[
             {
               name: 'Dashboard',
               href: PATH_DASHBOARD.root,
             },
             {
-              name: 'Empresa',
-              href: PATH_DASHBOARD.empresa.list,
+              name: 'Empleado',
+              href: PATH_DASHBOARD.empleado.list,
             },
-            { name: currentEmpresa?.name },
+            { name: currentEmpleado?.name },
           ]}
         />
 
-        <EmpresaNewEditForm isEdit currentEmpresa={currentEmpresa} />
+        <EmpleadoNewEditForm isEdit currentEmpleado={currentEmpleado} />
       </Container>
     </>
   );
