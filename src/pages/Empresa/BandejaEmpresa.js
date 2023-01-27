@@ -58,7 +58,7 @@ const TABLE_HEAD = [
 
 // ----------------------------------------------------------------------
 
-export default function UserListPage() {
+export default function BandejaEmpresa() {
     const {
         dense,
         page,
