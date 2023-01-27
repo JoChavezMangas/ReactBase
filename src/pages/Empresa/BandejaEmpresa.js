@@ -22,6 +22,7 @@ import {
     Typography
 } from '@mui/material';
 // routes
+import { paramCase } from 'change-case';
 import { PATH_DASHBOARD } from '../../routes/paths';
 // _mock_
 // import { _userList, _companyList } from '../../_mock/arrays';
@@ -79,7 +80,7 @@ export default function UserListPage() {
 
     const { themeStretch } = useSettingsContext();
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     // Crea la constante de la informacion a la tabla
     const [tableData, setTableData] = useState(_companyList);
 
@@ -118,32 +119,10 @@ export default function UserListPage() {
         setOpenConfirm(false);
     };
 
-    // const handleFilterStatus = (event, newValue) => {
-    //     setPage(0);
-    //     setFilterStatus(newValue);
-    // };
-
     const handleFilterName = (event) => {
         setPage(0);
         setFilterName(event.target.value);
     };
-
-    // const handleFilterRole = (event) => {
-    //     setPage(0);
-    //     setFilterRole(event.target.value);
-    // };
-
-    // const handleDeleteRow = (id) => {
-    //     const deleteRow = tableData.filter((row) => row.id !== id);
-    //     setSelected([]);
-    //     setTableData(deleteRow);
-
-    //     if (page > 0) {
-    //         if (dataInPage.length < 2) {
-    //             setPage(page - 1);
-    //         }
-    //     }
-    // };
 
     const handleDeleteRows = (selectedRows) => {
         const deleteRows = tableData.filter((row) => !selectedRows.includes(row.id));
@@ -164,6 +143,8 @@ export default function UserListPage() {
 
     // Redirije en caso de edición
     const handleEditRow = (id) => {
+        // const ruteID = paramCase(id);
+        // navigate(PATH_DASHBOARD.user.edit(id));
         navigate(PATH_DASHBOARD.user.edit(paramCase(id)));
     };
 
@@ -277,7 +258,7 @@ export default function UserListPage() {
                                                 row={row}
                                                 selected={selected.includes(row.id)}
                                                 onSelectRow={() => onSelectRow(row.id)}
-                                                onDeleteRow={() => handleDeleteRow(row.id)}
+                                                onDeleteRow={() => handleDeleteRows(row.id)}
                                                 onEditRow={() => handleEditRow(row.name)}
                                             />
                                         ))}
