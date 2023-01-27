@@ -34,9 +34,16 @@ import {
   UserCreatePage,
   UserProfilePage,
   UserAccountPage,
+
   // Dashboard: Empresa
   EmpresaListPage,
+  EmpresaEditPage,
   EmpresaCreatePage,
+
+  // Dashboard: Empleado
+  EmpleadoListPage,
+  EmpleadoEditPage,
+  EmpleadoCreatePage,
 
   // Dashboard: Ecommerce
   EcommerceShopPage,
@@ -213,11 +220,21 @@ export default function Router() {
           ],
         },
         {
-          path: 'Empresa',
+          path: 'empresa',
           children: [
             { element: <Navigate to="/dashboard/empresa/list" replace />, index: true },
             { path: 'list', element: <EmpresaListPage /> },
             { path: 'new', element: <EmpresaCreatePage /> },
+            { path: ':name/edit', element: <EmpresaEditPage /> },
+          ],
+        },
+        {
+          path: 'empleado',
+          children: [
+            { element: <Navigate to="/dashboard/empleado/list" replace />, index: true },
+            { path: 'list', element: <EmpleadoListPage /> },
+            { path: 'new', element: <EmpleadoCreatePage /> },
+            { path: ':name/edit', element: <EmpleadoEditPage /> },
           ],
         },
         {

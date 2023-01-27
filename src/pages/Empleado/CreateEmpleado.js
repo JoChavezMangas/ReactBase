@@ -11,7 +11,7 @@ import EmpresaNewEditForm from '../../sections/@dashboard/empresa/EmpresaNewEdit
 
 // ----------------------------------------------------------------------
 
-export default function EmpresaCreatePage() {
+export default function EmpleadoCreatePage() {
   const { themeStretch } = useSettingsContext();
 
   return (

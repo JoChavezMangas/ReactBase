@@ -1,8 +1,12 @@
 import { Helmet } from 'react-helmet-async';
+import { paramCase } from 'change-case';
+import { useParams } from 'react-router-dom';
 // @mui
 import { Container } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
+// _mock_
+import { _userList } from '../../_mock/arrays';
 // components
 import { useSettingsContext } from '../../components/settings';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
@@ -11,18 +15,22 @@ import EmpresaNewEditForm from '../../sections/@dashboard/empresa/EmpresaNewEdit
 
 // ----------------------------------------------------------------------
 
-export default function EmpresaCreatePage() {
+export default function EmpresaEditPage() {
   const { themeStretch } = useSettingsContext();
+
+  const { name } = useParams();
+
+  const currentEmpresa = _userList.find((empresa) => paramCase(empresa.name) === name);
 
   return (
     <>
       <Helmet>
-        <title> Empresa</title>
+        <title> User: Edit user | Minimal UI</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Crear nueva empresa"
+          heading="Editar empresa"
           links={[
             {
               name: 'Dashboard',
@@ -32,10 +40,11 @@ export default function EmpresaCreatePage() {
               name: 'Empresa',
               href: PATH_DASHBOARD.empresa.list,
             },
-            { name: 'Nueva Empresa' },
+            { name: currentEmpresa?.name },
           ]}
         />
-        <EmpresaNewEditForm />
+
+        <EmpresaNewEditForm isEdit currentEmpresa={currentEmpresa} />
       </Container>
     </>
   );

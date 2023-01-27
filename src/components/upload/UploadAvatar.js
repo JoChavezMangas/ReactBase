@@ -116,7 +116,7 @@ export default function UploadAvatar({ error, file, disabled, helperText, sx, ..
         >
           <Iconify icon="ic:round-add-a-photo" width={24} sx={{ mb: 1 }} />
 
-          <Typography variant="caption">{file ? 'Update photo' : 'Upload photo'}</Typography>
+          <Typography variant="caption">{file ? 'Actualizar logo' : 'Subir logo'}</Typography>
         </StyledPlaceholder>
       </StyledDropZone>
 
