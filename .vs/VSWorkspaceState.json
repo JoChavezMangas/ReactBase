@@ -1,15 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\public",
     "\\src",
-    "\\src\\pages",
-    "\\src\\pages\\Empresa",
-    "\\src\\routes",
-    "\\src\\sections\\@dashboard\\user",
-    "\\src\\sections\\@dashboard\\user\\list",
-    "\\src\\_mock\\arrays"
+    "\\src\\routes"
   ],
-  "SelectedNode": "\\src\\pages\\Empresa\\CreateEmpresa.js",
+  "SelectedNode": "\\src\\routes\\paths.js",
   "PreviewInSolutionExplorer": false
 }

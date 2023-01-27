@@ -1,9 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 // import { paramCase } from 'change-case';
 import { useState } from 'react';
-// import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { Link as RouterLink} from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
 import {
     Card,
@@ -24,6 +22,7 @@ import {
     Typography
 } from '@mui/material';
 // routes
+import { paramCase } from 'change-case';
 import { PATH_DASHBOARD } from '../../routes/paths';
 // _mock_
 // import { _userList, _companyList } from '../../_mock/arrays';
@@ -45,8 +44,8 @@ import {
     TablePaginationCustom,
 } from '../../components/table';
 // sections
-// import { UserTableRow } from '../../sections/@dashboard/user/list';
-
+import { UserTableRow } from '../../sections/@dashboard/user/list';
+import { FiltroBandeja, RowEmpresaBandeja } from '../../sections/@dashboard/empresa/EmpresaBandeja';
 
 // ----------------------------------------------------------------------
 
@@ -59,7 +58,7 @@ const TABLE_HEAD = [
 
 // ----------------------------------------------------------------------
 
-export default function UserListPage() {
+export default function BandejaEmpresa() {
     const {
         dense,
         page,
@@ -81,7 +80,7 @@ export default function UserListPage() {
 
     const { themeStretch } = useSettingsContext();
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     // Crea la constante de la informacion a la tabla
     const [tableData, setTableData] = useState(_companyList);
 
@@ -120,32 +119,10 @@ export default function UserListPage() {
         setOpenConfirm(false);
     };
 
-    // const handleFilterStatus = (event, newValue) => {
-    //     setPage(0);
-    //     setFilterStatus(newValue);
-    // };
-
     const handleFilterName = (event) => {
         setPage(0);
         setFilterName(event.target.value);
     };
-
-    // const handleFilterRole = (event) => {
-    //     setPage(0);
-    //     setFilterRole(event.target.value);
-    // };
-
-    // const handleDeleteRow = (id) => {
-    //     const deleteRow = tableData.filter((row) => row.id !== id);
-    //     setSelected([]);
-    //     setTableData(deleteRow);
-
-    //     if (page > 0) {
-    //         if (dataInPage.length < 2) {
-    //             setPage(page - 1);
-    //         }
-    //     }
-    // };
 
     const handleDeleteRows = (selectedRows) => {
         const deleteRows = tableData.filter((row) => !selectedRows.includes(row.id));
@@ -164,9 +141,12 @@ export default function UserListPage() {
         }
     };
 
-    // const handleEditRow = (id) => {
-    //     navigate(PATH_DASHBOARD.user.edit(paramCase(id)));
-    // };
+    // Redirije en caso de edición
+    const handleEditRow = (id) => {
+        // const ruteID = paramCase(id);
+        // navigate(PATH_DASHBOARD.user.edit(id));
+        navigate(PATH_DASHBOARD.user.edit(paramCase(id)));
+    };
 
     const handleResetFilter = () => {
         setFilterName('');
@@ -194,9 +174,6 @@ export default function UserListPage() {
             <Container maxWidth={themeStretch ? false : 'lg'}>
 
 
-
-
-
                 <CustomBreadcrumbs
                     heading={Company}
                     links={[
@@ -214,57 +191,27 @@ export default function UserListPage() {
                     }
                 />
 
+                
                 <Card>
 
                     {/* Seccion de filtro, debe moverse a un componente aparte  */}
-                   
-                    <Stack
-                        spacing={2}
-                        alignItems="center"
-                        direction={{
-                            xs: 'column',
-                            sm: 'row',
-                        }}
-                        sx={{ px: 2.5, py: 3 }}
-                    >
-
-
-
-                        <TextField
-                            fullWidth
-                            value={filterName}
-                            onChange={handleFilterName}
-                            placeholder="Buscar..."
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled' }} />
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
-
-                        {isFiltered && (
-                            <Button
-                                color="error"
-                                sx={{ flexShrink: 0 }}
-                                onClick={handleResetFilter}
-                                startIcon={<Iconify icon="eva:trash-2-outline" />}
-                            >
-                                Clear
-                            </Button>
-                        )}
-
-                    </Stack>
-
+                    <FiltroBandeja
+                        isFiltered={isFiltered}
+                        filterName={filterName}
+                        onFilterName={handleFilterName}
+                        onResetFilter={handleResetFilter}
+                    />
                     {/* Fin Filtro  */}
 
 
 
-                    {/* Seccion de Herramientas para seleccion de densidad,cantidad de registros y pagina, debe moverse a un componente aparte  */}
                     <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
+
+
+
+                    {/* Seccion de Herramientas para seleccion de densidad,cantidad de registros y pagina, debe moverse a un componente aparte  */}
                         <TableSelectedAction
-                            dense={dense}
+                            dense={false}
                             numSelected={selected.length}
                             rowCount={tableData.length}
                             onSelectAllRows={(checked) =>
@@ -274,7 +221,7 @@ export default function UserListPage() {
                                 )
                             }
                             action={
-                                <Tooltip title="Delete">
+                                <Tooltip title="Borrar">
                                     <IconButton color="primary" onClick={handleOpenConfirm}>
                                         <Iconify icon="eva:trash-2-outline" />
                                     </IconButton>
@@ -306,55 +253,16 @@ export default function UserListPage() {
                                     {dataFiltered
                                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                         .map((row) => (
-
-
-                                            // Genera contenido de la tabla, toma el row y coloca el valor (ver el metodo que usa)
-                                            // <UserTableRow
-                                            //    key={row.id}
-                                            //    row={row}
-                                            //    selected={selected.includes(row.id)}
-                                            //    onSelectRow={() => onSelectRow(row.id)}
-                                            //    onDeleteRow={() => handleDeleteRow(row.id)}
-                                            //    onEditRow={() => handleEditRow(row.name)}
-                                            // />
-
-
-                                            <TableRow hover selected={selected.includes(row.id)}>
-                                                <TableCell padding="checkbox">
-                                                    <Checkbox checked={selected.includes(row.id)} onClick={() => onSelectRow(row.id)} />
-                                                </TableCell>
-
-                                                <TableCell>
-                                                    <Stack direction="row" alignItems="center" spacing={1}>
-
-                                                        <Typography variant="subtitle2" noWrap>
-                                                            {row.name}
-                                                        </Typography>
-                                                    </Stack>
-                                                </TableCell>
-
-                                                <TableCell align="left">{row.phoneNumber}</TableCell>
-                                                <TableCell align="left">{row.email}</TableCell>
-                                                <TableCell align="center">
-                                                    <IconButton color={openPopover ? 'inherit' : 'default'} onClick={handleOpenPopover}>
-                                                        <Iconify icon="eva:more-vertical-fill" />
-                                                    </IconButton>
-                                                </TableCell>
-
-                                            </TableRow>
-
-
-
-
-
-
-
-
-
-
-
-
+                                            <RowEmpresaBandeja
+                                                key={row.id}
+                                                row={row}
+                                                selected={selected.includes(row.id)}
+                                                onSelectRow={() => onSelectRow(row.id)}
+                                                onDeleteRow={() => handleDeleteRows(row.id)}
+                                                onEditRow={() => handleEditRow(row.name)}
+                                            />
                                         ))}
+
 
                                     <TableEmptyRows
                                         height={denseHeight}
@@ -383,10 +291,10 @@ export default function UserListPage() {
             <ConfirmDialog
                 open={openConfirm}
                 onClose={handleCloseConfirm}
-                title="Delete"
+                title="Borrar"
                 content={
                     <>
-                        Are you sure want to delete <strong> {selected.length} </strong> items?
+                        Seguro que deseas borrar <strong> {selected.length} </strong> Empresas?
                     </>
                 }
                 action={
@@ -398,7 +306,7 @@ export default function UserListPage() {
                             handleCloseConfirm();
                         }}
                     >
-                        Delete
+                        Borrar
                     </Button>
                 }
             />
