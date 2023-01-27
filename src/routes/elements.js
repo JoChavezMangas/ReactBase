@@ -84,6 +84,21 @@ export const EmpleadoListPage = Loadable(lazy(() => import('../pages/Empleado/Ba
 export const EmpleadoCreatePage = Loadable(lazy(() => import('../pages/Empleado/CreateEmpleado')));
 export const EmpleadoEditPage = Loadable(lazy(() => import('../pages/Empleado/EmpleadoEditPage')));
 
+// DASHBOARD: Area
+export const AreaListPage = Loadable(lazy(() => import('../pages/Area/BandejaArea')));
+export const AreaCreatePage = Loadable(lazy(() => import('../pages/Area/CreateArea')));
+export const AreaEditPage = Loadable(lazy(() => import('../pages/Area/AreaEditPage')));
+
+// DASHBOARD: Puesto
+export const PuestoListPage = Loadable(lazy(() => import('../pages/Puesto/BandejaPuesto')));
+export const PuestoCreatePage = Loadable(lazy(() => import('../pages/Puesto/CreatePuesto')));
+export const PuestoEditPage = Loadable(lazy(() => import('../pages/Puesto/PuestoEditPage')));
+
+// DASHBOARD:     Banco
+export const BancoListPage = Loadable(lazy(() => import('../pages/Banco/BandejaBanco')));
+export const BancoCreatePage = Loadable(lazy(() => import('../pages/Banco/CreateBanco')));
+export const BancoEditPage = Loadable(lazy(() => import('../pages/Banco/BancoEditPage')));
+
 // DASHBOARD: BLOG
 export const BlogPostsPage = Loadable(lazy(() => import('../pages/dashboard/BlogPostsPage')));
 export const BlogPostPage = Loadable(lazy(() => import('../pages/dashboard/BlogPostPage')));

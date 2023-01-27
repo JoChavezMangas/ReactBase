@@ -45,6 +45,21 @@ import {
   EmpleadoEditPage,
   EmpleadoCreatePage,
 
+  // Dashboard: Area
+  AreaListPage,
+  AreaEditPage,
+  AreaCreatePage,
+
+  // Dashboard: Puesto
+  PuestoListPage,
+  PuestoEditPage,
+  PuestoCreatePage,
+
+  // Dashboard: Banco
+  BancoListPage,
+  BancoEditPage,
+  BancoCreatePage,
+
   // Dashboard: Ecommerce
   EcommerceShopPage,
   EcommerceCheckoutPage,
@@ -235,6 +250,33 @@ export default function Router() {
             { path: 'list', element: <EmpleadoListPage /> },
             { path: 'new', element: <EmpleadoCreatePage /> },
             { path: ':name/edit', element: <EmpleadoEditPage /> },
+          ],
+        },
+        {
+          path: 'area',
+          children: [
+            { element: <Navigate to="/dashboard/area/list" replace />, index: true },
+            { path: 'list', element: <AreaListPage /> },
+            { path: 'new', element: <AreaCreatePage /> },
+            { path: ':name/edit', element: <AreaEditPage /> },
+          ],
+        },
+        {
+          path: 'puesto',
+          children: [
+            { element: <Navigate to="/dashboard/puesto/list" replace />, index: true },
+            { path: 'list', element: <PuestoListPage /> },
+            { path: 'new', element: <PuestoCreatePage /> },
+            { path: ':name/edit', element: <PuestoEditPage /> },
+          ],
+        },
+        {
+          path: 'banco',
+          children: [
+            { element: <Navigate to="/dashboard/banco/list" replace />, index: true },
+            { path: 'list', element: <BancoListPage /> },
+            { path: 'new', element: <BancoCreatePage /> },
+            { path: ':name/edit', element: <BancoEditPage /> },
           ],
         },
         {

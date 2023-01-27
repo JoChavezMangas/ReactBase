@@ -37,9 +37,9 @@ const navConfig = [
   // GENERAL
   // ----------------------------------------------------------------------
   {
-    subheader: 'general',
+    // subheader: 'general',
     items: [
-      { title: 'app', path: PATH_DASHBOARD.general.app, icon: ICONS.dashboard },
+      { title: 'Inicio', path: PATH_DASHBOARD.general.app, icon: ICONS.dashboard },
       /* { title: 'ecommerce', path: PATH_DASHBOARD.general.ecommerce, icon: ICONS.ecommerce },
       { title: 'analytics', path: PATH_DASHBOARD.general.analytics, icon: ICONS.analytics },
       { title: 'banking', path: PATH_DASHBOARD.general.banking, icon: ICONS.banking },
@@ -53,20 +53,20 @@ const navConfig = [
   {
     subheader: 'Administración',
     items: [
-      // USER
-      {
-        title: 'user',
-        path: PATH_DASHBOARD.user.root,
-        icon: ICONS.user,
-        children: [
-          { title: 'profile', path: PATH_DASHBOARD.user.profile },
-          { title: 'cards', path: PATH_DASHBOARD.user.cards },
-          { title: 'list', path: PATH_DASHBOARD.user.list },
-          { title: 'create', path: PATH_DASHBOARD.user.new },
-          { title: 'edit', path: PATH_DASHBOARD.user.demoEdit },
-          { title: 'account', path: PATH_DASHBOARD.user.account },
-        ],
-      },
+      // // USER
+      // {
+      //   title: 'user',
+      //   path: PATH_DASHBOARD.user.root,
+      //   icon: ICONS.user,
+      //   children: [
+      //     { title: 'profile', path: PATH_DASHBOARD.user.profile },
+      //     { title: 'cards', path: PATH_DASHBOARD.user.cards },
+      //     { title: 'list', path: PATH_DASHBOARD.user.list },
+      //     { title: 'create', path: PATH_DASHBOARD.user.new },
+      //     { title: 'edit', path: PATH_DASHBOARD.user.demoEdit },
+      //     { title: 'account', path: PATH_DASHBOARD.user.account },
+      //   ],
+      // },
       // Empresa
       {
         title: 'empresa',
@@ -87,6 +87,39 @@ const navConfig = [
           { title: 'lista', path: PATH_DASHBOARD.empleado.list },
           { title: 'crear', path: PATH_DASHBOARD.empleado.new },
           { title: 'editar', path: PATH_DASHBOARD.empleado.demoEdit },
+        ],
+      },
+      // Area
+      {
+        title: 'area',
+        path: PATH_DASHBOARD.area.root,
+        icon: ICONS.ecommerce,
+        children: [
+          { title: 'lista', path: PATH_DASHBOARD.area.list },
+          { title: 'crear', path: PATH_DASHBOARD.area.new },
+          { title: 'editar', path: PATH_DASHBOARD.area.demoEdit },
+        ],
+      },
+      // Puesto
+      {
+        title: 'puesto',
+        path: PATH_DASHBOARD.puesto.root,
+        icon: ICONS.invoice,
+        children: [
+          { title: 'lista', path: PATH_DASHBOARD.puesto.list },
+          { title: 'crear', path: PATH_DASHBOARD.puesto.new },
+          { title: 'editar', path: PATH_DASHBOARD.puesto.demoEdit },
+        ],
+      },
+      // Banco
+      {
+        title: 'banco',
+        path: PATH_DASHBOARD.banco.root,
+        icon: ICONS.banking,
+        children: [
+          { title: 'lista', path: PATH_DASHBOARD.banco.list },
+          { title: 'crear', path: PATH_DASHBOARD.banco.new },
+          { title: 'editar', path: PATH_DASHBOARD.banco.demoEdit },
         ],
       },
 
