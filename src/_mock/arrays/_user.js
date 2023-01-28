@@ -139,20 +139,22 @@ export const _userList = [...Array(24)].map((_, index) => ({
 
 export const _companyList = [...Array(24)].map((_, index) => ({
     id: _mock.id(index),
-    // avatarUrl: _mock.image.avatar(index),
     name: randomInArray(['Grupoapa SA. de CV.', 'SACH SA. de CV.', 'SCOTIABANK','BANAMEX SA. de CV.','SOC','RHHR','Integra Soluciones']),
     email: _mock.email(index),
     phoneNumber: _mock.phoneNumber(index),
-    // address: '908 Jack Locks',
-    // country: _mock.address.country(index),
-    // state: 'Virginia',
-    // city: 'Rancho Cordova',
-    // zipCode: '85807',
-    // company: _mock.company(index),
-    // isVerified: _mock.boolean(index),
-    // status: randomInArray(['active', 'banned']),
-    // role: _mock.role(index),
 }));
 
-
-
+export const _dataList = [...Array(36)].map((_, index) => ({
+    id: _mock.id(index),
+    name: _mock.name.fullName(index),
+    email: _mock.email(index),
+    lastLogin: _mock.time(index),
+    performance: _mock.number.percent(index),
+    rating: _mock.number.rating(index),
+    status: randomInArray(['Activo', 'Inactivo', 'Bloqueado']),
+    isAdmin: _mock.boolean(index),
+    lastName: _mock.name.lastName(index),
+    firstName: _mock.name.firstName(index),
+    age: _mock.number.age(index),
+    phone: _mock.phoneNumber(index),
+}));
