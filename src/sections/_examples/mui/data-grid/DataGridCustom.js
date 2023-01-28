@@ -150,7 +150,7 @@ const columns = [
     filterable: false,
     disableColumnMenu: true,
     renderCell: (params) => (
-        <IconButton onClick={handleOpenPopover}>
+      <IconButton  onClick={() => console.log('ID', params.row.id)}>
         <Iconify icon="eva:more-vertical-fill" />
       </IconButton>
     ),
@@ -185,12 +185,6 @@ export default function DataGridCustom({ data }) {
   const selected = data.filter((row) => selectionModel.includes(row.id));
 
   console.log('SELECTED', selected);
-
-    const handleOpenPopover = (event) => {
-        setOpenPopover(event.currentTarget);
-    };
-
-
   return (
     <DataGrid
       checkboxSelection

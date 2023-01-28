@@ -21,8 +21,11 @@ import {
     Checkbox,
     Typography,
     CardHeader,
-    Box
+    Box,
+    MenuItem
 } from '@mui/material';
+
+import { useTheme } from '@mui/material/styles';
 // routes
 import { paramCase } from 'change-case';
 import { PATH_DASHBOARD } from '../../routes/paths';
@@ -46,172 +49,201 @@ import {
     TablePaginationCustom,
 } from '../../components/table';
 // sections
-import { UserTableRow } from '../../sections/@dashboard/user/list';
-import { FiltroBandeja, RowEmpresaBandeja } from '../../sections/@dashboard/empresa/EmpresaBandeja';
-import DataGridCustom from '../../sections/_examples/mui/data-grid/DataGridCustom';
-
-// ----------------------------------------------------------------------
-
-const TABLE_HEAD = [
-    { id: 'CompanyName', label: 'Razon social', align: 'left' },
-    { id: 'ContactPhone', label: 'Telefono de contacto', align: 'left' },
-    { id: 'CompanyMail', label: 'Correo Electronico', align: 'left' },
-    { id: '', label: 'Acciones', align: 'center' },    
-];
-
-// ----------------------------------------------------------------------
+import GenericDataGridCustom from '../../sections/_examples/mui/data-grid/GenericDataGridCostom';
+import Label from '../../components/label';
+import { CustomAvatar } from '../../components/custom-avatar';
+import MenuPopover from '../../components/menu-popover';
 
 
 
 
 export default function BandejaEmpresa() {
-    const {
-        dense,
-        page,
-        order,
-        orderBy,
-        rowsPerPage,
-        setPage,
-        //
-        selected,
-        setSelected,
-        onSelectRow,
-        onSelectAllRows,
-        //
-        onSort,
-        onChangeDense,
-        onChangePage,
-        onChangeRowsPerPage,
-    } = useTable();
-
-    const { themeStretch } = useSettingsContext();
-
-    const navigate = useNavigate();
-    // Crea la constante de la informacion a la tabla
-    const [tableData, setTableData] = useState(_companyList);
 
     const [openConfirm, setOpenConfirm] = useState(false);
-
-    const [filterName, setFilterName] = useState('');
-
-    const [filterRole, setFilterRole] = useState('all');
-
-    const [filterStatus, setFilterStatus] = useState('all');
-
-    const dataFiltered = applyFilter({
-        inputData: tableData,
-        comparator: getComparator(order, orderBy),
-        filterName,
-        filterRole,
-        filterStatus,
-    });
-
-    const dataInPage = dataFiltered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-
-    const denseHeight = dense ? 52 : 72;
-
-    const isFiltered = filterName !== '' || filterRole !== 'all' || filterStatus !== 'all';
-
-    const isNotFound =
-        (!dataFiltered.length && !!filterName) ||
-        (!dataFiltered.length && !!filterRole) ||
-        (!dataFiltered.length && !!filterStatus);
-
+    const [openPopover, setOpenPopover] = useState(null);
+    const navigate = useNavigate();
     const handleOpenConfirm = () => {
         setOpenConfirm(true);
     };
-
     const handleCloseConfirm = () => {
         setOpenConfirm(false);
     };
-
-    const handleFilterName = (event) => {
-        setPage(0);
-        setFilterName(event.target.value);
-    };
-
-    const handleDeleteRows = (selectedRows) => {
-        const deleteRows = tableData.filter((row) => !selectedRows.includes(row.id));
-        setSelected([]);
-        setTableData(deleteRows);
-
-        if (page > 0) {
-            if (selectedRows.length === dataInPage.length) {
-                setPage(page - 1);
-            } else if (selectedRows.length === dataFiltered.length) {
-                setPage(0);
-            } else if (selectedRows.length > dataInPage.length) {
-                const newPage = Math.ceil((tableData.length - selectedRows.length) / rowsPerPage) - 1;
-                setPage(newPage);
-            }
-        }
-    };
-
-    // Redirije en caso de edición
-    const handleEditRow = (id) => {
-        // const ruteID = paramCase(id);
-        // navigate(PATH_DASHBOARD.user.edit(id));
-        navigate(PATH_DASHBOARD.user.edit(paramCase(id)));
-    };
-
-    const handleResetFilter = () => {
-        setFilterName('');
-        setFilterRole('all');
-        setFilterStatus('all');
-    };
-
-    const Company = "Empresa"
-    const [openPopover, setOpenPopover] = useState(null);
     const handleOpenPopover = (event) => {
+        console.log(event)
+        console.log(event.currentTarget)
         setOpenPopover(event.currentTarget);
     };
+    const handleClosePopover = () => {
+        setOpenPopover(null);
+    };
+
+    const handleEditRow = (id) => {
+        console.log(id)
+        navigate(PATH_DASHBOARD.empresa.edit(paramCase(id)));
+    };
+
+    // const handleDeleteRow = (id) => {
+    //    const deleteRow = tableData.filter((row) => row.id !== id);
+    //    setSelected([]);
+    //    setTableData(deleteRow);
+
+    //    if (page > 0) {
+    //        if (dataInPage.length < 2) {
+    //            setPage(page - 1);
+    //        }
+    //    }
+    // };
+
+
+    const columns = [
+        {
+            field: 'id',
+            hide: true,
+        },
+        {
+            field: 'avatar',
+            headerName: '',
+            align: 'center',
+            headerAlign: 'center',
+            width: 64,
+            sortable: false,
+            filterable: false,
+            disableColumnMenu: true,
+            renderCell: (params) => <CustomAvatar name={params.row.name} sx={{ width: 36, height: 36 }} />,
+        },
+        {
+            field: 'name',
+            headerName: 'Razon Social',
+            flex: 1,
+            editable: true,
+        },
+        {
+            field: 'Phone',
+            headerName: 'Telefono',
+            flex: 1,
+            editable: false,
+            renderCell: (params) => (
+                <Typography variant="body2" sx={{ textDecoration: 'underline' }} noWrap>
+                    {params.row.phone}
+                </Typography>
+            ),
+        },
+        {
+            field: 'email',
+            headerName: 'Email',
+            flex: 1,
+            editable: true,
+            renderCell: (params) => (
+                <Typography variant="body2" sx={{ textDecoration: 'underline' }} noWrap>
+                    {params.row.email}
+                </Typography>
+            ),
+        },
+        {
+            field: 'status',
+            type: 'singleSelect',
+            headerName: 'Status',
+            valueOptions: ['Activo', 'Inactivo', 'Bloqueado'],
+            align: 'center',
+            headerAlign: 'center',
+            width: 120,
+            renderCell: (params) => RenderStatus(params.row.status),
+        },
+        {
+            field: 'action',
+            headerName: 'Acciones',
+            align: 'center',
+            width: 90,
+            sortable: false,
+            filterable: false,
+            disableColumnMenu: true,
+            renderCell: (params) => (
+                <IconButton color={openPopover ? 'inherit' : 'default'} onClick={handleOpenPopover}>
+                    <Iconify icon="eva:more-vertical-fill" />
+                </IconButton>
+            ),
+        },
+    ];
+
+
+
+
+
 
     return (
         <>
             <Helmet>
-                <title> {Company} </title>
+                <title> Empresa </title>
             </Helmet>
 
             <Container>
                 <Card>
                     <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
-                    <Box sx={{ height: 800 }}>
-                        <DataGridCustom data={_dataList} />
-                    </Box>
+                        <Box sx={{ height: 800 }}>
+                                <GenericDataGridCustom data={_dataList} columns={columns} />
+                        </Box>
                     </TableContainer>
                 </Card>
             </Container>
+
+
+
+            <MenuPopover
+                open={openPopover}
+                onClose={handleClosePopover}
+                arrow="right-top"
+                sx={{ width: 140 }}
+            >
+                <MenuItem
+                    onClick={() => {
+                        handleOpenConfirm();
+                        handleClosePopover();
+                    }}
+                    sx={{ color: 'error.main' }}
+                >
+                    <Iconify icon="eva:trash-2-outline" />
+                    Borrar
+                </MenuItem>
+
+                <MenuItem
+                    onClick={() => {
+                        handleEditRow('some');
+                        handleClosePopover();
+                    }}
+                >
+                    <Iconify icon="eva:edit-fill" />
+                    Editar
+                </MenuItem>
+            </MenuPopover>
+
+
+            <ConfirmDialog
+                open={openConfirm}
+                onClose={handleCloseConfirm}
+                title="Borrar"
+                content="Deseas borrar esta empresa?"
+                action={
+                    <Button variant="contained" color="error" onClick={console.log(this)}>
+                        Borrar
+                    </Button>
+                }
+            />
 
         </>
     );
 }
 
-// ----------------------------------------------------------------------
 
-function applyFilter({ inputData, comparator, filterName, filterStatus, filterRole }) {
-    const stabilizedThis = inputData.map((el, index) => [el, index]);
-
-    stabilizedThis.sort((a, b) => {
-        const order = comparator(a[0], b[0]);
-        if (order !== 0) return order;
-        return a[1] - b[1];
-    });
-
-    inputData = stabilizedThis.map((el) => el[0]);
-
-    if (filterName) {
-        inputData = inputData.filter(
-            (user) => user.name.toLowerCase().indexOf(filterName.toLowerCase()) !== -1
-        );
-    }
-
-    if (filterStatus !== 'all') {
-        inputData = inputData.filter((user) => user.status === filterStatus);
-    }
-
-    if (filterRole !== 'all') {
-        inputData = inputData.filter((user) => user.role === filterRole);
-    }
-
-    return inputData;
-}
+ function RenderStatus(getStatus) {
+    const theme = useTheme();
+    const isLight = theme.palette.mode === 'light';
+    return (
+        <Label
+            variant={isLight ? 'soft' : 'filled'}
+            color={(getStatus === 'Bloqueado' && 'error') || (getStatus === 'Inactivo' && 'warning') || 'success'}
+            sx={{ mx: 'auto' }}
+        >
+            {getStatus}
+        </Label>
+    );
+ }
