@@ -68,7 +68,7 @@ export default function BandejaEmpresa() {
     const handleCloseConfirm = () => {
         setOpenConfirm(false);
     };
-    const handleOpenPopover = (event) => {
+    const handleOpenPopover = (event,id) => {
         console.log(event)
         console.log(event.currentTarget)
         setOpenPopover(event.currentTarget);
@@ -158,7 +158,7 @@ export default function BandejaEmpresa() {
             filterable: false,
             disableColumnMenu: true,
             renderCell: (params) => (
-                <IconButton color={openPopover ? 'inherit' : 'default'} onClick={handleOpenPopover}>
+                <IconButton color={openPopover ? 'inherit' : 'default'} onClick={handleOpenPopover }>
                     <Iconify icon="eva:more-vertical-fill" />
                 </IconButton>
             ),
