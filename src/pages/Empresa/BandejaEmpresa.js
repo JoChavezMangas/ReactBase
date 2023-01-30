@@ -61,6 +61,8 @@ export default function BandejaEmpresa() {
 
     const [openConfirm, setOpenConfirm] = useState(false);
     const [openPopover, setOpenPopover] = useState(null);
+    const [tableData, setTableData] = useState(_dataList);
+    const [IdAUX, setIdAUX] = useState('');
     const navigate = useNavigate();
     const handleOpenConfirm = () => {
         setOpenConfirm(true);
@@ -75,41 +77,24 @@ export default function BandejaEmpresa() {
     const handleClosePopover = () => {
         setOpenPopover(null);
     };
-
     const handleEditRow = (id) => {
         console.log(id)
         navigate(PATH_DASHBOARD.empresa.edit(paramCase(id)));
     };
-
     const JustAfterClicDelete = () => {
-        console.log('After Delete', IdAUX)
+        handleDeleteRow(IdAUX)
     }
-
-    const [IdAUX, setIdAUX] = useState('');
-
-
-
-
-
-
-    // const handleDeleteRow = (id) => {
-    //    const deleteRow = tableData.filter((row) => row.id !== id);
-    //    setSelected([]);
-    //    setTableData(deleteRow);
-
-    //    if (page > 0) {
-    //        if (dataInPage.length < 2) {
-    //            setPage(page - 1);
-    //        }
-    //    }
-    // };
-
+    const handleDeleteRow = (id) => {
+        const deleteRow = tableData.filter((row) => row.id !== id);
+        setTableData(deleteRow);
+        setOpenConfirm(false);
+    };
 
     const columns = [
-        {
-            field: 'id',
-            hide: true,
-        },
+        // {
+        //    field: 'id',
+        //    hide: true,
+        // },
         {
             field: 'avatar',
             headerName: '',
@@ -175,11 +160,6 @@ export default function BandejaEmpresa() {
         },
     ];
 
-
-
-
-
-
     return (
         <>
             <Helmet>
@@ -187,10 +167,24 @@ export default function BandejaEmpresa() {
             </Helmet>
 
             <Container>
+
+                <CustomBreadcrumbs
+                    heading="Empresa"
+                    links={[{ name: '' },]}
+                    action={<Button component={RouterLink}
+                        to={PATH_DASHBOARD.empresa.new}
+                        variant="contained"
+                        startIcon={<Iconify icon="eva:plus-fill" />}
+                    >
+                        Crear nueva Empresa
+                    </Button>} />
+
+
+
                 <Card>
                     <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
                         <Box sx={{ height: 800 }}>
-                                <GenericDataGridCustom data={_dataList} columns={columns} />
+                            <GenericDataGridCustom data={tableData} columns={columns} />
                         </Box>
                     </TableContainer>
                 </Card>
@@ -234,7 +228,7 @@ export default function BandejaEmpresa() {
                 content="Deseas borrar esta empresa?"
                 action={
                     <Button variant="contained" color="error" onClick={JustAfterClicDelete}>
-                        Borrar!
+                        Borrar
                     </Button>
                 }
             />

@@ -37,10 +37,10 @@ export default function EmpresaNewEditForm({ isEdit = false, currentEmpresa }) {
 
   const NewEmpresaSchema = Yup.object().shape({
     businessName: Yup.string().required('Ingrese la Razón social'),
-    businessReason: Yup.string().required('Ingrese la Razón comercial'),
+      name: Yup.string().required('Ingrese la Razón comercial'),
     RFC: Yup.string().required('Ingrese RFC'),
     email: Yup.string().required('Ingrese correo electrónico').email('De ser una dirección valida'),
-    phoneNumber: Yup.string().required('Ingresé número de teléfono'),
+    phoneNumber: Yup.string().required('Ingrese número de teléfono'),
     address: Yup.string().required('Ingrese dirección'),
     colony: Yup.string().required('Seleccione una colonia'),
     // company: Yup.string().required('Company is required'),
@@ -53,17 +53,17 @@ export default function EmpresaNewEditForm({ isEdit = false, currentEmpresa }) {
   const defaultValues = useMemo(
     () => ({
       businessName: currentEmpresa?.businessName || '',
-      businessReason: currentEmpresa?.businessReason || '',
-      RFC: currentEmpresa?. RFC || '',
-      email: currentEmpresa?.email || '',
-      phoneNumber: currentEmpresa?.phoneNumber || '',
-      address: currentEmpresa?.address || '',
-      zipCode: currentEmpresa?.zipCode || '',
-      colony: currentEmpresa?.colony || '',
-      state: currentEmpresa?.state || '',
-      city: currentEmpresa?.city || '',
-      avatarUrl: currentEmpresa?.avatarUrl || null,
-      isVerified: currentEmpresa?.isVerified || true,
+      name: currentEmpresa?.name || '',
+      RFC:          currentEmpresa?. RFC || '',
+      email:        currentEmpresa?.email || '',
+      phoneNumber:  currentEmpresa?.phoneNumber || '',
+      address:      currentEmpresa?.address || '',
+      zipCode:      currentEmpresa?.zipCode || '',
+      colony:       currentEmpresa?.colony || '',
+      state:        currentEmpresa?.state || '',
+      city:         currentEmpresa?.city || '',
+      avatarUrl:    currentEmpresa?.avatarUrl || null,
+      isVerified:   currentEmpresa?.isVerified || true,
       // status: currentEmpresa?.status,
       // company: currentEmpresa?.company || '',
       // role: currentEmpresa?.role || '',
@@ -175,7 +175,7 @@ export default function EmpresaNewEditForm({ isEdit = false, currentEmpresa }) {
               }}
             >
               <RHFTextField name="businessName" label="Razón social" />
-              <RHFTextField name="businessReason" label="Razón comercial" />
+              <RHFTextField name="name" label="Razón comercial" />
               <RHFTextField name="RFC" label="RFC" />
               <RHFTextField name="email" label="Correo electrónico" />
               <RHFTextField name="phoneNumber" label="Teléfono" />

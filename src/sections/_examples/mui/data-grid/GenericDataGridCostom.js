@@ -3,9 +3,17 @@ import { useState } from 'react';
 // @mui
 import { useTheme } from '@mui/material/styles';
 import { Stack, Typography, Box, Rating, LinearProgress, IconButton } from '@mui/material';
-import { DataGrid, GridToolbar, getGridNumericOperators } from '@mui/x-data-grid';
-// utils
-import { fPercent } from '../../../../utils/formatNumber';
+import {
+    DataGrid,
+    GridToolbar,
+    getGridNumericOperators,
+    GridToolbarContainer,
+    GridToolbarColumnsButton,
+    GridToolbarFilterButton,
+    GridToolbarExport,
+    GridToolbarDensitySelector,
+} from '@mui/x-data-grid';
+
 // components
 import Label from '../../../../components/label';
 import Iconify from '../../../../components/iconify';
@@ -16,6 +24,18 @@ import { CustomAvatar } from '../../../../components/custom-avatar';
 
 
 // ----------------------------------------------------------------------
+
+function CustomToolbar() {
+    return (
+        <GridToolbarContainer>
+            <GridToolbarColumnsButton />
+            <GridToolbarFilterButton />
+            {/* <GridToolbarDensitySelector /> */}
+            {/* <GridToolbarExport /> */}
+        </GridToolbarContainer>
+    );
+}
+
 
 GenericDataGridCustom.propTypes = {
     data: PropTypes.array,
@@ -47,7 +67,7 @@ export default function GenericDataGridCustom({ data, columns }) {
 
     return (
         <DataGrid
-            checkboxSelection
+            // checkboxSelection
             disableSelectionOnClick
             rows={data}
             columns={columns}
@@ -55,9 +75,39 @@ export default function GenericDataGridCustom({ data, columns }) {
             onSelectionModelChange={(newSelectionModel) => {
                 setSelectionModel(newSelectionModel);
             }}
-            components={{
-                Toolbar: GridToolbar,
+            localeText={{
+                toolbarColumns: 'Columnas',
+                toolbarFilters: 'Filtros',
+                columnsPanelTextFieldPlaceholder: 'Columna',
+                columnsPanelTextFieldLabel: 'Búsqueda',
+                columnsPanelShowAllButton:'Mostrar',
+                columnsPanelHideAllButton:'Ocultar',
+                filterPanelOperators:'Tipo de filtro',
+                filterPanelOperatorAnd:'y',
+                filterPanelOperatorOr:'o',
+                filterOperatorIs: 'es',
+                filterOperatorNot: 'no es',
+                filterPanelColumns: 'Columna',
+                filterPanelInputLabel: 'Valor',
+                filterPanelInputPlaceholder: 'Valor',
+                filterOperatorContains: 'Contiene el valor',
+                filterOperatorEquals: 'Es igual a',
+                filterOperatorStartsWith: 'Comienza con',
+                filterOperatorEndsWith: 'Termina con',
+                filterOperatorIsEmpty: 'No tiene valor',
+                filterOperatorIsNotEmpty: 'Tiene valor',
+                filterOperatorIsAnyOf: 'Tiene el valor',
+                columnMenuUnsort: 'Sin orden',
+                columnMenuSortAsc: 'Orden ascendente',
+                columnMenuSortDesc: 'Orden descendete',
+                columnMenuShowColumns:'Mostrar columna',
+                columnMenuFilter: 'Filtros',
+                columnMenuHideColumn: 'Ocultar columna'
+
             }}
+            components={{
+                Toolbar: CustomToolbar,
+             }}
 
 
         />

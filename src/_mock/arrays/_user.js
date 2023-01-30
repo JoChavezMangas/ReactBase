@@ -144,17 +144,16 @@ export const _companyList = [...Array(24)].map((_, index) => ({
     phoneNumber: _mock.phoneNumber(index),
 }));
 
-export const _dataList = [...Array(36)].map((_, index) => ({
+export const _dataList = [...Array(12)].map((_, index) => ({
     id: _mock.id(index),
-    name: _mock.name.fullName(index),
+    name: randomInArray(['Rogafin', 'SOC', 'Banamex','Integra','TOI','AFIRME','Ve Por Mas','RHHR','Sometra', 'Persona Fisica','Broker Moral temporal','Broker Fisico Completo']),      // _mock.name.fullName(index),
     email: _mock.email(index),
-    lastLogin: _mock.time(index),
-    performance: _mock.number.percent(index),
-    rating: _mock.number.rating(index),
     status: randomInArray(['Activo', 'Inactivo', 'Bloqueado']),
-    isAdmin: _mock.boolean(index),
-    lastName: _mock.name.lastName(index),
-    firstName: _mock.name.firstName(index),
-    age: _mock.number.age(index),
     phone: _mock.phoneNumber(index),
+    RFC: "CAMJ889955H89",
+    phoneNumber: _mock.phoneNumber(index),
+    zipCode: '09450',
+    city: 'Coyoacan',
+    state: 'CDMX',
+    businessName : "SA. de CV."
 }));

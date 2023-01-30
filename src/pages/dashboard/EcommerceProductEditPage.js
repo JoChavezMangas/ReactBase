@@ -22,8 +22,8 @@ export default function EcommerceProductEditPage() {
 
   const dispatch = useDispatch();
 
-  const { name } = useParams();
-
+    const { name } = useParams();
+    console.log(name)
   const currentProduct = useSelector((state) =>
     state.product.products.find((product) => paramCase(product.name) === name)
   );
