@@ -108,13 +108,13 @@ export default function BandejaEmpresa() {
         },
         {
             field: 'name',
-            headerName: 'Razon Social',
+            headerName: 'Razón Social',
             flex: 1,
             editable: true,
         },
         {
             field: 'Phone',
-            headerName: 'Telefono',
+            headerName: 'Teléfono',
             flex: 1,
             editable: false,
             renderCell: (params) => (
@@ -137,7 +137,7 @@ export default function BandejaEmpresa() {
         {
             field: 'status',
             type: 'singleSelect',
-            headerName: 'Status',
+            headerName: 'Estatus',
             valueOptions: ['Activo', 'Inactivo', 'Bloqueado'],
             align: 'center',
             headerAlign: 'center',

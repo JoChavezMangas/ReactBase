@@ -79,7 +79,7 @@ export default function GenericDataGridCustom({ data, columns }) {
                 toolbarColumns: 'Columnas',
                 toolbarFilters: 'Filtros',
                 columnsPanelTextFieldPlaceholder: 'Columna',
-                columnsPanelTextFieldLabel: 'Búsqueda',
+                columnsPanelTextFieldLabel: 'BÃºsqueda',
                 columnsPanelShowAllButton:'Mostrar',
                 columnsPanelHideAllButton:'Ocultar',
                 filterPanelOperators:'Tipo de filtro',

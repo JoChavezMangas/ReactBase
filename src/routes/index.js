@@ -236,9 +236,8 @@ export default function Router() {
         },
         {
           path: 'empresa',
-          // element: <EmpresaListPage/>,
           children: [
-            // { element: <Navigate to="/dashboard/empresa/list" replace />, index: true },
+            { element: <Navigate to="/dashboard/empresa/list" replace />, index: true },
             { path: 'list', element: <EmpresaListPage /> },
             { path: 'new', element: <EmpresaCreatePage /> },
             { path: ':name/edit', element: <EmpresaEditPage /> },
