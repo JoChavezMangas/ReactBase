@@ -68,10 +68,9 @@ export default function BandejaEmpresa() {
     const handleCloseConfirm = () => {
         setOpenConfirm(false);
     };
-    const handleOpenPopover = (event,id) => {
-        console.log(event)
-        console.log(event.currentTarget)
-        setOpenPopover(event.currentTarget);
+    const handleOpenPopover = (e, Id) => {
+        setIdAUX(Id)
+        setOpenPopover(e.currentTarget);
     };
     const handleClosePopover = () => {
         setOpenPopover(null);
@@ -81,6 +80,17 @@ export default function BandejaEmpresa() {
         console.log(id)
         navigate(PATH_DASHBOARD.empresa.edit(paramCase(id)));
     };
+
+    const JustAfterClicDelete = () => {
+        console.log('After Delete', IdAUX)
+    }
+
+    const [IdAUX, setIdAUX] = useState('');
+
+
+
+
+
 
     // const handleDeleteRow = (id) => {
     //    const deleteRow = tableData.filter((row) => row.id !== id);
@@ -158,7 +168,7 @@ export default function BandejaEmpresa() {
             filterable: false,
             disableColumnMenu: true,
             renderCell: (params) => (
-                <IconButton color={openPopover ? 'inherit' : 'default'} onClick={handleOpenPopover }>
+                <IconButton color={openPopover ? 'inherit' : 'default'} onClick={(e) => handleOpenPopover(e, params.row.id)}>
                     <Iconify icon="eva:more-vertical-fill" />
                 </IconButton>
             ),
@@ -194,20 +204,20 @@ export default function BandejaEmpresa() {
                 arrow="right-top"
                 sx={{ width: 140 }}
             >
-                <MenuItem
+                <MenuItem 
                     onClick={() => {
                         handleOpenConfirm();
                         handleClosePopover();
                     }}
                     sx={{ color: 'error.main' }}
                 >
-                    <Iconify icon="eva:trash-2-outline" />
+                    <Iconify icon="eva:trash-2-outline"  />
                     Borrar
                 </MenuItem>
 
                 <MenuItem
                     onClick={() => {
-                        handleEditRow('some');
+                        handleEditRow(IdAUX);
                         handleClosePopover();
                     }}
                 >
@@ -223,8 +233,8 @@ export default function BandejaEmpresa() {
                 title="Borrar"
                 content="Deseas borrar esta empresa?"
                 action={
-                    <Button variant="contained" color="error" onClick={console.log(this)}>
-                        Borrar
+                    <Button variant="contained" color="error" onClick={JustAfterClicDelete}>
+                        Borrar!
                     </Button>
                 }
             />

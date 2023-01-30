@@ -2,8 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\routes"
+    "\\src\\pages",
+    "\\src\\pages\\dashboard",
+    "\\src\\routes",
+    "\\src\\sections",
+    "\\src\\sections\\_examples",
+    "\\src\\sections\\_examples\\mui",
+    "\\src\\sections\\_examples\\mui\\data-grid"
   ],
-  "SelectedNode": "\\src\\routes\\paths.js",
   "PreviewInSolutionExplorer": false
 }
