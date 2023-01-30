@@ -210,18 +210,18 @@ export default function Router() {
         { path: 'banking', element: <GeneralBankingPage /> },
         { path: 'booking', element: <GeneralBookingPage /> },
         { path: 'file', element: <GeneralFilePage /> },
-        {
-          path: 'e-commerce',
-          children: [
-            { element: <Navigate to="/dashboard/e-commerce/shop" replace />, index: true },
-            { path: 'shop', element: <EcommerceShopPage /> },
-            { path: 'product/:name', element: <EcommerceProductDetailsPage /> },
-            { path: 'list', element: <EcommerceProductListPage /> },
-            { path: 'product/new', element: <EcommerceProductCreatePage /> },
-            { path: 'product/:name/edit', element: <EcommerceProductEditPage /> },
-            { path: 'checkout', element: <EcommerceCheckoutPage /> },
-          ],
-        },
+        // {
+        //   path: 'e-commerce',
+        //   children: [
+        //     { element: <Navigate to="/dashboard/e-commerce/shop" replace />, index: true },
+        //     { path: 'shop', element: <EcommerceShopPage /> },
+        //     { path: 'product/:name', element: <EcommerceProductDetailsPage /> },
+        //     { path: 'list', element: <EcommerceProductListPage /> },
+        //     { path: 'product/new', element: <EcommerceProductCreatePage /> },
+        //     { path: 'product/:name/edit', element: <EcommerceProductEditPage /> },
+        //     { path: 'checkout', element: <EcommerceCheckoutPage /> },
+        //   ],
+        // },
         {
           path: 'user',
           children: [
@@ -236,8 +236,9 @@ export default function Router() {
         },
         {
           path: 'empresa',
+          // element: <EmpresaListPage/>,
           children: [
-            { element: <Navigate to="/dashboard/empresa/list" replace />, index: true },
+            // { element: <Navigate to="/dashboard/empresa/list" replace />, index: true },
             { path: 'list', element: <EmpresaListPage /> },
             { path: 'new', element: <EmpresaCreatePage /> },
             { path: ':name/edit', element: <EmpresaEditPage /> },
@@ -279,16 +280,16 @@ export default function Router() {
             { path: ':name/edit', element: <BancoEditPage /> },
           ],
         },
-        {
-          path: 'invoice',
-          children: [
-            { element: <Navigate to="/dashboard/invoice/list" replace />, index: true },
-            { path: 'list', element: <InvoiceListPage /> },
-            { path: ':id', element: <InvoiceDetailsPage /> },
-            { path: ':id/edit', element: <InvoiceEditPage /> },
-            { path: 'new', element: <InvoiceCreatePage /> },
-          ],
-        },
+        // {
+        //   path: 'invoice',
+        //   children: [
+        //     { element: <Navigate to="/dashboard/invoice/list" replace />, index: true },
+        //     { path: 'list', element: <InvoiceListPage /> },
+        //     { path: ':id', element: <InvoiceDetailsPage /> },
+        //     { path: ':id/edit', element: <InvoiceEditPage /> },
+        //     { path: 'new', element: <InvoiceCreatePage /> },
+        //   ],
+        // },
         {
           path: 'blog',
           children: [
