@@ -157,3 +157,56 @@ export const _dataList = [...Array(12)].map((_, index) => ({
     state: 'CDMX',
     businessName : "SA. de CV."
 }));
+
+export const _employeeList = [...Array(12)].map((_, index) => ({
+    id: _mock.id(index),
+    name: randomInArray(['Josue Chavez',
+                        'Silvia Ramirez',
+                        'Oscar Cantero',
+                        'Martin Badillo',
+                        'Victor Estrada',
+                        'Brenda Chavez',
+                        'Roberto Araujo',
+                        'Ericka Bonilla',
+                        'Fernando Nicolas',
+                        'Marcela Peralta',
+                        'Rey Alejandro',
+                        'Jessica Flores',
+                        'Ricardo Martinez']),      // _mock.name.fullName(index),
+    email: _mock.email(index),
+    status: randomInArray(['Activo', 'Inactivo', 'Bloqueado','Proceso']),
+    empresa: randomInArray(['Rogafin', 'SOC', 'Banamex', 'Integra', 'TOI', 'AFIRME', 'Ve Por Mas', 'RHHR', 'Sometra', 'Persona Fisica', 'Broker Moral temporal', 'Broker Fisico Completo']),
+    Departamento: randomInArray(['QA', 'Infraestrucutra', 'Desarrollo', 'SAP','Soporte plataformas','Cobranza','Contabilidad']),
+    Puesto: randomInArray(['Gerente Desarrollo', 'Gerente Infraestrucutra', 'Encargado de departamento SAP', 'Encargado de departamento QA', 'Encargado de departamento Soporte','Operador Desarrollador','Operador Infraesrtucutra']),
+    phone: _mock.phoneNumber(index),
+    RFC: "CAMJ889955H89",
+    phoneNumber: _mock.phoneNumber(index),
+    zipCode: '09450',
+    city: 'Coyoacan',
+    state: 'CDMX',
+    businessName: "SA. de CV."
+}));
+
+export const _areaList = [...Array(12)].map((_, index) => ({
+    id: _mock.id(index),
+    name: randomInArray(['Sistemas', 'Cobranza', 'Implementacion de herrmientas', 'Herramientas Digitales', 'Direccion']),
+    empresa: randomInArray(['APA','INTEGRA','SOC']),
+    DierctorName: randomInArray(['Oscar Cantero','Eduardo Zamudio','Dierctor 1','Directora 2']),
+    email: _mock.email(index),
+    status: randomInArray(['Activo', 'Inactivo', 'Bloqueado'])
+}));
+
+export const _puestoList = [...Array(12)].map((_, index) => ({
+    id: _mock.id(index),
+    name: randomInArray(['Programador','Project Manager','Coordinador de soporte plataformas','Gerente de desarrollo','Quality asurance']),
+    empresa: randomInArray(['APA', 'INTEGRA', 'SOC']),
+    DierctorName: randomInArray(['Oscar Cantero', 'Eduardo Zamudio', 'Dierctor 1', 'Directora 2']),
+    email: _mock.email(index),
+    status: randomInArray(['Activo', 'Inactivo', 'Bloqueado'])
+}));
+
+
+
+
+
+
