@@ -314,7 +314,7 @@ function InputRange({ type }) {
                 py: 0.5,
                 borderRadius: 0.75,
                 typography: 'body2',
-                bgcolor: (theme) => alpha(theme.palette.grey[500], 0.12),
+                bgcolor: (theme) => alpha(theme.palette.grey[100], 0.12),
                 '& .MuiInput-input': { p: 0, textAlign: 'right' },
               }}
             />

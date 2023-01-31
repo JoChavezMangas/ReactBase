@@ -27,7 +27,12 @@ import { CustomAvatar } from '../../../../components/custom-avatar';
 
 function CustomToolbar() {
     return (
-        <GridToolbarContainer>
+        <GridToolbarContainer
+        sx={{
+            backgroundColor: 'rgb(249, 250, 251)',
+            color:'rgb(196, 205, 213)',
+        }}
+        >
             <GridToolbarColumnsButton />
             <GridToolbarFilterButton />
             {/* <GridToolbarDensitySelector /> */}
@@ -67,8 +72,21 @@ export default function GenericDataGridCustom({ data, columns }) {
 
     return (
         <DataGrid
+            sx={{
+                '.MuiDataGrid-columnSeparator': {
+                    display: 'none',
+                  },
+                '& .MuiDataGrid-columnHeaders':{
+                    backgroundColor: 'rgba(0, 171, 85, 0.08)',
+                    borderRadius: '0px',
+                },
+                '& .MuiDataGrid-row':{
+                    color: 'rgb(69, 79, 91)',
+                },
+            }}
             // checkboxSelection
             disableSelectionOnClick
+            header
             rows={data}
             columns={columns}
             pagination

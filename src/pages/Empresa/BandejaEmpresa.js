@@ -1,6 +1,8 @@
 import { Helmet } from 'react-helmet-async';
 // import { paramCase } from 'change-case';
 import { useState } from 'react';
+import { commenter } from 'stylis';
+
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
 import {
@@ -116,8 +118,11 @@ export default function BandejaEmpresa() {
             headerName: 'Teléfono',
             flex: 1,
             editable: false,
+            align: 'center',
+            headerAlign: 'center',
+            width:120,
             renderCell: (params) => (
-                <Typography variant="body2" sx={{ textDecoration: 'underline' }} noWrap>
+                <Typography variant="body2">
                     {params.row.phone}
                 </Typography>
             ),
@@ -128,7 +133,7 @@ export default function BandejaEmpresa() {
             flex: 1,
             editable: false,
             renderCell: (params) => (
-                <Typography variant="body2" sx={{ textDecoration: 'underline' }} noWrap>
+                <Typography variant="body2" noWrap>
                     {params.row.email}
                 </Typography>
             ),
@@ -168,10 +173,12 @@ export default function BandejaEmpresa() {
             <Container>
 
                 <CustomBreadcrumbs
-                    heading="Empresa"
+                    heading={
+                    <Typography variant='h4' color='primary'>Empresa</Typography>
+                    }
                     links={[{ name: '' },]}
                     action={<Button component={RouterLink}
-                        to={PATH_DASHBOARD.empresa.new}
+                        to={PATH_DASHBOARD.empresa.list}
                         variant="contained"
                         startIcon={<Iconify icon="eva:plus-fill" />}
                     >

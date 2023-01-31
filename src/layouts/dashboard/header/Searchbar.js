@@ -144,7 +144,7 @@ function Searchbar() {
       <div>
         {!open && (
           <IconButtonAnimate onClick={handleOpen}>
-            <Iconify icon="eva:search-fill" />
+            <Iconify icon="ri:search-eye-line" width="32" height="32" />
           </IconButtonAnimate>
         )}
 
@@ -172,7 +172,7 @@ function Searchbar() {
                   onKeyUp={handleKeyUp}
                   startAdornment={
                     <InputAdornment position="start">
-                      <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled' }} />
+                      <Iconify icon="ri:search-eye-line" sx={{ color: 'text.disabled' }} />
                     </InputAdornment>
                   }
                   sx={{ height: 1, typography: 'h6' }}

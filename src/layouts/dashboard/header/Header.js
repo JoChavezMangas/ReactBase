@@ -49,7 +49,6 @@ export default function Header({ onOpenNav }) {
         </IconButton>
       )}
 
-      <Searchbar />
 
       <Stack
         flexGrow={1}
@@ -59,6 +58,7 @@ export default function Header({ onOpenNav }) {
         spacing={{ xs: 0.5, sm: 1.5 }}
       >
         {/* <LanguagePopover /> */}
+        <Searchbar />
 
         <NotificationsPopover />
 
