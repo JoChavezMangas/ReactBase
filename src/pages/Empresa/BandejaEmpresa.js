@@ -26,6 +26,7 @@ import {
 } from '@mui/material';
 
 import { useTheme } from '@mui/material/styles';
+import { useSnackbar } from 'notistack';
 // routes
 import { paramCase } from 'change-case';
 import { PATH_DASHBOARD } from '../../routes/paths';
@@ -34,25 +35,14 @@ import { PATH_DASHBOARD } from '../../routes/paths';
 import { _companyList, _dataList } from '../../_mock/arrays';
 // components
 import Iconify from '../../components/iconify';
-import Scrollbar from '../../components/scrollbar';
 import ConfirmDialog from '../../components/confirm-dialog';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
-import { useSettingsContext } from '../../components/settings';
-import {
-    useTable,
-    getComparator,
-    emptyRows,
-    TableNoData,
-    TableEmptyRows,
-    TableHeadCustom,
-    TableSelectedAction,
-    TablePaginationCustom,
-} from '../../components/table';
 // sections
 import GenericDataGridCustom from '../../sections/_examples/mui/data-grid/GenericDataGridCostom';
 import Label from '../../components/label';
 import { CustomAvatar } from '../../components/custom-avatar';
 import MenuPopover from '../../components/menu-popover';
+
 
 
 
@@ -82,7 +72,8 @@ export default function BandejaEmpresa() {
         navigate(PATH_DASHBOARD.empresa.edit(paramCase(id)));
     };
     const JustAfterClicDelete = () => {
-        handleDeleteRow(IdAUX)
+        handleDeleteRow(IdAUX);
+        onDelete(IdAUX);
     }
     const handleDeleteRow = (id) => {
         const deleteRow = tableData.filter((row) => row.id !== id);
@@ -90,11 +81,19 @@ export default function BandejaEmpresa() {
         setOpenConfirm(false);
     };
 
+    const { enqueueSnackbar } = useSnackbar();
+    const onDelete = async (data) => {
+        try {
+            await new Promise((resolve) => setTimeout(resolve, 500));
+            enqueueSnackbar('Listo, la empresa fue borrada');
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+
+
     const columns = [
-        // {
-        //    field: 'id',
-        //    hide: true,
-        // },
         {
             field: 'avatar',
             headerName: '',
