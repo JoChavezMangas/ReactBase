@@ -2,13 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\src",
+    "\\src\\layouts\\dashboard\\header",
     "\\src\\pages",
-    "\\src\\pages\\dashboard",
-    "\\src\\routes",
-    "\\src\\sections",
-    "\\src\\sections\\_examples",
-    "\\src\\sections\\_examples\\mui",
-    "\\src\\sections\\_examples\\mui\\data-grid"
+    "\\src\\pages\\Empresa"
   ],
+  "SelectedNode": "\\src\\pages\\Empresa\\BandejaEmpresa.js",
   "PreviewInSolutionExplorer": false
 }

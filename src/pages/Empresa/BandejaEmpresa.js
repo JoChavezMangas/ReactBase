@@ -110,7 +110,7 @@ export default function BandejaEmpresa() {
             field: 'name',
             headerName: 'Razón Social',
             flex: 1,
-            editable: true,
+            editable: false,
         },
         {
             field: 'Phone',
@@ -127,7 +127,7 @@ export default function BandejaEmpresa() {
             field: 'email',
             headerName: 'Email',
             flex: 1,
-            editable: true,
+            editable: false,
             renderCell: (params) => (
                 <Typography variant="body2" sx={{ textDecoration: 'underline' }} noWrap>
                     {params.row.email}
