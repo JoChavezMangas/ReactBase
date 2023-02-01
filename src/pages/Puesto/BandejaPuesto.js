@@ -90,7 +90,7 @@ export default function BandejaPuesto() {
             editable: false,
         },
         {
-            field: 'empresa',
+            field: 'areaName',
             headerName: 'Empresa y Area',
             flex: 1,
             editable: false,
@@ -243,7 +243,6 @@ function RenderEmpresaArea(empresa,area) {
             >
                 {area}
             </Label>
-
         </a>
     );
 }
