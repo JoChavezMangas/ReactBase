@@ -1,28 +1,16 @@
 import { Helmet } from 'react-helmet-async';
 // import { paramCase } from 'change-case';
 import { useState } from 'react';
-import { commenter } from 'stylis';
-
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
 import {
     Card,
-    Table,
     Button,
-    Tooltip,
     // Divider,
-    TableBody,
     Container,
     IconButton,
     TableContainer,
-    InputAdornment,
-    TextField,
-    Stack,
-    TableRow,
-    TableCell,
-    Checkbox,
     Typography,
-    CardHeader,
     Box,
     MenuItem
 } from '@mui/material';
@@ -178,7 +166,7 @@ export default function BandejaEmpresa() {
                     }
                     links={[{ name: '' },]}
                     action={<Button component={RouterLink}
-                        to={PATH_DASHBOARD.empresa.list}
+                        to={PATH_DASHBOARD.empresa.new}
                         variant="contained"
                         startIcon={<Iconify icon="eva:plus-fill" />}
                     >

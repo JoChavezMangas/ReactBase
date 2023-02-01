@@ -2,10 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\layouts\\dashboard\\header",
     "\\src\\pages",
-    "\\src\\pages\\Empresa"
+    "\\src\\pages\\Area",
+    "\\src\\pages\\Banco",
+    "\\src\\pages\\Puesto",
+    "\\src\\sections\\@dashboard\\empresa"
   ],
-  "SelectedNode": "\\src\\pages\\Empresa\\BandejaEmpresa.js",
+  "SelectedNode": "\\src\\pages\\Puesto\\BandejaPuesto.js",
   "PreviewInSolutionExplorer": false
 }
