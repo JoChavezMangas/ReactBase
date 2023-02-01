@@ -13,7 +13,8 @@ import { Box, Card, Grid, Stack } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // assets
-import { countries } from '../../../assets/data';
+import { roleType } from '../../../assets/data/index';
+
 // components
 // import Label from '../../../components/label';
 import { useSnackbar } from '../../../components/snackbar';
@@ -119,17 +120,17 @@ export default function PuestoNewEditForm({ isEdit = false, currentPuesto }) {
               <RHFTextField name="rolName" label="Nombre del puesto" />
               <RHFSelect native name="rolType" label="Tipo de puesto" placeholder="Tipo de puesto">
                 <option value="" />
-                {countries.map((country) => (
-                  <option key={country.code} value={country.label}>
-                    {country.label}
+                {roleType.map((rolType) => (
+                  <option key={rolType.code} value={rolType.label}>
+                    {rolType.label}
                   </option>
                 ))}
               </RHFSelect>
               <RHFSelect native name="area" label="Área" placeholder="Área">
                 <option value="" />
-                {countries.map((country) => (
-                  <option key={country.code} value={country.label}>
-                    {country.label}
+                {roleType.map((area) => (
+                  <option key={area.code} value={area.label}>
+                    {area.label}
                   </option>
                 ))}
               </RHFSelect>
