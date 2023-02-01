@@ -72,7 +72,7 @@ export default function Header({ onOpenNav }) {
   return (
     <AppBar
       sx={{
-        boxShadow: 'none',
+        boxShadow: 3, 
         height: HEADER.H_MOBILE,
         zIndex: theme.zIndex.appBar + 1,
         ...bgBlur({
@@ -83,7 +83,7 @@ export default function Header({ onOpenNav }) {
         }),
         ...(isDesktop && {
           width: `calc(100% - ${NAV.W_DASHBOARD + 1}px)`,
-          height: HEADER.H_DASHBOARD_DESKTOP,
+          height: HEADER.H_DASHBOARD_DESKTOP,          
           ...(isOffset && {
             height: HEADER.H_DASHBOARD_DESKTOP_OFFSET,
           }),

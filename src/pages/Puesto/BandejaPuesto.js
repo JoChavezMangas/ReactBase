@@ -193,23 +193,21 @@ export default function UserListPage() {
 
             <Container maxWidth={themeStretch ? false : 'lg'}>
 
-
-
-
-
                 <CustomBreadcrumbs
-                    heading={Company}
+                    heading={
+                        <Typography variant='h4' color='primary'>Puesto</Typography>
+                    }
                     links={[
                         { name: '' },
                     ]}
                     action={
                         <Button
                             component={RouterLink}
-                            to={PATH_DASHBOARD.user.new}
+                            to={PATH_DASHBOARD.puesto.new}
                             variant="contained"
                             startIcon={<Iconify icon="eva:plus-fill" />}
                         >
-                            Crear nueva {Company}
+                            Crear nuevo puesto
                         </Button>
                     }
                 />
