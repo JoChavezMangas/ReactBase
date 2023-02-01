@@ -174,7 +174,7 @@ export default function UserListPage() {
         setFilterStatus('all');
     };
 
-    const Company = "Empresa"
+    const Company = "Empleado"
     const [openPopover, setOpenPopover] = useState(null);
     const handleOpenPopover = (event) => {
         setOpenPopover(event.currentTarget);
@@ -198,7 +198,9 @@ export default function UserListPage() {
 
 
                 <CustomBreadcrumbs
-                    heading={Company}
+                    heading={
+                        <Typography variant='h4' color='primary'>Empleado</Typography>
+                    }
                     links={[
                         { name: '' },
                     ]}

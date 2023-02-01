@@ -195,7 +195,7 @@ export default function UserListPage() {
 
                 <CustomBreadcrumbs
                     heading={
-                        <Typography variant='h4' color='primary'>Editar área</Typography>
+                        <Typography variant='h4' color='primary'>Área</Typography>
                     }
                     links={[
                         { name: '' },
