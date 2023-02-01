@@ -30,6 +30,9 @@ function CustomToolbar() {
         <GridToolbarContainer
         sx={{
             backgroundColor: 'rgb(249, 250, 251)',
+            height:45,
+            paddingTop:1,
+            paddingBottom:4,
             color:'rgb(196, 205, 213)',
         }}
         >

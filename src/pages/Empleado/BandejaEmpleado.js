@@ -186,7 +186,7 @@ export default function BandejaEmpleado() {
 
 
                 <Card>
-                    <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
+                    <TableContainer sx={{marginTop:'0px', position: 'relative', overflow: 'unset' }}>
                         <Box sx={{ height: 800 }}>
                             <GenericDataGridCustom data={tableData} columns={columns} />
                         </Box>
