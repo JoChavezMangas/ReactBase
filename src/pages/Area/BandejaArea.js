@@ -59,7 +59,7 @@ export default function BandejaArea() {
     };
     const handleEditRow = (id) => {
         console.log(id)
-        navigate(PATH_DASHBOARD.empresa.edit(paramCase(id)));
+        navigate(PATH_DASHBOARD.area.edit(paramCase(id)));
     };
     const JustAfterClicDelete = () => {
         handleDeleteRow(IdAUX);
@@ -93,17 +93,17 @@ export default function BandejaArea() {
             sortable: false,
             filterable: false,
             disableColumnMenu: true,
-            renderCell: (params) => <CustomAvatar name={params.row.empresa} sx={{ width: 36, height: 36 }} />,
-        },
-        {
-            field: 'empresa',
-            headerName: 'Empresa',
-            flex: 1,
-            editable: false,
+            renderCell: (params) => <CustomAvatar name={params.row.name} sx={{ width: 36, height: 36 }} />,
         },
         {
             field: 'name',
             headerName: 'Area',
+            flex: 1,
+            editable: false,
+        },
+        {
+            field: 'empresa',
+            headerName: 'Empresa',
             flex: 1,
             editable: false,
         },
@@ -151,11 +151,11 @@ export default function BandejaArea() {
                     heading="Area"
                     links={[{ name: '' },]}
                     action={<Button component={RouterLink}
-                        to={PATH_DASHBOARD.empresa.new}
+                        to={PATH_DASHBOARD.area.new}
                         variant="contained"
                         startIcon={<Iconify icon="eva:plus-fill" />}
                     >
-                        Crear nueva Empresa
+                        Crear nueva Area
                     </Button>} />
 
 
@@ -204,7 +204,7 @@ export default function BandejaArea() {
                 open={openConfirm}
                 onClose={handleCloseConfirm}
                 title="Borrar"
-                content="Deseas borrar esta empresa?"
+                content="Deseas borrar esta area?"
                 action={
                     <Button variant="contained" color="error" onClick={JustAfterClicDelete}>
                         Borrar

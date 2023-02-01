@@ -37,7 +37,7 @@ import MenuPopover from '../../components/menu-popover';
 
 
 
-export default function BandejaEmpresa() {
+export default function BandejaPuesto() {
 
     const [openConfirm, setOpenConfirm] = useState(false);
     const [openPopover, setOpenPopover] = useState(null);
@@ -59,7 +59,7 @@ export default function BandejaEmpresa() {
     };
     const handleEditRow = (id) => {
         console.log(id)
-        navigate(PATH_DASHBOARD.empresa.edit(paramCase(id)));
+        navigate(PATH_DASHBOARD.puesto.edit(paramCase(id)));
     };
     const JustAfterClicDelete = () => {
         handleDeleteRow(IdAUX);
@@ -81,47 +81,21 @@ export default function BandejaEmpresa() {
         }
     };
 
-
+    const stringAUX = " /";
 
     const columns = [
         {
-            field: 'avatar',
-            headerName: '',
-            align: 'center',
-            headerAlign: 'center',
-            width: 64,
-            sortable: false,
-            filterable: false,
-            disableColumnMenu: true,
-            renderCell: (params) => <CustomAvatar name={params.row.name} sx={{ width: 36, height: 36 }} />,
-        },
-        {
             field: 'name',
-            headerName: 'Razón Social',
+            headerName: 'Puesto',
             flex: 1,
             editable: false,
         },
         {
-            field: 'Phone',
-            headerName: 'Teléfono',
+            field: 'empresa',
+            headerName: 'Empresa y Area',
             flex: 1,
             editable: false,
-            renderCell: (params) => (
-                <Typography variant="body2" sx={{ textDecoration: 'underline' }} noWrap>
-                    {params.row.phone}
-                </Typography>
-            ),
-        },
-        {
-            field: 'email',
-            headerName: 'Email',
-            flex: 1,
-            editable: false,
-            renderCell: (params) => (
-                <Typography variant="body2" sx={{ textDecoration: 'underline' }} noWrap>
-                    {params.row.email}
-                </Typography>
-            ),
+            renderCell: (params) => RenderEmpresaArea(params.row.empresa, params.row.areaName),
         },
         {
             field: 'status',
@@ -214,7 +188,7 @@ export default function BandejaEmpresa() {
                 open={openConfirm}
                 onClose={handleCloseConfirm}
                 title="Borrar"
-                content="Deseas borrar esta empresa?"
+                content="Deseas borrar este puesto?"
                 action={
                     <Button variant="contained" color="error" onClick={JustAfterClicDelete}>
                         Borrar
@@ -240,3 +214,31 @@ function RenderStatus(getStatus) {
         </Label>
     );
 }
+
+function RenderEmpresaArea(empresa,area) {
+    const theme = useTheme();
+    const isLight = theme.palette.mode === 'light';
+    return (
+        <a>
+
+            <Label
+                variant={isLight ? 'soft' : 'filled'}
+                color='success'
+                sx={{ mx: 'auto' }}
+            >
+                {empresa}
+            </Label>
+
+            <Label
+                variant={isLight ? 'soft' : 'filled'}
+                color='info'
+                sx={{ mx: 'auto' }}
+            >
+                {area}
+            </Label>
+
+        </a>
+    );
+}
+
+
