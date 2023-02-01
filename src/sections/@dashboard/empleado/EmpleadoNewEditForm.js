@@ -48,7 +48,6 @@ export default function EmpleadoNewEditForm({ isEdit = false, currentEmpleado })
     rfc: Yup.string().required('Ingrese RFC'),
     curp: Yup.string().required('Ingrese CURP'),
     address: Yup.string().required('Ingrese dirección'),
-    company: Yup.string().required('Company is required'),
   });
 
   const defaultValues = useMemo(
@@ -112,7 +111,7 @@ export default function EmpleadoNewEditForm({ isEdit = false, currentEmpleado })
       console.error(error);
     }
   };
-  
+
   const handleDrop = useCallback(
     (acceptedFiles) => {
       const file = acceptedFiles[0];
