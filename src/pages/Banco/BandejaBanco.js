@@ -102,18 +102,10 @@ export default function BandejaBanco() {
             editable: false,
         },
         {
-            field: 'Phone',
-            headerName: 'Teléfono',
+            field: 'contactPerson',
+            headerName: 'Perosna de contacto',
             flex: 1,
             editable: false,
-            align: 'center',
-            headerAlign: 'center',
-            width: 120,
-            renderCell: (params) => (
-                <Typography variant="body2">
-                    {params.row.phone}
-                </Typography>
-            ),
         },
         {
             field: 'email',
