@@ -23,7 +23,7 @@ import FormProvider, {
   RHFSelect,
   RHFTextField,
   RHFRadioGroup,
-  RHFUploadAvatar,
+  RHFUploadPhoto,
 
 } from '../../../components/hook-form';
 
@@ -142,7 +142,7 @@ export default function EmpleadoNewEditForm({ isEdit = false, currentEmpleado })
             )}
 
             <Box sx={{ mb: 5 }}>
-              <RHFUploadAvatar
+              <RHFUploadPhoto
                 name="avatarUrl"
                 maxSize={3145728}
                 onDrop={handleDrop}
