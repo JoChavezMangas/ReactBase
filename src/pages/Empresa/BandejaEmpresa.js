@@ -22,7 +22,7 @@ import { paramCase } from 'change-case';
 import { PATH_DASHBOARD } from '../../routes/paths';
 // _mock_
 // import { _userList, _companyList } from '../../_mock/arrays';
-import { _companyList, _dataList } from '../../_mock/arrays';
+import { _dataList } from '../../_mock/arrays';
 // components
 import Iconify from '../../components/iconify';
 import ConfirmDialog from '../../components/confirm-dialog';

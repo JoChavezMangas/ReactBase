@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { paramCase } from 'change-case';
 // import { useParams } from 'react-router-dom';
-import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
+import { Link as RouterLink, useParams } from 'react-router-dom';
 // @mui
 import { Container, Button, Typography } from '@mui/material';
 // routes

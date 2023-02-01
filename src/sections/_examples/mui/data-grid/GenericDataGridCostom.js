@@ -1,23 +1,23 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 // @mui
-import { useTheme } from '@mui/material/styles';
-import { Stack, Typography, Box, Rating, LinearProgress, IconButton } from '@mui/material';
+// import { useTheme } from '@mui/material/styles';
+import { Box, Rating, } from '@mui/material';
 import {
     DataGrid,
-    GridToolbar,
+    // GridToolbar,
     getGridNumericOperators,
     GridToolbarContainer,
     GridToolbarColumnsButton,
     GridToolbarFilterButton,
-    GridToolbarExport,
-    GridToolbarDensitySelector,
+    // GridToolbarExport,
+    // GridToolbarDensitySelector,
 } from '@mui/x-data-grid';
 
 // components
-import Label from '../../../../components/label';
-import Iconify from '../../../../components/iconify';
-import { CustomAvatar } from '../../../../components/custom-avatar';
+// import Label from '../../../../components/label';
+// import Iconify from '../../../../components/iconify';
+// import { CustomAvatar } from '../../../../components/custom-avatar';
 
 // ----------------------------------------------------------------------
 

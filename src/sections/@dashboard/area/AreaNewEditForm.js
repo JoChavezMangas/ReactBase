@@ -1,26 +1,25 @@
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 // form
 import { useForm} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack, Typography } from '@mui/material';
+import { Box, Card, Grid, Stack} from '@mui/material';
 // utils
-import { fData } from '../../../utils/formatNumber';
+// import { fData } from '../../../utils/formatNumber';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // assets
 import { countries } from '../../../assets/data';
 // components
-import Label from '../../../components/label';
+// import Label from '../../../components/label';
 import { useSnackbar } from '../../../components/snackbar';
 import FormProvider, {
   RHFSelect,
   RHFTextField,
-  RHFUploadAvatar,
 } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
@@ -60,13 +59,11 @@ export default function AreaNewEditForm({ isEdit = false, currentArea }) {
 
   const {
     reset,
-    watch,
-    setValue,
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
 
-  const values = watch();
+  // const values = watch();
 
   useEffect(() => {
     if (isEdit && currentArea) {
@@ -90,20 +87,7 @@ export default function AreaNewEditForm({ isEdit = false, currentArea }) {
     }
   };
 
-  const handleDrop = useCallback(
-    (acceptedFiles) => {
-      const file = acceptedFiles[0];
 
-      const newFile = Object.assign(file, {
-        preview: URL.createObjectURL(file),
-      });
-
-      if (file) {
-        setValue('avatarUrl', newFile, { shouldValidate: true });
-      }
-    },
-    [setValue]
-  );
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>

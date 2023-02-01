@@ -20,7 +20,7 @@ import { useSnackbar } from 'notistack';
 // routes
 import { paramCase } from 'change-case';
 import { PATH_DASHBOARD } from '../../routes/paths';
-import { _dataList, _employeeList } from '../../_mock/arrays';
+import { _employeeList } from '../../_mock/arrays';
 // components
 import Iconify from '../../components/iconify';
 import ConfirmDialog from '../../components/confirm-dialog';

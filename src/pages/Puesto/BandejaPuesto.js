@@ -30,7 +30,6 @@ import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 // sections
 import GenericDataGridCustom from '../../sections/_examples/mui/data-grid/GenericDataGridCostom';
 import Label from '../../components/label';
-import { CustomAvatar } from '../../components/custom-avatar';
 import MenuPopover from '../../components/menu-popover';
 
 
@@ -81,7 +80,7 @@ export default function BandejaPuesto() {
         }
     };
 
-    const stringAUX = " /";
+    // const stringAUX = " /";
 
     const columns = [
         {
