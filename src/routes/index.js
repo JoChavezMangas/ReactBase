@@ -61,17 +61,17 @@ import {
   BancoCreatePage,
 
   // Dashboard: Ecommerce
-  EcommerceShopPage,
-  EcommerceCheckoutPage,
-  EcommerceProductListPage,
-  EcommerceProductEditPage,
-  EcommerceProductCreatePage,
-  EcommerceProductDetailsPage,
+  // EcommerceShopPage,
+  // EcommerceCheckoutPage,
+  // EcommerceProductListPage,
+  // EcommerceProductEditPage,
+  // EcommerceProductCreatePage,
+  // EcommerceProductDetailsPage,
   // Dashboard: Invoice
-  InvoiceListPage,
-  InvoiceDetailsPage,
-  InvoiceCreatePage,
-  InvoiceEditPage,
+  // InvoiceListPage,
+  // InvoiceDetailsPage,
+  // InvoiceCreatePage,
+  // InvoiceEditPage,
   // Dashboard: Blog
   BlogPostsPage,
   BlogPostPage,

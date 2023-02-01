@@ -1,28 +1,29 @@
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
-import { useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 // form
 import { useForm, Controller} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { LoadingButton } from '@mui/lab';
-import { Box, Card, Grid, Stack, TextField} from '@mui/material';
+import { Box, Card, Grid, Stack, TextField, Typography} from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 
 // // utils
-// import { fData } from '../../../utils/formatNumber';
+import { fData } from '../../../utils/formatNumber';
 // routes
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // // assets
 // import { countries } from '../../../assets/data';
 // // components
-// import Label from '../../../components/label';
+import Label from '../../../components/label';
 import { useSnackbar } from '../../../components/snackbar';
 import FormProvider, {
   RHFSelect,
   RHFTextField,
   RHFRadioGroup,
+  RHFUploadAvatar,
 
 } from '../../../components/hook-form';
 
@@ -32,6 +33,7 @@ EmpleadoNewEditForm.propTypes = {
   isEdit: PropTypes.bool,
   currentEmpleado: PropTypes.object,
 };
+
 
 export default function EmpleadoNewEditForm({ isEdit = false, currentEmpleado }) {
   const navigate = useNavigate();
@@ -80,10 +82,14 @@ export default function EmpleadoNewEditForm({ isEdit = false, currentEmpleado })
 
   const {
     control,
+    watch,
+    setValue,
     reset,
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
+
+  const values = watch();
 
   useEffect(() => {
     if (isEdit && currentEmpleado) {
@@ -106,11 +112,61 @@ export default function EmpleadoNewEditForm({ isEdit = false, currentEmpleado })
       console.error(error);
     }
   };
+  
+  const handleDrop = useCallback(
+    (acceptedFiles) => {
+      const file = acceptedFiles[0];
+
+      const newFile = Object.assign(file, {
+        preview: URL.createObjectURL(file),
+      });
+
+      if (file) {
+        setValue('avatarUrl', newFile, { shouldValidate: true });
+      }
+    },
+    [setValue]
+  );
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={12}>
+      <Grid item xs={12} md={3}>
+          <Card sx={{ pt: 10, pb: 5, px: 3 }}>
+            {isEdit && (
+              <Label
+                color={values.status === 'active' ? 'success' : 'error'}
+                sx={{ textTransform: 'uppercase', position: 'absolute', top: 24, right: 24 }}
+              >
+                {values.status}
+              </Label>
+            )}
+
+            <Box sx={{ mb: 5 }}>
+              <RHFUploadAvatar
+                name="avatarUrl"
+                maxSize={3145728}
+                onDrop={handleDrop}
+                helperText={
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      mt: 2,
+                      mx: 'auto',
+                      display: 'block',
+                      textAlign: 'center',
+                      color: 'text.secondary',
+                    }}
+                  >
+                    Formatos *.jpeg, *.jpg, *.png, *.gif
+                    <br /> Tamaño máximo {fData(3145728)}
+                  </Typography>
+                }
+              />
+            </Box>
+          </Card>
+        </Grid>
+        <Grid item xs={12} md={9}>
           <Card sx={{ p: 3 }}>
             <Box
               rowGap={3}
@@ -186,8 +242,39 @@ export default function EmpleadoNewEditForm({ isEdit = false, currentEmpleado })
                 />
               <RHFTextField name="address" label="Domicilio" />
               <RHFTextField name="zipCode" label="Código postal" />              
-
-
+              <RHFTextField name="state" label="Estado" />              
+              <RHFTextField name="delegacion" label="Delegación" />              
+              <RHFTextField name="phone" label="Teléfono fijo" />              
+              <RHFTextField name="phoneSecond" label="Teléfono de recados" />              
+              <RHFTextField name="movilPhone" label="Teléfono móvil" />   
+              <RHFSelect native name="bank" label="Banco" placeholder="Banco">
+                <option value="" />
+              </RHFSelect>           
+              <RHFTextField name="bankAccount" label="Cuenta de banco" />              
+              <RHFTextField name="clabe" label="Clabe interbancaria" />              
+              <RHFSelect native name="typeContract" label="Tipo de contrato" placeholder="Tipo de contratación">
+                <option value="" />
+              </RHFSelect>  
+              <Controller
+                  name="dateAdmission"
+                  control={control}
+                  render={({ field, fieldState: { error } }) => (
+                    <DatePicker
+                      {...field}
+                      label="Terminación del período de prueba"
+                      inputFormat="dd/MM/yyyy"
+                      renderInput={(params) => (
+                        <TextField
+                          fullWidth
+                          {...params}
+                          error={!!error}
+                          helperText={error?.message}
+                        />
+                      )}
+                    />
+                  )}
+                />
+                <RHFTextField name="NSS" label="NSS" />              
             </Box>
 
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>

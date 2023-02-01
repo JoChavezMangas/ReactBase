@@ -4,8 +4,6 @@ import { useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
 import {
-    Tab,
-    Tabs,
     Card,
     Table,
     Button,
@@ -19,7 +17,7 @@ import {
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // _mock_
-import { _userList, _companyList } from '../../_mock/arrays';
+import { _companyList } from '../../_mock/arrays';
 // components
 import Iconify from '../../components/iconify';
 import Scrollbar from '../../components/scrollbar';
@@ -38,12 +36,12 @@ import {
 } from '../../components/table';
 // sections
 import { UserTableToolbar, UserTableRow } from '../../sections/@dashboard/user/list';
-import { genericFilter } from '../../sections/@dashboard/user/list/genericFilter';
+// import { genericFilter } from '../../sections/@dashboard/user/list/genericFilter';
 
 
 // ----------------------------------------------------------------------
 
-const STATUS_OPTIONS = ['all', 'active', 'banned'];
+// const STATUS_OPTIONS = ['all', 'active', 'banned'];
 
 const ROLE_OPTIONS = [
     'all',
@@ -130,10 +128,10 @@ export default function UserListPage() {
         setOpenConfirm(false);
     };
 
-    const handleFilterStatus = (event, newValue) => {
-        setPage(0);
-        setFilterStatus(newValue);
-    };
+    // const handleFilterStatus = (event, newValue) => {
+    //     setPage(0);
+    //     setFilterStatus(newValue);
+    // };
 
     const handleFilterName = (event) => {
         setPage(0);

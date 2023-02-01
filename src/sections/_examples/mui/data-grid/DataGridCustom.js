@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Stack, Typography, Box, Rating, LinearProgress, IconButton } from '@mui/material';
+import { Typography, Box, Rating, IconButton } from '@mui/material';
 import { DataGrid, GridToolbar, getGridNumericOperators } from '@mui/x-data-grid';
 // utils
-import { fPercent } from '../../../../utils/formatNumber';
+// import { fPercent } from '../../../../utils/formatNumber';
 // components
 import Label from '../../../../components/label';
 import Iconify from '../../../../components/iconify';

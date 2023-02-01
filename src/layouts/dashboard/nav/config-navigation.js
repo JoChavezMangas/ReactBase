@@ -2,8 +2,8 @@
 import { PATH_DASHBOARD } from '../../../routes/paths';
 // components
 import SvgColor from '../../../components/svg-color';
-import { Label } from '../../../sections/_examples/Block';
-import Iconify from '../../../components/iconify';
+// import { Label } from '../../../sections/_examples/Block';
+// import Iconify from '../../../components/iconify';
 
 // ----------------------------------------------------------------------
 
