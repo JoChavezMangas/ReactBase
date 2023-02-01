@@ -172,19 +172,15 @@ export const _employeeList = [...Array(12)].map((_, index) => ({
                         'Marcela Peralta',
                         'Rey Alejandro',
                         'Jessica Flores',
-                        'Ricardo Martinez']),      // _mock.name.fullName(index),
+                        'Ricardo Martinez']),
     email: _mock.email(index),
     status: randomInArray(['Activo', 'Inactivo', 'Bloqueado','Proceso']),
     empresa: randomInArray(['Rogafin', 'SOC', 'Banamex', 'Integra', 'TOI', 'AFIRME', 'Ve Por Mas', 'RHHR', 'Sometra', 'Persona Fisica', 'Broker Moral temporal', 'Broker Fisico Completo']),
     Departamento: randomInArray(['QA', 'Infraestrucutra', 'Desarrollo', 'SAP','Soporte plataformas','Cobranza','Contabilidad']),
     Puesto: randomInArray(['Gerente Desarrollo', 'Gerente Infraestrucutra', 'Encargado de departamento SAP', 'Encargado de departamento QA', 'Encargado de departamento Soporte','Operador Desarrollador','Operador Infraesrtucutra']),
     phone: _mock.phoneNumber(index),
-    RFC: "CAMJ889955H89",
-    phoneNumber: _mock.phoneNumber(index),
-    zipCode: '09450',
-    city: 'Coyoacan',
-    state: 'CDMX',
-    businessName: "SA. de CV."
+    areaName: randomInArray(['Sistemas', 'Cobranza', 'Contabilidad', 'Herramientas Digitales', 'Direccion']),
+    dpto: randomInArray(['Desarrollo', 'Infraestructura', 'QA', 'SAP', 'Soporte Plataformas', '', '']),
 }));
 
 export const _areaList = [...Array(12)].map((_, index) => ({
@@ -201,7 +197,7 @@ export const _puestoList = [...Array(12)].map((_, index) => ({
     name: randomInArray(['Programador', 'Project Manager', 'Coordinador de soporte plataformas', 'Gerente de desarrollo', 'Quality asurance']),
     areaName: randomInArray(['Sistemas', 'Cobranza', 'Implementacion de herrmientas', 'Herramientas Digitales', 'Direccion']),
     empresa: randomInArray(['APA', 'INTEGRA', 'SOC']),
-    dpto: randomInArray(['Desarrollo', 'Infraestructura', 'QA','SAP','Soporte Platafomras','','']),
+    dpto: randomInArray(['Desarrollo', 'Infraestructura', 'QA','SAP','Soporte Plataformas','','']),
     DierctorName: randomInArray(['Oscar Cantero', 'Eduardo Zamudio', 'Dierctor 1', 'Directora 2']),
     email: _mock.email(index),
     status: randomInArray(['Activo', 'Inactivo', 'Bloqueado'])

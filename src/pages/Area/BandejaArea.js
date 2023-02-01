@@ -109,7 +109,7 @@ export default function BandejaArea() {
         },
         {
             field: 'DierctorName',
-            headerName: 'DierctorName',
+            headerName: 'Dierctor',
             flex: 1,
             editable: false,
         },

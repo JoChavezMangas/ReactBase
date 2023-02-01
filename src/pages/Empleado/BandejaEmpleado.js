@@ -14,7 +14,7 @@ import {
     Box,
     MenuItem
 } from '@mui/material';
-
+import { purple, red } from '@mui/material/colors';
 import { useTheme } from '@mui/material/styles';
 import { useSnackbar } from 'notistack';
 // routes
@@ -104,19 +104,16 @@ export default function BandejaEmpleado() {
             headerName: 'Empresa',
             flex: 1,
             editable: false,
+        },
+        {
+            field: 'areaName',
+            headerName: 'Area y Departamento',
+            flex: 2,
+            editable: false,
+            disableExtendRowFullWidth:true,
+
             renderCell: (params) => RenderEmpresaAreaDepto(params.row.empresa, params.row.areaName, params.row.dpto),
         },
-        // {
-        //    field: 'Departamento',
-        //    headerName: 'Departamento',
-        //    flex: 1,
-        //    editable: false,
-        //    renderCell: (params) => (
-        //        <Typography variant="body2" noWrap>
-        //            {params.row.Departamento}
-        //        </Typography>
-        //    ),
-        // },
         {
             field: 'Puesto',
             headerName: 'Puesto',
@@ -129,16 +126,6 @@ export default function BandejaEmpleado() {
             ),
         },
         {
-            field: 'status',
-            type: 'singleSelect',
-            headerName: 'Estatus',
-            valueOptions: ['Activo', 'Inactivo', 'Bloqueado','Proceso'],
-            align: 'center',
-            headerAlign: 'center',
-            width: 120,
-            renderCell: (params) => RenderStatus(params.row.status),
-        },
-        {
             field: 'email',
             headerName: 'Email',
             flex: 1,
@@ -148,6 +135,16 @@ export default function BandejaEmpleado() {
                     {params.row.email}
                 </Typography>
             ),
+        },
+        {
+            field: 'status',
+            type: 'singleSelect',
+            headerName: 'Estatus',
+            valueOptions: ['Activo', 'Inactivo', 'Bloqueado','Proceso'],
+            align: 'center',
+            headerAlign: 'center',
+            width: 120,
+            renderCell: (params) => RenderStatus(params.row.status),
         },
         {
             field: 'action',
@@ -263,32 +260,48 @@ function RenderStatus(getStatus) {
 function RenderEmpresaAreaDepto(empresa, area,dpto) {
     const theme = useTheme();
     const isLight = theme.palette.mode === 'light';
+    const accent = purple.A200;
+    let result;
+
+
+    if (dpto === '') {
+        result= (
+            <a>
+                <Label
+                    variant={isLight ? 'soft' : 'filled'}
+                    color='secondary'
+                    sx={{ mx: 'auto' }}
+                >
+                    {area}
+                </Label>
+            </a>
+        );
+    } else {
+        result=(
+            <a>
+                <Label
+                    variant={isLight ? 'soft' : 'filled'}
+                    color='secondary'
+                    sx={{ mx: 'auto' }}
+                >
+                    {area}
+                </Label>
+                <Label
+                    variant={isLight ? 'soft' : 'filled'}
+                    color='success'
+                    sx={{ mx: 'auto' }}
+                >
+                    {dpto}
+                </Label>
+            </a>
+        );
+    }
 
     return (
-        <a>
-            <Label
-                variant={isLight ? 'soft' : 'filled'}
-                color='success'
-                sx={{ mx: 'auto' }}
-            >
-                {empresa}
-            </Label>
-            <Label
-                variant={isLight ? 'soft' : 'filled'}
-                color='info'
-                sx={{ mx: 'auto' }}
-            >
-                {empresa}
-            </Label>
-            <Label
-                variant={isLight ? 'soft' : 'filled'}
-                color='info'
-                sx={{ mx: 'auto' }}
-            >
-                {empresa}
-            </Label>
-        </a>
-    );
+        <>
+            {result}
+        </>
+        )
 }
 
 
