@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { paramCase } from 'change-case';
 import { useParams } from 'react-router-dom';
 // @mui
-import { Container } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // _mock_
@@ -30,7 +30,9 @@ export default function AreaEditPage() {
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Editar area"
+          heading={
+            <Typography variant='h4' color='primary'>Editar Área</Typography>
+          }
           links={[
             {
               name: 'Dashboard',

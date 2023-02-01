@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 // @mui
-import { Container } from '@mui/material';
+import { Container, Typography,} from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // components
@@ -22,7 +22,9 @@ export default function EmpresaCreatePage() {
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Crear nueva empresa"
+          heading={
+            <Typography variant='h4' color='primary'>Crear nueva empresa</Typography>
+            }
           links={[
             {
               name: 'Dashboard',

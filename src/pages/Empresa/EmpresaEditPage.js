@@ -1,9 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 import { paramCase } from 'change-case';
 // import { useParams } from 'react-router-dom';
-import { Link as RouterLink, useNavigate, useParams} from 'react-router-dom';
+import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
 // @mui
-import { Container, Button } from '@mui/material';
+import { Container, Button, Typography } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // _mock_
@@ -23,18 +23,20 @@ export default function EmpresaEditPage() {
 
   const { name } = useParams();
 
-    const currentEmpresa = _dataList.find((empresa) => paramCase(empresa.id) === name);
+  const currentEmpresa = _dataList.find((empresa) => paramCase(empresa.id) === name);
 
   return (
     <>
       <Helmet>
         <title> User: Edit user | Minimal UI</title>
-        </Helmet>
+      </Helmet>
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Editar empresa"
+          heading={
+            <Typography variant='h4' color='primary'>Editar empresa</Typography>
+          }
 
-            links={[
+          links={[
             {
               name: 'Dashboard',
               href: PATH_DASHBOARD.root,
@@ -44,17 +46,19 @@ export default function EmpresaEditPage() {
               href: PATH_DASHBOARD.empresa.list,
             },
             { name: currentEmpresa?.name },
-            ]}
+          ]}
 
-                  action={<Button component={RouterLink}
-                      to={PATH_DASHBOARD.empresa.list}
-                variant="contained"
-            >
-                Regresar
-            </Button>}
+          action={<Button component={RouterLink}
+            to={PATH_DASHBOARD.empresa.list}
+            variant="contained"
+            startIcon={<Iconify icon="ic:round-arrow-back" />}
+          >
+
+            Regresar
+          </Button>}
 
         />
-             
+
 
 
 

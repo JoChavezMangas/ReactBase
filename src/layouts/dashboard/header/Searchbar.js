@@ -26,7 +26,7 @@ import NavConfig from '../nav/config-navigation';
 // ----------------------------------------------------------------------
 
 const APPBAR_MOBILE = 64;
-const APPBAR_DESKTOP = 92;
+const APPBAR_DESKTOP =64;
 
 const StyledSearchbar = styled('div')(({ theme }) => ({
   ...bgBlur({ color: theme.palette.background.default }),
@@ -39,7 +39,7 @@ const StyledSearchbar = styled('div')(({ theme }) => ({
   alignItems: 'center',
   height: APPBAR_MOBILE,
   padding: theme.spacing(0, 3),
-  boxShadow: theme.customShadows.z8,
+  boxShadow: 0,
   [theme.breakpoints.up('md')]: {
     height: APPBAR_DESKTOP,
     padding: theme.spacing(0, 5),
@@ -63,7 +63,7 @@ const StyledPopper = styled((props) => <Popper {...props} />)(({ theme }) => ({
       ...theme.typography.overline,
       top: 0,
       margin: 0,
-      lineHeight: '48px',
+      lineHeight: '30px',
       borderRadius: theme.shape.borderRadius,
     },
   },

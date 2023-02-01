@@ -75,7 +75,7 @@ export default function BandejaArea() {
     const onDelete = async (data) => {
         try {
             await new Promise((resolve) => setTimeout(resolve, 500));
-            enqueueSnackbar('Listo, el �rea');
+            enqueueSnackbar('Listo, el área');
         } catch (error) {
             console.error(error);
         }
@@ -148,15 +148,23 @@ export default function BandejaArea() {
             <Container>
 
                 <CustomBreadcrumbs
-                    heading="Area"
-                    links={[{ name: '' },]}
-                    action={<Button component={RouterLink}
-                        to={PATH_DASHBOARD.empresa.new}
-                        variant="contained"
-                        startIcon={<Iconify icon="eva:plus-fill" />}
-                    >
-                        Crear nueva Empresa
-                    </Button>} />
+                    heading={
+                        <Typography variant='h4' color='primary'>Editar área</Typography>
+                    }
+                    links={[
+                        { name: '' },
+                    ]}
+                    action={
+                        <Button
+                            component={RouterLink}
+                            to={PATH_DASHBOARD.area.new}
+                            variant="contained"
+                            startIcon={<Iconify icon="eva:plus-fill" />}
+                        >
+                            Crear nueva {Company}
+                        </Button>
+                    }
+                />
 
 
 

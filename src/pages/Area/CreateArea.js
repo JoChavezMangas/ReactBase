@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 // @mui
-import { Container } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // components
@@ -22,7 +22,9 @@ export default function EmpleadoCreatePage() {
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Crear nuevo empleado"
+          heading={
+            <Typography variant='h4' color='primary'>Crear nueva área</Typography>
+          }
           links={[
             {
               name: 'Dashboard',
@@ -30,9 +32,9 @@ export default function EmpleadoCreatePage() {
             },
             {
               name: 'Empleado',
-              href: PATH_DASHBOARD.empleado.list,
+              href: PATH_DASHBOARD.area.list,
             },
-            { name: 'Nuevo Empleado' },
+            { name: 'Nueva área' },
           ]}
         />
         <EmpleadoNewEditForm />

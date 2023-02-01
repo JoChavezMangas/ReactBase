@@ -1,41 +1,43 @@
 import { Helmet } from 'react-helmet-async';
 // @mui
-import { Container } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // components
 import { useSettingsContext } from '../../components/settings';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 // sections
-import EmpleadoNewEditForm from '../../sections/@dashboard/empleado/EmpleadoNewEditForm';
+import PuestoNewEditForm from '../../sections/@dashboard/puesto/PuestoNewEditForm';
 
 // ----------------------------------------------------------------------
 
-export default function EmpleadoCreatePage() {
+export default function PuestoCreatePage() {
   const { themeStretch } = useSettingsContext();
 
   return (
     <>
       <Helmet>
-        <title> Empleado</title>
+        <title> Puesto</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Crear nuevo empleado"
+          heading={
+            <Typography variant='h4' color='primary'>Crear nuevo puesto</Typography>
+          }
           links={[
             {
               name: 'Dashboard',
               href: PATH_DASHBOARD.root,
             },
             {
-              name: 'Empleado',
-              href: PATH_DASHBOARD.empleado.list,
+              name: 'Puesto',
+              href: PATH_DASHBOARD.puesto.list,
             },
-            { name: 'Nuevo Empleado' },
+            { name: 'Nuevo Puesto' },
           ]}
         />
-        <EmpleadoNewEditForm />
+        <PuestoNewEditForm />
       </Container>
     </>
   );
