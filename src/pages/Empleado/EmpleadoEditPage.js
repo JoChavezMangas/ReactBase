@@ -1,8 +1,8 @@
 import { Helmet } from 'react-helmet-async';
 import { paramCase } from 'change-case';
-import { useParams } from 'react-router-dom';
+import { Link as RouterLink, useParams } from 'react-router-dom';
 // @mui
-import { Container } from '@mui/material';
+import { Button, Container, Icon, Typography } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // _mock_
@@ -25,12 +25,14 @@ export default function EmpleadoEditPage() {
   return (
     <>
       <Helmet>
-        <title> User: Edit user | Minimal UI</title>
+        <title> Empleado</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
-          heading="Editar empleado"
+          heading={
+            <Typography variant='h4' color='primary'>Editar empleado</Typography>
+          }
           links={[
             {
               name: 'Dashboard',
@@ -42,6 +44,14 @@ export default function EmpleadoEditPage() {
             },
             { name: currentEmpleado?.name },
           ]}
+          action={<Button component={RouterLink}
+            to={PATH_DASHBOARD.empleado.list}
+            variant="contained"
+            startIcon={<Icon icon="ic:round-arrow-back" />}
+          >
+
+            Regresar
+          </Button>}
         />
 
         <EmpleadoNewEditForm isEdit currentEmpleado={currentEmpleado} />

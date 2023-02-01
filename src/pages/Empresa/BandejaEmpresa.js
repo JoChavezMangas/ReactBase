@@ -166,7 +166,7 @@ export default function BandejaEmpresa() {
                     }
                     links={[{ name: '' },]}
                     action={<Button component={RouterLink}
-                        to={PATH_DASHBOARD.empresa.list}
+                        to={PATH_DASHBOARD.empresa.new}
                         variant="contained"
                         startIcon={<Iconify icon="eva:plus-fill" />}
                     >

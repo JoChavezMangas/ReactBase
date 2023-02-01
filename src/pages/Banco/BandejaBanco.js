@@ -164,14 +164,20 @@ export default function BandejaBanco() {
                     heading={
                         <Typography variant='h4' color='primary'>Banco</Typography>
                     }
-                    links={[{ name: '' },]}
-                    action={<Button component={RouterLink}
-                        to={PATH_DASHBOARD.banco.list}
-                        variant="contained"
-                        startIcon={<Iconify icon="eva:plus-fill" />}
-                    >
-                        Crear nuevo Banco
-                    </Button>} />
+                    links={[
+                        { name: '' },
+                    ]}
+                    action={
+                        <Button
+                            component={RouterLink}
+                            to={PATH_DASHBOARD.banco.new}
+                            variant="contained"
+                            startIcon={<Iconify icon="eva:plus-fill" />}
+                        >
+                            Crear nuevo banco
+                        </Button>
+                    }
+                />
 
 
 

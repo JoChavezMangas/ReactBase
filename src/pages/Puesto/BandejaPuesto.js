@@ -132,15 +132,23 @@ export default function BandejaPuesto() {
             <Container>
 
                 <CustomBreadcrumbs
-                    heading="Puesto"
-                    links={[{ name: '' },]}
-                    action={<Button component={RouterLink}
-                        to={PATH_DASHBOARD.puesto.new}
-                        variant="contained"
-                        startIcon={<Iconify icon="eva:plus-fill" />}
-                    >
-                        Crear nuevo puesto
-                    </Button>} />
+                    heading={
+                        <Typography variant='h4' color='primary'>Puesto</Typography>
+                    }
+                    links={[
+                        { name: '' },
+                    ]}
+                    action={
+                        <Button
+                            component={RouterLink}
+                            to={PATH_DASHBOARD.puesto.new}
+                            variant="contained"
+                            startIcon={<Iconify icon="eva:plus-fill" />}
+                        >
+                            Crear nuevo puesto
+                        </Button>
+                    }
+                />
 
 
 
