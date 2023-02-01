@@ -1,8 +1,8 @@
 import { Helmet } from 'react-helmet-async';
 import { paramCase } from 'change-case';
-import { useParams } from 'react-router-dom';
+import { Link as RouterLink, useParams } from 'react-router-dom';
 // @mui
-import { Container, Typography } from '@mui/material';
+import { Button, Container, Typography } from '@mui/material';
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // _mock_
@@ -12,6 +12,8 @@ import { useSettingsContext } from '../../components/settings';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 // sections
 import AreaNewEditForm from '../../sections/@dashboard/area/AreaNewEditForm';
+import Iconify from '../../components/iconify';
+
 
 // ----------------------------------------------------------------------
 
@@ -44,6 +46,14 @@ export default function AreaEditPage() {
             },
             { name: currentArea?.name },
           ]}
+          action={<Button component={RouterLink}
+            to={PATH_DASHBOARD.area.list}
+            variant="contained"
+            startIcon={<Iconify icon="ic:round-arrow-back" />}
+          >
+
+            Regresar
+          </Button>}
         />
 
         <AreaNewEditForm isEdit currentArea={currentArea} />

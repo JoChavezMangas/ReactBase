@@ -36,37 +36,18 @@ export default function AreaNewEditForm({ isEdit = false, currentArea }) {
   const { enqueueSnackbar } = useSnackbar();
 
   const NewAreaSchema = Yup.object().shape({
-    businessName: Yup.string().required('Ingrese la Razón social'),
-    businessReason: Yup.string().required('Ingrese la Razón comercial'),
-    RFC: Yup.string().required('Ingrese RFC'),
-    email: Yup.string().required('Ingrese correo electrónico').email('De ser una dirección valida'),
-    phoneNumber: Yup.string().required('Ingresé número de teléfono'),
-    address: Yup.string().required('Ingrese dirección'),
-    colony: Yup.string().required('Seleccione una colonia'),
-    // company: Yup.string().required('Company is required'),
-    state: Yup.string().required('Ingrese un estado'),
-    city: Yup.string().required('Ingrese una ciudad'),
-    // role: Yup.string().required('Role is required'),
-    avatarUrl: Yup.string().required('Cargar imagen').nullable(true),
+    areaName: Yup.string().required('Ingrese nombre del área'),
+    companyName: Yup.string().required('Ingrese nombre la empresa'),
+    rol: Yup.string().required('Seleccione empleado'),
+
   });
 
   const defaultValues = useMemo(
     () => ({
-      businessName: currentArea?.businessName || '',
-      businessReason: currentArea?.businessReason || '',
-      RFC: currentArea?. RFC || '',
-      email: currentArea?.email || '',
-      phoneNumber: currentArea?.phoneNumber || '',
-      address: currentArea?.address || '',
-      zipCode: currentArea?.zipCode || '',
-      colony: currentArea?.colony || '',
-      state: currentArea?.state || '',
-      city: currentArea?.city || '',
-      avatarUrl: currentArea?.avatarUrl || null,
-      isVerified: currentArea?.isVerified || true,
-      // status: currentArea?.status,
-      // company: currentArea?.company || '',
-      // role: currentArea?.role || '',
+      areaName: currentArea?.areaName || '',
+      companyName: currentArea?.companyName || '',
+      rol: currentArea?. RFC || '',
+
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentArea]
@@ -127,43 +108,7 @@ export default function AreaNewEditForm({ isEdit = false, currentArea }) {
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={3}>
-          <Card sx={{ pt: 10, pb: 5, px: 3 }}>
-            {isEdit && (
-              <Label
-                color={values.status === 'active' ? 'success' : 'error'}
-                sx={{ textTransform: 'uppercase', position: 'absolute', top: 24, right: 24 }}
-              >
-                {values.status}
-              </Label>
-            )}
-
-            <Box sx={{ mb: 5 }}>
-              <RHFUploadAvatar
-                name="avatarUrl"
-                maxSize={3145728}
-                onDrop={handleDrop}
-                helperText={
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      mt: 2,
-                      mx: 'auto',
-                      display: 'block',
-                      textAlign: 'center',
-                      color: 'text.secondary',
-                    }}
-                  >
-                    Formatos *.jpeg, *.jpg, *.png, *.gif
-                    <br /> Tamaño máximo {fData(3145728)}
-                  </Typography>
-                }
-              />
-            </Box>
-          </Card>
-        </Grid>
-
-        <Grid item xs={12} md={9}>
+        <Grid item xs={12} md={12}>
           <Card sx={{ p: 3 }}>
             <Box
               rowGap={3}
@@ -174,23 +119,9 @@ export default function AreaNewEditForm({ isEdit = false, currentArea }) {
                 sm: 'repeat(3, 1fr)',
               }}
             >
-              <RHFTextField name="businessName" label="Razón social" />
-              <RHFTextField name="businessReason" label="Razón comercial" />
-              <RHFTextField name="RFC" label="RFC" />
-              <RHFTextField name="email" label="Correo electrónico" />
-              <RHFTextField name="phoneNumber" label="Teléfono" />
-              <RHFTextField name="address" label="Dirección" />
-              <RHFTextField name="zipCode" label="Código postal" />
-
-              {/* <RHFSelect native name="country" label="Country" placeholder="Country">
-                <option value="" />
-                {countries.map((country) => (
-                  <option key={country.code} value={country.label}>
-                    {country.label}
-                  </option>
-                ))}
-              </RHFSelect> */}
-              <RHFSelect native name="colony" label="Colonia" placeholder="Colonia">
+              <RHFTextField name="areaName" label="Nombre del área" />
+              <RHFTextField name="companyName" label="Empresa" />
+              <RHFSelect native name="rol" label="Empleado" placeholder="Empleado">
                 <option value="" />
                 {countries.map((country) => (
                   <option key={country.code} value={country.label}>
@@ -198,10 +129,7 @@ export default function AreaNewEditForm({ isEdit = false, currentArea }) {
                   </option>
                 ))}
               </RHFSelect>
-              <RHFTextField name="state" label="Estado" />
-              <RHFTextField name="city" label="Delegación" />
-
-            </Box>
+             </Box>
 
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>

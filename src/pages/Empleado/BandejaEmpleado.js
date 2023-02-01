@@ -57,7 +57,7 @@ export default function BandejaEmpleado() {
     };
     const handleEditRow = (id) => {
         console.log(id)
-        navigate(PATH_DASHBOARD.empresa.edit(paramCase(id)));
+        navigate(PATH_DASHBOARD.empleado.edit(paramCase(id)));
     };
     const JustAfterClicDelete = () => {
         handleDeleteRow(IdAUX);
@@ -172,13 +172,15 @@ export default function BandejaEmpleado() {
     return (
         <>
             <Helmet>
-                <title> Empelados </title>
+                <title> Empelado </title>
             </Helmet>
 
             <Container>
 
                 <CustomBreadcrumbs
-                    heading="Empleado"
+                    heading={
+                        <Typography variant='h4' color='primary'>Empleado</Typography>
+                    }
                     links={[{ name: '' },]}
                     action={<Button component={RouterLink}
                         to={PATH_DASHBOARD.empleado.new}

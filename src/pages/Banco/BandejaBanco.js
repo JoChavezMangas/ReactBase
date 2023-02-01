@@ -103,7 +103,7 @@ export default function BandejaBanco() {
         },
         {
             field: 'Phone',
-            headerName: 'Teléfono',
+            headerName: 'TelÃ©fono',
             flex: 1,
             editable: false,
             align: 'center',
@@ -174,7 +174,7 @@ export default function BandejaBanco() {
                             variant="contained"
                             startIcon={<Iconify icon="eva:plus-fill" />}
                         >
-                            Crear nuevo banco
+                            Registrar banco
                         </Button>
                     }
                 />

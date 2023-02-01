@@ -18,6 +18,8 @@ import { countries } from '../../../assets/data';
 import Label from '../../../components/label';
 import { useSnackbar } from '../../../components/snackbar';
 import FormProvider, {
+  RHFCheckbox,
+  RHFMultiCheckbox,
   RHFSelect,
   RHFTextField,
   RHFUploadAvatar,
@@ -36,37 +38,20 @@ export default function BancoNewEditForm({ isEdit = false, currentBanco }) {
   const { enqueueSnackbar } = useSnackbar();
 
   const NewBancoSchema = Yup.object().shape({
-    businessName: Yup.string().required('Ingrese la Razón social'),
-    businessReason: Yup.string().required('Ingrese la Razón comercial'),
-    RFC: Yup.string().required('Ingrese RFC'),
-    email: Yup.string().required('Ingrese correo electrónico').email('De ser una dirección valida'),
-    phoneNumber: Yup.string().required('Ingresé número de teléfono'),
-    address: Yup.string().required('Ingrese dirección'),
-    colony: Yup.string().required('Seleccione una colonia'),
-    // company: Yup.string().required('Company is required'),
-    state: Yup.string().required('Ingrese un estado'),
-    city: Yup.string().required('Ingrese una ciudad'),
-    // role: Yup.string().required('Role is required'),
-    avatarUrl: Yup.string().required('Cargar imagen').nullable(true),
+    bankName: Yup.string().required('Ingrese nombre del banco'),
+    digit: Yup.string().required('Ingrese dígitos'),
+    idSap: Yup.string().required('Ingrese id de banco'),
+    // orders: Yup.string().required('Ingrese correo electrónico'),
+    // businessParthner: Yup.string().required('Ingresé número de teléfono'),
   });
 
   const defaultValues = useMemo(
     () => ({
-      businessName: currentBanco?.businessName || '',
-      businessReason: currentBanco?.businessReason || '',
-      RFC: currentBanco?. RFC || '',
-      email: currentBanco?.email || '',
-      phoneNumber: currentBanco?.phoneNumber || '',
-      address: currentBanco?.address || '',
-      zipCode: currentBanco?.zipCode || '',
-      colony: currentBanco?.colony || '',
-      state: currentBanco?.state || '',
-      city: currentBanco?.city || '',
-      avatarUrl: currentBanco?.avatarUrl || null,
-      isVerified: currentBanco?.isVerified || true,
-      // status: currentBanco?.status,
-      // company: currentBanco?.company || '',
-      // role: currentBanco?.role || '',
+      bankName: currentBanco?.bankName || '',
+      digit: currentBanco?.digit || '',
+      idSap: currentBanco?.idSap || '',
+      orders: currentBanco?.orders || '',
+      businessParthner: currentBanco?.businessParthner || '',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentBanco]
@@ -101,7 +86,7 @@ export default function BancoNewEditForm({ isEdit = false, currentBanco }) {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
-      enqueueSnackbar(!isEdit ? '¡Su banco fue creada!' : '¡Sus cambios fueron actualizados!');
+      enqueueSnackbar(!isEdit ? '¡Su banco fue registrado!' : '¡Sus cambios fueron actualizados!');
       navigate(PATH_DASHBOARD.banco.list);
       console.log('DATA', data);
     } catch (error) {
@@ -127,43 +112,7 @@ export default function BancoNewEditForm({ isEdit = false, currentBanco }) {
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={3}>
-          <Card sx={{ pt: 10, pb: 5, px: 3 }}>
-            {isEdit && (
-              <Label
-                color={values.status === 'active' ? 'success' : 'error'}
-                sx={{ textTransform: 'uppercase', position: 'absolute', top: 24, right: 24 }}
-              >
-                {values.status}
-              </Label>
-            )}
-
-            <Box sx={{ mb: 5 }}>
-              <RHFUploadAvatar
-                name="avatarUrl"
-                maxSize={3145728}
-                onDrop={handleDrop}
-                helperText={
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      mt: 2,
-                      mx: 'auto',
-                      display: 'block',
-                      textAlign: 'center',
-                      color: 'text.secondary',
-                    }}
-                  >
-                    Formatos *.jpeg, *.jpg, *.png, *.gif
-                    <br /> Tamaño máximo {fData(3145728)}
-                  </Typography>
-                }
-              />
-            </Box>
-          </Card>
-        </Grid>
-
-        <Grid item xs={12} md={9}>
+        <Grid item xs={12} md={12}>
           <Card sx={{ p: 3 }}>
             <Box
               rowGap={3}
@@ -174,38 +123,16 @@ export default function BancoNewEditForm({ isEdit = false, currentBanco }) {
                 sm: 'repeat(3, 1fr)',
               }}
             >
-              <RHFTextField name="businessName" label="Razón social" />
-              <RHFTextField name="businessReason" label="Razón comercial" />
-              <RHFTextField name="RFC" label="RFC" />
-              <RHFTextField name="email" label="Correo electrónico" />
-              <RHFTextField name="phoneNumber" label="Teléfono" />
-              <RHFTextField name="address" label="Dirección" />
-              <RHFTextField name="zipCode" label="Código postal" />
-
-              {/* <RHFSelect native name="country" label="Country" placeholder="Country">
-                <option value="" />
-                {countries.map((country) => (
-                  <option key={country.code} value={country.label}>
-                    {country.label}
-                  </option>
-                ))}
-              </RHFSelect> */}
-              <RHFSelect native name="colony" label="Colonia" placeholder="Colonia">
-                <option value="" />
-                {countries.map((country) => (
-                  <option key={country.code} value={country.label}>
-                    {country.label}
-                  </option>
-                ))}
-              </RHFSelect>
-              <RHFTextField name="state" label="Estado" />
-              <RHFTextField name="city" label="Delegación" />
-
+              <RHFTextField name="bankName" label="Nombre del banco" />
+              <RHFTextField name="digit" label="Dígitos" />
+              <RHFTextField name="idSap" label="Id banco SAP" />
+              <RHFCheckbox name="orders" label="Visible para pedidos" sx={{ mt: 3 }} />
+              <RHFCheckbox name="businessParthner" label="¿Es socio de negocios?" sx={{ mt: 3 }} />
             </Box>
 
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                {!isEdit ? 'Crear Banco' : 'Guardar Cambios'}
+                {!isEdit ? 'Registrar Banco' : 'Guardar Cambios'}
               </LoadingButton>
             </Stack>
           </Card>

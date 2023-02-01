@@ -23,7 +23,7 @@ export default function PuestoCreatePage() {
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
           heading={
-            <Typography variant='h4' color='primary'>Crear nuevo puesto</Typography>
+            <Typography variant='h4' color='primary'>Registrar puesto</Typography>
           }
           links={[
             {
@@ -34,7 +34,7 @@ export default function PuestoCreatePage() {
               name: 'Puesto',
               href: PATH_DASHBOARD.puesto.list,
             },
-            { name: 'Nuevo Puesto' },
+            { name: 'Registrar puesto' },
           ]}
         />
         <PuestoNewEditForm />

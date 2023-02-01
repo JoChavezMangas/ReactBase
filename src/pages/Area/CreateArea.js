@@ -7,17 +7,17 @@ import { PATH_DASHBOARD } from '../../routes/paths';
 import { useSettingsContext } from '../../components/settings';
 import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 // sections
-import EmpleadoNewEditForm from '../../sections/@dashboard/empleado/EmpleadoNewEditForm';
+import AreaNewEditForm from '../../sections/@dashboard/area/AreaNewEditForm';
 
 // ----------------------------------------------------------------------
 
-export default function EmpleadoCreatePage() {
+export default function AreaCreatePage() {
   const { themeStretch } = useSettingsContext();
 
   return (
     <>
       <Helmet>
-        <title> Empleado</title>
+        <title> Area</title>
       </Helmet>
 
       <Container maxWidth={themeStretch ? false : 'lg'}>
@@ -31,13 +31,13 @@ export default function EmpleadoCreatePage() {
               href: PATH_DASHBOARD.root,
             },
             {
-              name: 'Empleado',
+              name: 'Área',
               href: PATH_DASHBOARD.area.list,
             },
             { name: 'Nueva área' },
           ]}
         />
-        <EmpleadoNewEditForm />
+        <AreaNewEditForm />
       </Container>
     </>
   );

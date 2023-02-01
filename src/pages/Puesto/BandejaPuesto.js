@@ -145,7 +145,7 @@ export default function BandejaPuesto() {
                             variant="contained"
                             startIcon={<Iconify icon="eva:plus-fill" />}
                         >
-                            Crear nuevo puesto
+                            Registrar puesto
                         </Button>
                     }
                 />

@@ -23,7 +23,7 @@ export default function BancoCreatePage() {
       <Container maxWidth={themeStretch ? false : 'lg'}>
         <CustomBreadcrumbs
           heading={
-            <Typography variant='h4' color='primary'>Crear nuevo banco</Typography>
+            <Typography variant='h4' color='primary'>Registrar banco</Typography>
           }
           links={[
             {
@@ -34,7 +34,7 @@ export default function BancoCreatePage() {
               name: 'Banco',
               href: PATH_DASHBOARD.banco.list,
             },
-            { name: 'Nuevo Banco' },
+            { name: 'Registrar Banco' },
           ]}
         />
         <BancoNewEditForm />

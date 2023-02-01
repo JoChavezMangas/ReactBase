@@ -21,6 +21,7 @@ import FormProvider, {
   RHFSelect,
   RHFTextField,
   RHFUploadAvatar,
+  RHFCheckbox,
 } from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
@@ -36,37 +37,16 @@ export default function PuestoNewEditForm({ isEdit = false, currentPuesto }) {
   const { enqueueSnackbar } = useSnackbar();
 
   const NewPuestoSchema = Yup.object().shape({
-    businessName: Yup.string().required('Ingrese la Razón social'),
-    businessReason: Yup.string().required('Ingrese la Razón comercial'),
-    RFC: Yup.string().required('Ingrese RFC'),
-    email: Yup.string().required('Ingrese correo electrónico').email('De ser una dirección valida'),
-    phoneNumber: Yup.string().required('Ingresé número de teléfono'),
-    address: Yup.string().required('Ingrese dirección'),
-    colony: Yup.string().required('Seleccione una colonia'),
-    // company: Yup.string().required('Company is required'),
-    state: Yup.string().required('Ingrese un estado'),
-    city: Yup.string().required('Ingrese una ciudad'),
-    // role: Yup.string().required('Role is required'),
-    avatarUrl: Yup.string().required('Cargar imagen').nullable(true),
+    rolName: Yup.string().required('Ingrese nombre del puesto'),
+    rolType: Yup.string().required('Seleccione el tipo de puesto'),
+    area: Yup.string().required('Seleccione el área del puesto'),
   });
 
   const defaultValues = useMemo(
     () => ({
-      businessName: currentPuesto?.businessName || '',
-      businessReason: currentPuesto?.businessReason || '',
-      RFC: currentPuesto?. RFC || '',
-      email: currentPuesto?.email || '',
-      phoneNumber: currentPuesto?.phoneNumber || '',
-      address: currentPuesto?.address || '',
-      zipCode: currentPuesto?.zipCode || '',
-      colony: currentPuesto?.colony || '',
-      state: currentPuesto?.state || '',
-      city: currentPuesto?.city || '',
-      avatarUrl: currentPuesto?.avatarUrl || null,
-      isVerified: currentPuesto?.isVerified || true,
-      // status: currentPuesto?.status,
-      // company: currentPuesto?.company || '',
-      // role: currentPuesto?.role || '',
+      roleName: currentPuesto?.rolName || '',
+      rolType: currentPuesto?.rolType || '',
+      area: currentPuesto?. area || '',
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentPuesto]
@@ -101,7 +81,7 @@ export default function PuestoNewEditForm({ isEdit = false, currentPuesto }) {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
       reset();
-      enqueueSnackbar(!isEdit ? '¡Su puesto fue creada!' : '¡Sus cambios fueron actualizados!');
+      enqueueSnackbar(!isEdit ? '¡Su puesto fue registrado!' : '¡Sus cambios fueron actualizados!');
       navigate(PATH_DASHBOARD.puesto.list);
       console.log('DATA', data);
     } catch (error) {
@@ -126,44 +106,8 @@ export default function PuestoNewEditForm({ isEdit = false, currentPuesto }) {
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={3}>
-          <Card sx={{ pt: 10, pb: 5, px: 3 }}>
-            {isEdit && (
-              <Label
-                color={values.status === 'active' ? 'success' : 'error'}
-                sx={{ textTransform: 'uppercase', position: 'absolute', top: 24, right: 24 }}
-              >
-                {values.status}
-              </Label>
-            )}
-
-            <Box sx={{ mb: 5 }}>
-              <RHFUploadAvatar
-                name="avatarUrl"
-                maxSize={3145728}
-                onDrop={handleDrop}
-                helperText={
-                  <Typography
-                    variant="caption"
-                    sx={{
-                      mt: 2,
-                      mx: 'auto',
-                      display: 'block',
-                      textAlign: 'center',
-                      color: 'text.secondary',
-                    }}
-                  >
-                    Formatos *.jpeg, *.jpg, *.png, *.gif
-                    <br /> Tamaño máximo {fData(3145728)}
-                  </Typography>
-                }
-              />
-            </Box>
-          </Card>
-        </Grid>
-
-        <Grid item xs={12} md={9}>
+      <Grid container spacing={3}>        
+        <Grid item xs={12} md={12}>
           <Card sx={{ p: 3 }}>
             <Box
               rowGap={3}
@@ -174,23 +118,8 @@ export default function PuestoNewEditForm({ isEdit = false, currentPuesto }) {
                 sm: 'repeat(3, 1fr)',
               }}
             >
-              <RHFTextField name="businessName" label="Razón social" />
-              <RHFTextField name="businessReason" label="Razón comercial" />
-              <RHFTextField name="RFC" label="RFC" />
-              <RHFTextField name="email" label="Correo electrónico" />
-              <RHFTextField name="phoneNumber" label="Teléfono" />
-              <RHFTextField name="address" label="Dirección" />
-              <RHFTextField name="zipCode" label="Código postal" />
-
-              {/* <RHFSelect native name="country" label="Country" placeholder="Country">
-                <option value="" />
-                {countries.map((country) => (
-                  <option key={country.code} value={country.label}>
-                    {country.label}
-                  </option>
-                ))}
-              </RHFSelect> */}
-              <RHFSelect native name="colony" label="Colonia" placeholder="Colonia">
+              <RHFTextField name="rolName" label="Nombre del puesto" />
+              <RHFSelect native name="rolType" label="Tipo de puesto" placeholder="Tipo de puesto">
                 <option value="" />
                 {countries.map((country) => (
                   <option key={country.code} value={country.label}>
@@ -198,14 +127,19 @@ export default function PuestoNewEditForm({ isEdit = false, currentPuesto }) {
                   </option>
                 ))}
               </RHFSelect>
-              <RHFTextField name="state" label="Estado" />
-              <RHFTextField name="city" label="Delegación" />
-
+              <RHFSelect native name="area" label="Área" placeholder="Área">
+                <option value="" />
+                {countries.map((country) => (
+                  <option key={country.code} value={country.label}>
+                    {country.label}
+                  </option>
+                ))}
+              </RHFSelect>
             </Box>
 
             <Stack alignItems="flex-end" sx={{ mt: 3 }}>
               <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                {!isEdit ? 'Crear Puesto' : 'Guardar Cambios'}
+                {!isEdit ? 'Registrar Puesto' : 'Guardar Cambios'}
               </LoadingButton>
             </Stack>
           </Card>
