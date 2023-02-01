@@ -104,23 +104,19 @@ export default function BandejaEmpleado() {
             headerName: 'Empresa',
             flex: 1,
             editable: false,
-            renderCell: (params) => (
-                <Typography variant="body2" noWrap>
-                    {params.row.empresa}
-                </Typography>
-            ),
+            renderCell: (params) => RenderEmpresaAreaDepto(params.row.empresa, params.row.areaName, params.row.dpto),
         },
-        {
-            field: 'Departamento',
-            headerName: 'Departamento',
-            flex: 1,
-            editable: false,
-            renderCell: (params) => (
-                <Typography variant="body2" noWrap>
-                    {params.row.Departamento}
-                </Typography>
-            ),
-        },
+        // {
+        //    field: 'Departamento',
+        //    headerName: 'Departamento',
+        //    flex: 1,
+        //    editable: false,
+        //    renderCell: (params) => (
+        //        <Typography variant="body2" noWrap>
+        //            {params.row.Departamento}
+        //        </Typography>
+        //    ),
+        // },
         {
             field: 'Puesto',
             headerName: 'Puesto',
@@ -260,3 +256,37 @@ function RenderStatus(getStatus) {
         </Label>
     );
 }
+
+
+function RenderEmpresaAreaDepto(empresa, area,dpto) {
+    const theme = useTheme();
+    const isLight = theme.palette.mode === 'light';
+
+    return (
+        <a>
+            <Label
+                variant={isLight ? 'soft' : 'filled'}
+                color='success'
+                sx={{ mx: 'auto' }}
+            >
+                {empresa}
+            </Label>
+            <Label
+                variant={isLight ? 'soft' : 'filled'}
+                color='info'
+                sx={{ mx: 'auto' }}
+            >
+                {empresa}
+            </Label>
+            <Label
+                variant={isLight ? 'soft' : 'filled'}
+                color='info'
+                sx={{ mx: 'auto' }}
+            >
+                {empresa}
+            </Label>
+        </a>
+    );
+}
+
+

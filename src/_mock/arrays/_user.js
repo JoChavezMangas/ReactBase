@@ -201,23 +201,20 @@ export const _puestoList = [...Array(12)].map((_, index) => ({
     name: randomInArray(['Programador', 'Project Manager', 'Coordinador de soporte plataformas', 'Gerente de desarrollo', 'Quality asurance']),
     areaName: randomInArray(['Sistemas', 'Cobranza', 'Implementacion de herrmientas', 'Herramientas Digitales', 'Direccion']),
     empresa: randomInArray(['APA', 'INTEGRA', 'SOC']),
+    dpto: randomInArray(['Desarrollo', 'Infraestructura', 'QA','SAP','Soporte Platafomras','','']),
     DierctorName: randomInArray(['Oscar Cantero', 'Eduardo Zamudio', 'Dierctor 1', 'Directora 2']),
     email: _mock.email(index),
     status: randomInArray(['Activo', 'Inactivo', 'Bloqueado'])
 }));
 
-export const _bancoList = [...Array(12)].map((_, index) => ({
+export const _bancoList = [...Array(8)].map((_, index) => ({
     id: _mock.id(index),
-    name: randomInArray(['Afirme','Banamex','HSBC','Santander','Banorte','City','Scotia bank','Banregio']),
+    name: randomInArray(['Afirme','Banamex','HSBC','Santander','Banorte','City','Scotia bank','Banregio','Bangercito']),
     email: _mock.email(index),
     status: randomInArray(['Activo', 'Inactivo', 'Bloqueado']),
-    phone: _mock.phoneNumber(index),
-    RFC: "CAMJ889955H89",
-    phoneNumber: _mock.phoneNumber(index),
-    zipCode: '09450',
-    city: 'Coyoacan',
-    state: 'CDMX',
-    businessName: "SA. de CV."
+    someStatus : "status",
+    contactPerson: randomInArray(['Oscar Cantero', 'Eduardo Zamudio', 'Dierctor 1', 'Directora 2']),
+    phoneNumber: _mock.phoneNumber(index)
 }));
 
 

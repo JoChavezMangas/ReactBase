@@ -30,7 +30,6 @@ import CustomBreadcrumbs from '../../components/custom-breadcrumbs';
 // sections
 import GenericDataGridCustom from '../../sections/_examples/mui/data-grid/GenericDataGridCostom';
 import Label from '../../components/label';
-import { CustomAvatar } from '../../components/custom-avatar';
 import MenuPopover from '../../components/menu-popover';
 
 
@@ -91,7 +90,7 @@ export default function BandejaPuesto() {
             editable: false,
         },
         {
-            field: 'empresa',
+            field: 'areaName',
             headerName: 'Empresa y Area',
             flex: 1,
             editable: false,
@@ -244,7 +243,6 @@ function RenderEmpresaArea(empresa,area) {
             >
                 {area}
             </Label>
-
         </a>
     );
 }
