@@ -11,10 +11,8 @@ import {
     IconButton,
     TableContainer,
     Typography,
-    Box,
     MenuItem
 } from '@mui/material';
-import { purple, red } from '@mui/material/colors';
 import { useTheme } from '@mui/material/styles';
 import { useSnackbar } from 'notistack';
 // routes
@@ -259,7 +257,6 @@ function RenderStatus(getStatus) {
 function RenderEmpresaAreaDepto(empresa, area,dpto) {
     const theme = useTheme();
     const isLight = theme.palette.mode === 'light';
-    const accent = purple.A200;
     let result;
 
 
