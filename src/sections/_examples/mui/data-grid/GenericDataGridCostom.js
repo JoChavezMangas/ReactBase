@@ -76,7 +76,8 @@ export default function GenericDataGridCustom({ data, columns }) {
     console.log('SELECTED', selected);
 
     return (
-        <DataGrid  autoHeight
+        <DataGrid
+            autoHeight
             sx={{
                 '.MuiDataGrid-columnSeparator': {
                     display: 'none',
