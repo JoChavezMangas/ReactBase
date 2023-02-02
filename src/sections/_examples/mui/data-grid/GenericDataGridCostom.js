@@ -74,7 +74,7 @@ export default function GenericDataGridCustom({ data, columns }) {
     console.log('SELECTED', selected);
 
     return (
-        <DataGrid
+        <DataGrid  autoHeight
             sx={{
                 '.MuiDataGrid-columnSeparator': {
                     display: 'none',
@@ -85,13 +85,15 @@ export default function GenericDataGridCustom({ data, columns }) {
                 },
                 '& .MuiDataGrid-row':{
                     color: 'rgb(69, 79, 91)',
-                },
+                }
             }}
             // checkboxSelection
             disableSelectionOnClick
             header
             rows={data}
             columns={columns}
+            rowsPerPageOptions={[10]}
+            pageSize={10}
             pagination
             onSelectionModelChange={(newSelectionModel) => {
                 setSelectionModel(newSelectionModel);

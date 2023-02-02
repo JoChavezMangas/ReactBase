@@ -177,9 +177,7 @@ export default function BandejaEmpresa() {
 
                 <Card>
                     <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
-                        <Box sx={{ height: 800 }}>
                             <GenericDataGridCustom data={tableData} columns={columns} />
-                        </Box>
                     </TableContainer>
                 </Card>
             </Container>
