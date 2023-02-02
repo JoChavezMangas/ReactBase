@@ -11,10 +11,8 @@ import {
     IconButton,
     TableContainer,
     Typography,
-    Box,
     MenuItem
 } from '@mui/material';
-import { purple, red } from '@mui/material/colors';
 import { useTheme } from '@mui/material/styles';
 import { useSnackbar } from 'notistack';
 // routes
@@ -96,19 +94,19 @@ export default function BandejaEmpleado() {
         {
             field: 'name',
             headerName: 'Colaborador',
-            flex: 1,
+            width: 220,
             editable: false,
         },
         {
             field: 'empresa',
             headerName: 'Empresa',
-            flex: 1,
+            width:150,
             editable: false,
         },
         {
             field: 'areaName',
             headerName: 'Area y Departamento',
-            flex: 2,
+            width: 300,
             editable: false,
             disableExtendRowFullWidth:true,
 
@@ -117,7 +115,7 @@ export default function BandejaEmpleado() {
         {
             field: 'Puesto',
             headerName: 'Puesto',
-            flex: 1,
+            width: 220,
             editable: false,
             renderCell: (params) => (
                 <Typography variant="body2" noWrap>
@@ -127,8 +125,8 @@ export default function BandejaEmpleado() {
         },
         {
             field: 'email',
+            width: 250,
             headerName: 'Email',
-            flex: 1,
             editable: false,
             renderCell: (params) => (
                 <Typography variant="body2" sx={{ textDecoration: 'underline' }} noWrap>
@@ -186,10 +184,9 @@ export default function BandejaEmpleado() {
 
 
                 <Card>
-                    <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
-                        <Box sx={{ height: 800 }}>
+                    <TableContainer sx={{marginTop:'0px', position: 'relative', overflow: 'unset', }}
+                    style={{ width: '100%' }}>
                             <GenericDataGridCustom data={tableData} columns={columns} />
-                        </Box>
                     </TableContainer>
                 </Card>
             </Container>
@@ -260,7 +257,6 @@ function RenderStatus(getStatus) {
 function RenderEmpresaAreaDepto(empresa, area,dpto) {
     const theme = useTheme();
     const isLight = theme.palette.mode === 'light';
-    const accent = purple.A200;
     let result;
 
 

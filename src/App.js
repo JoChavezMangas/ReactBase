@@ -46,7 +46,7 @@ import { StyledChart } from './components/chart';
 import SnackbarProvider from './components/snackbar';
 import ScrollToTop from './components/scroll-to-top';
 import { MotionLazyContainer } from './components/animate';
-import { ThemeSettings, SettingsProvider } from './components/settings';
+import { SettingsProvider } from './components/settings';
 
 // Check our docs
 // https://docs.minimals.cc/authentication/js-version
@@ -70,14 +70,14 @@ export default function App() {
                   <ScrollToTop />
                   <MotionLazyContainer>
                     <ThemeProvider>
-                      <ThemeSettings>
+                      {/* <ThemeSettings> */}
                         <ThemeLocalization>
                           <SnackbarProvider>
                             <StyledChart />
                             <Router />
                           </SnackbarProvider>
                         </ThemeLocalization>
-                      </ThemeSettings>
+                      {/* </ThemeSettings> */}
                     </ThemeProvider>
                   </MotionLazyContainer>
                 </BrowserRouter>
