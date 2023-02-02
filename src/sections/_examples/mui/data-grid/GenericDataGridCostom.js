@@ -66,6 +66,8 @@ export default function GenericDataGridCustom({ data, columns }) {
 
     }
 
+    const [pageSize, setPageSize] = useState(10);
+
     const selected = data.filter((row) => selectionModel.includes(row.id));
 
     console.log('SELECTED', selected);
@@ -125,8 +127,12 @@ export default function GenericDataGridCustom({ data, columns }) {
             }}
             components={{
                 Toolbar: CustomToolbar,
-             }}
+            }}
 
+            pageSize={pageSize}
+            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+            rowsPerPageOptions={[10, 25, 50]}
+            pagination
 
         />
     );
