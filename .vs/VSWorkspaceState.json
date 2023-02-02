@@ -5,9 +5,10 @@
     "\\src\\pages",
     "\\src\\pages\\Area",
     "\\src\\pages\\Banco",
-    "\\src\\pages\\Puesto",
-    "\\src\\sections\\@dashboard\\empresa"
+    "\\src\\pages\\Empleado",
+    "\\src\\pages\\Empresa",
+    "\\src\\pages\\Puesto"
   ],
-  "SelectedNode": "\\src\\pages\\Puesto\\BandejaPuesto.js",
+  "SelectedNode": "\\src\\pages\\Empleado\\BandejaEmpleado.js",
   "PreviewInSolutionExplorer": false
 }
